@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 162c5cec2772a284c8379409348f4ccd, type: 3}
+  m_Name: Chunk Config
+  m_EditorClassIdentifier: 
+  m_Chunks:
+  - {fileID: 9114045137696439886, guid: b4e87754509ec344e8d2356fe12b386a, type: 3}
+  - {fileID: 772425971244350116, guid: 3f7e25c098e5fa9489afc31fa7aa4b4b, type: 3}
+  - {fileID: 5429627594649381980, guid: 56b7380e208143b4885f5c0cc84c6e3f, type: 3}
+  m_ChunkTierConfig:
+    m_PrecentageOverflow: 80
+    m_StartDataChunks:
+    - m_Tier: 1
+      m_Percent: 80
+    - m_Tier: 2
+      m_Percent: 0
+    - m_Tier: 3
+      m_Percent: 0

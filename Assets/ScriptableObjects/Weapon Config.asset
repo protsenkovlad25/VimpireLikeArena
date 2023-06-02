@@ -1,0 +1,73 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5457e3b21de83ad4abbcb3e5f68016bc, type: 3}
+  m_Name: Weapon Config
+  m_EditorClassIdentifier: 
+  m_WeaponData:
+  - m_Name: Simple Projectile
+    m_WeaponType: 1
+    m_AttackSpeed: 1
+    m_RepulsiveForce: 250
+    m_Damage: 2
+    m_ProjectileType: 1
+    m_ProjectileSpeed: 12
+    m_Distance: 50
+  - m_Name: Melee Weapon
+    m_WeaponType: 2
+    m_AttackSpeed: 0.5
+    m_RepulsiveForce: 750
+    m_Damage: 5
+    m_ProjectileType: 2
+    m_ProjectileSpeed: 15
+    m_Distance: 1
+  - m_Name: Tangent Weapon
+    m_WeaponType: 3
+    m_AttackSpeed: 0.5
+    m_RepulsiveForce: 0
+    m_Damage: 10
+    m_ProjectileType: 0
+    m_ProjectileSpeed: 0
+    m_Distance: 0
+  - m_Name: Direct Weapon
+    m_WeaponType: 4
+    m_AttackSpeed: 0.5
+    m_RepulsiveForce: 100
+    m_Damage: 1
+    m_ProjectileType: 3
+    m_ProjectileSpeed: 25
+    m_Distance: 10
+  m_ListModelWeapons:
+  - m_Name: Simple Projectile
+    m_WeaponType: 1
+    m_WeaponBehaviour: {fileID: 469436177383617848, guid: 5bd930b9bf2eb444a8e749531144fee2, type: 3}
+  - m_Name: Tangent Weapon
+    m_WeaponType: 3
+    m_WeaponBehaviour: {fileID: 744339978039708569, guid: 5c4819dbbd5d3474087340178df3aa2e, type: 3}
+  - m_Name: Tangent Weapon
+    m_WeaponType: 2
+    m_WeaponBehaviour: {fileID: 8551724534071085408, guid: 7338f5a3357619d4c809617cd5d6174b, type: 3}
+  - m_Name: Direct
+    m_WeaponType: 4
+    m_WeaponBehaviour: {fileID: 6169490842623932695, guid: fb81c1dc8aeda1245bc7383741258bb1, type: 3}
+  m_ListModelProjectile:
+  - m_Name: Simple Projectile
+    m_ProjectileType: 1
+    m_Projectile: {fileID: 5939607146184074369, guid: d2425206efd9ef94f8aba21ddd7d2285, type: 3}
+  - m_Name: Melee Projectile
+    m_ProjectileType: 2
+    m_Projectile: {fileID: 443273743404155136, guid: be2e1e80b198cf949beb36785bb3b0ba, type: 3}
+  - m_Name: None
+    m_ProjectileType: 0
+    m_Projectile: {fileID: 0}
+  - m_Name: Direct Projectile
+    m_ProjectileType: 3
+    m_Projectile: {fileID: 5077908403257476351, guid: edc39d23f8d9ce745943d37ab13b2617, type: 3}
