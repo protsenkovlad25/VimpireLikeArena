@@ -4,17 +4,23 @@ using VampireLike.Core.Characters;
 
 public class ShakeCamera : MonoBehaviour
 {
-    [SerializeField] private Camera Camera;
-    [SerializeField] private MainCharacter m_MainCharacter;
+    [SerializeField] Camera Camera;
+    //[SerializeField] private MainCharacter m_MainCharacter;
 
     public void Init()
     {
-        //m_MainCharacter.TakingDamage += Shake;
         EventManager.MainCharacterTakeDamage.AddListener(Shake);
+        //m_MainCharacter.TakingDamage += Shake;
     }
 
     public void Shake()
     {
-        Camera.DOShakePosition(0.5f, new Vector3(1, 0, 0), 10);
+        if (Camera != null)
+        {
+            Debug.LogError("Shake");
+            Camera.main.DOShakePosition(0.5f, new Vector3(1, 0, 0), 10);
+        }
+        else if (Camera == null) Debug.LogError("Camera NULL");
+        else Debug.LogError("Pizdec");
     }
 }

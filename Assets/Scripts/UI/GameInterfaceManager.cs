@@ -16,6 +16,8 @@ public class GameInterfaceManager : MonoBehaviour
     private int initialHealth;
     private int currentHealth;
 
+    private bool corotineChanging = false;
+
     private void Start()
     {
         EventManager.OnWin.AddListener(CompleteLevel);
@@ -52,7 +54,16 @@ public class GameInterfaceManager : MonoBehaviour
         }
         else
         {
-            StartCoroutine(TemporaryRedScreen());
+            if (corotineChanging)
+            {
+                StopCoroutine("TemporaryRedScreen");
+                StartCoroutine("TemporaryRedScreen");
+            }
+            else
+            {
+                corotineChanging = true;
+                StartCoroutine("TemporaryRedScreen");
+            }
         }
     }
 
@@ -100,5 +111,7 @@ public class GameInterfaceManager : MonoBehaviour
             yield return new WaitForSeconds(2f);
             RedScreenImage.DOFade(0, 0.5f);
         }
+
+        corotineChanging = false;
     }
 }
