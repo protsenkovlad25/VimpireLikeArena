@@ -4,6 +4,7 @@ public static class EventManager
 {
     public static UnityEvent OnLose = new UnityEvent();
     public static UnityEvent OnWin = new UnityEvent();
+    public static UnityEvent MainCharacterTakeDamage = new UnityEvent();
 
     public static void Lose()
     {
@@ -13,5 +14,10 @@ public static class EventManager
     public static void Win()
     {
         OnWin?.Invoke();
+    }
+
+    public static void TakingDamage()
+    {
+        MainCharacterTakeDamage?.Invoke();
     }
 }

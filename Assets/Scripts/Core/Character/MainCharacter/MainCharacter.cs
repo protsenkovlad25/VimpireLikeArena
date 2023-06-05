@@ -16,7 +16,7 @@ namespace VampireLike.Core.Characters
         [SerializeField] private bool m_TakeDamage;
 
 
-        public event Action TakingDamage;
+        //public event Action TakingDamage;
 
         public Transform WeaponPoint => m_WeaponPoint;
 
@@ -34,15 +34,17 @@ namespace VampireLike.Core.Characters
             m_TakeDamage = false;
 
             base.TakeDamage(damage);
-            TakingDamage?.Invoke();
+
+            //TakingDamage?.Invoke();
+            EventManager.TakingDamage();
 
             Debug.Log("I take Damage");
 
             StartCoroutine(TakeDamageCoroutine());
-            StartCoroutine(TransparentChange());
+            StartCoroutine(TransparencyChange());
         }
 
-        private IEnumerator TransparentChange()
+        private IEnumerator TransparencyChange()
         {
             while (!m_TakeDamage)
             {

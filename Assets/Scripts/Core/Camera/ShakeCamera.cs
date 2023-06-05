@@ -9,7 +9,8 @@ public class ShakeCamera : MonoBehaviour
 
     public void Init()
     {
-        m_MainCharacter.TakingDamage += Shake;
+        //m_MainCharacter.TakingDamage += Shake;
+        EventManager.MainCharacterTakeDamage.AddListener(Shake);
     }
 
     public void Shake()
