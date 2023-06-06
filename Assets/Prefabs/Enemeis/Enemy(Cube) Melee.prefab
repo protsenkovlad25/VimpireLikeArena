@@ -244,7 +244,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7862294553716742593, guid: 038fd9599ae665a42b3c29a4780067e7, type: 3}
       propertyPath: m_Name
-      value: Particle System
+      value: SpawnParticle
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 038fd9599ae665a42b3c29a4780067e7, type: 3}

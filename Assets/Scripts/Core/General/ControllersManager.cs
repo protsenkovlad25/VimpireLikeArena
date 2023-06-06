@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using VampireLike.Core.Characters;
 using VampireLike.Core.Characters.Enemies;
@@ -36,7 +37,7 @@ namespace VampireLike.Core.General
             m_MISCController.Init();
 
             m_LevelController.FirstArena();
-            StartGameLoop();
+            //StartGameLoop();
         }
 
         private void OnDragJoystickPlayer(Vector2 vector2)
@@ -51,11 +52,15 @@ namespace VampireLike.Core.General
             m_LevelController.OnSetChunk -= OnSetChunk;
         }
 
-        private void StartGameLoop()
+        private void StartEnemyGameLoop()
         {
-            m_MainCharacterController.StartShoot();
             m_EnemeisController.StartShoot();
             m_EnemeisController.Attach();
+        }
+
+        private void StartMainCharacterGameLoop()
+        {
+            m_MainCharacterController.StartShoot();
         }
 
         private void OnAllDeadEnemies()
@@ -85,12 +90,27 @@ namespace VampireLike.Core.General
             m_WeaponsController.GaveWeapons(m_EnemeisController.NeedingWeapons);
             m_EnemeisController.InitEnemeisWeapons();
 
-            StartGameLoop();
+            StartCoroutine(WaitCoroutine());
+            StartMainCharacterGameLoop();
+            Debug.LogError("Wait coroutine");
         }
 
         private void OnPlayerDied()
         {
             PlayerController.Instance.LoseLevel();
+        }
+
+        private IEnumerator WaitCoroutine()
+        {
+            yield return StartCoroutine(SpawnPause());
+            Debug.LogError("coroutine end");
+            StartEnemyGameLoop();
+        }
+
+        private IEnumerator SpawnPause()
+        {
+            yield return new WaitForSeconds(0.5f);
+            Debug.LogError("SpawnPause end");
         }
     }
 }

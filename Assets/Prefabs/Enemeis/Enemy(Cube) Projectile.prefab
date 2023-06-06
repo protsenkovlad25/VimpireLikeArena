@@ -242,9 +242,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1561170670989684561, guid: 038fd9599ae665a42b3c29a4780067e7, type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 7862294553716742593, guid: 038fd9599ae665a42b3c29a4780067e7, type: 3}
       propertyPath: m_Name
-      value: Particle System
+      value: SpawnParticle
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 038fd9599ae665a42b3c29a4780067e7, type: 3}

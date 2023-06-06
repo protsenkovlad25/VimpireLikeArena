@@ -103,5 +103,22 @@ namespace VampireLike.Core.Characters.Enemies
                 StartCoroutine(PauseMove());
             }
         }
+
+        public void SpawnPause()
+        {
+            StartCoroutine(WaitCoroutine());
+        }
+
+        private IEnumerator WaitCoroutine()
+        {
+            yield return MoveAndShootPause();
+        }
+
+        private IEnumerator MoveAndShootPause()
+        {
+            m_Moving.Stop();
+            StopShoot();
+            yield return new WaitForSeconds(0.5f);
+        }
     }
 }
