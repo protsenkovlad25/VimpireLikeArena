@@ -50,7 +50,9 @@ public class GameInterfaceManager : MonoBehaviour
 
         if ((currentHealth * 100) / initialHealth < 20)
         {
-            RedScreenImage.DOFade(1, 0.5f);
+            Color color = new Color { r = 0.53f, g = 0f, b = 0f , a = 1f};
+            //RedScreenImage.DOFade(1, 0.5f);
+            RedScreenImage.DOColor(color, 0.5f);
         }
         else
         {
@@ -86,28 +88,45 @@ public class GameInterfaceManager : MonoBehaviour
     private IEnumerator TemporaryRedScreen()
     {
         int percentageHealth = (currentHealth * 100) / initialHealth;
+        Color color;
 
         if (percentageHealth <= 99 && percentageHealth >= 80)
         {
-            RedScreenImage.DOFade(0.2f, 0.5f);
+            //RedScreenImage.DOFade(0.2f, 0.5f);
+            color = new Color { r = 1f, g = 0.39f, b = 0.39f, a = 0.2f };
+            RedScreenImage.DOColor(color, 0.5f);
+            Debug.LogError(RedScreenImage.color.r.ToString());
+
             yield return new WaitForSeconds(2f);
             RedScreenImage.DOFade(0, 0.5f);
         }
         else if (percentageHealth <= 79 && percentageHealth >= 60)
         {
-            RedScreenImage.DOFade(0.4f, 0.5f);
+            //RedScreenImage.DOFade(0.4f, 0.5f);
+            color = new Color { r = 0.9f, g = 0.31f, b = 0.31f, a = 0.4f };
+            RedScreenImage.DOColor(color, 0.5f);
+            Debug.LogError(RedScreenImage.color.r.ToString());
+
             yield return new WaitForSeconds(2f);
             RedScreenImage.DOFade(0, 0.5f);
         }
         else if (percentageHealth <= 59 && percentageHealth >= 40)
         {
-            RedScreenImage.DOFade(0.6f, 0.5f);
+            //RedScreenImage.DOFade(0.6f, 0.5f);
+            color = new Color { r = 0.82f, g = 0.2f, b = 0.2f, a = 0.6f };
+            RedScreenImage.DOColor(color, 0.5f);
+            Debug.LogError(RedScreenImage.color.r.ToString());
+
             yield return new WaitForSeconds(2f);
             RedScreenImage.DOFade(0, 0.5f);
         }
         else if (percentageHealth <= 39 && percentageHealth >= 20)
         {
-            RedScreenImage.DOFade(0.8f, 0.5f);
+            //RedScreenImage.DOFade(0.8f, 0.5f);
+            color = new Color { r = 0.66f, g = 0.08f, b = 0.08f, a = 0.8f };
+            RedScreenImage.DOColor(color, 0.5f);
+            Debug.LogError(RedScreenImage.color.r.ToString());
+
             yield return new WaitForSeconds(2f);
             RedScreenImage.DOFade(0, 0.5f);
         }
