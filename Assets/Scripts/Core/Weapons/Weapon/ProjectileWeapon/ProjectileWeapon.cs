@@ -8,6 +8,7 @@ namespace VampireLike.Core.Weapons
     {
         [SerializeField] private Transform m_StartPoint;
         [SerializeField] private bool m_IsStop;
+        [SerializeField] private ParticleSystem m_ShootParticle;
 
         private IAttaching m_Attaching;
         private PoolBehaviour<Projectile> m_Pool;
@@ -31,6 +32,7 @@ namespace VampireLike.Core.Weapons
         public override void Shoot()
         {
             StartCoroutine(ShootCoroutine());
+            
         }
 
         public override void Stop()
@@ -72,6 +74,7 @@ namespace VampireLike.Core.Weapons
                     yield break;
                 }
 
+
                 var projectile = m_Pool.Take();
                 projectile.transform.SetParent(null);
                 projectile.gameObject.layer = gameObject.layer;
@@ -79,12 +82,15 @@ namespace VampireLike.Core.Weapons
                 projectile.Damage = m_ProjectileWeaponData.Damage;
                 projectile.RepulsiveForce = m_ProjectileWeaponData.RepulsiveForce;
 
+
                 if (m_Attaching.GetTarget() == null)
                 {
                     yield break;
                 }
                 projectile.SetMovement(m_Moving);
                 projectile.Move(m_ProjectileWeaponData.ProjectileSpeed, m_Attaching.GetTarget().position, m_ProjectileWeaponData.Distance);
+
+                m_ShootParticle.Play();
 
                 yield return new WaitForSeconds(m_ProjectileWeaponData.AttackSpeed);
             }
