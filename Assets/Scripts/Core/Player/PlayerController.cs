@@ -9,9 +9,12 @@ namespace VampireLike.Core.Players
 
         public void Init()
         {
-            DontDestroyOnLoad(this.gameObject);
-            Instance = this;
+            if (Instance == null)
+            {
+                DontDestroyOnLoad(this.gameObject);
 
+                Instance = this;
+            }
             Player = SavePlayerData.LoadData();
 
             if (Player == null)

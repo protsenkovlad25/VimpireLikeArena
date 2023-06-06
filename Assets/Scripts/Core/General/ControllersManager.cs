@@ -70,7 +70,6 @@ namespace VampireLike.Core.General
 
             if (PlayerController.Instance.IsCompleteLevel())
             {
-                Debug.LogError("Complete");
                 PlayerController.Instance.CompleteLevel();
 
                 SavePlayerData.SaveData();
@@ -92,7 +91,6 @@ namespace VampireLike.Core.General
 
             StartCoroutine(WaitCoroutine());
             StartMainCharacterGameLoop();
-            Debug.LogError("Wait coroutine");
         }
 
         private void OnPlayerDied()
@@ -103,14 +101,13 @@ namespace VampireLike.Core.General
         private IEnumerator WaitCoroutine()
         {
             yield return StartCoroutine(SpawnPause());
-            Debug.LogError("coroutine end");
+            
             StartEnemyGameLoop();
         }
 
         private IEnumerator SpawnPause()
         {
             yield return new WaitForSeconds(0.5f);
-            Debug.LogError("SpawnPause end");
         }
     }
 }
