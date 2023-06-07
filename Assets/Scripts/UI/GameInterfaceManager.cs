@@ -95,7 +95,6 @@ public class GameInterfaceManager : MonoBehaviour
             //RedScreenImage.DOFade(0.2f, 0.5f);
             color = new Color { r = 1f, g = 0.39f, b = 0.39f, a = 0.2f };
             RedScreenImage.DOColor(color, 0.5f);
-            Debug.LogError(RedScreenImage.color.r.ToString());
 
             yield return new WaitForSeconds(2f);
             RedScreenImage.DOFade(0, 0.5f);
@@ -105,7 +104,6 @@ public class GameInterfaceManager : MonoBehaviour
             //RedScreenImage.DOFade(0.4f, 0.5f);
             color = new Color { r = 0.9f, g = 0.31f, b = 0.31f, a = 0.4f };
             RedScreenImage.DOColor(color, 0.5f);
-            Debug.LogError(RedScreenImage.color.r.ToString());
 
             yield return new WaitForSeconds(2f);
             RedScreenImage.DOFade(0, 0.5f);
@@ -115,7 +113,6 @@ public class GameInterfaceManager : MonoBehaviour
             //RedScreenImage.DOFade(0.6f, 0.5f);
             color = new Color { r = 0.82f, g = 0.2f, b = 0.2f, a = 0.6f };
             RedScreenImage.DOColor(color, 0.5f);
-            Debug.LogError(RedScreenImage.color.r.ToString());
 
             yield return new WaitForSeconds(2f);
             RedScreenImage.DOFade(0, 0.5f);
@@ -125,7 +122,6 @@ public class GameInterfaceManager : MonoBehaviour
             //RedScreenImage.DOFade(0.8f, 0.5f);
             color = new Color { r = 0.66f, g = 0.08f, b = 0.08f, a = 0.8f };
             RedScreenImage.DOColor(color, 0.5f);
-            Debug.LogError(RedScreenImage.color.r.ToString());
 
             yield return new WaitForSeconds(2f);
             RedScreenImage.DOFade(0, 0.5f);

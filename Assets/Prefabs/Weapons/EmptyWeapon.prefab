@@ -76,7 +76,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_StartPoint: {fileID: 8551724534058448606}
   m_IsStop: 0
-  m_ShootParticle: {fileID: 0}
+  m_ShootParticle: {fileID: 5946640367191814148, guid: 4940d3e4348a26640a79c1f0643fc36a, type: 3}
 --- !u!1 &8551724534279036753
 GameObject:
   m_ObjectHideFlags: 0

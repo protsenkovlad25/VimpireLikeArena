@@ -141,7 +141,7 @@ namespace VampireLike.Core.Characters.Enemies
                 enemy.SetCharacterData(new CharacterData()
                 {
                     Speed = 4,
-                    ScaleDamage = 1,
+                    ScaleDamage = 2,
                     HealthPoints = 5
                 });
                 enemy.SetCharacterMovement(new EnemyMovement());
