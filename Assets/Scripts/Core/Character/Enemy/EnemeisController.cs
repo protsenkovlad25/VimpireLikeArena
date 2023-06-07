@@ -140,7 +140,7 @@ namespace VampireLike.Core.Characters.Enemies
             {
                 enemy.SetCharacterData(new CharacterData()
                 {
-                    Speed = 5,
+                    Speed = 4,
                     ScaleDamage = 1,
                     HealthPoints = 5
                 });

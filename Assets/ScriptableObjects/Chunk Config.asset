@@ -14,14 +14,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Chunks:
   - {fileID: 9114045137696439886, guid: b4e87754509ec344e8d2356fe12b386a, type: 3}
+  - {fileID: 9114045137696439886, guid: c6dc23bd8b8f2dd4c9738b5a8a4bcb8a, type: 3}
+  - {fileID: 9114045137696439886, guid: 4f518f8b70d565144be657cb2a495c2f, type: 3}
   - {fileID: 772425971244350116, guid: 3f7e25c098e5fa9489afc31fa7aa4b4b, type: 3}
+  - {fileID: 772425971244350116, guid: 76d2bce4884571c4da2a0fda608a26c4, type: 3}
+  - {fileID: 772425971244350116, guid: 6be07763efe044f49a75570768984ce2, type: 3}
   - {fileID: 5429627594649381980, guid: 56b7380e208143b4885f5c0cc84c6e3f, type: 3}
+  - {fileID: 5429627594649381980, guid: 5786fe64007d8cf439b618a4ab3e2534, type: 3}
+  - {fileID: 5429627594649381980, guid: b1c88709059939441be0a43d81fd1c3c, type: 3}
   m_ChunkTierConfig:
     m_PrecentageOverflow: 80
     m_StartDataChunks:
     - m_Tier: 1
       m_Percent: 80
     - m_Tier: 2
-      m_Percent: 0
+      m_Percent: 20
     - m_Tier: 3
       m_Percent: 0

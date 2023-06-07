@@ -40,10 +40,13 @@ namespace VampireLike.Core.Levels
                     Percent = item.Percent
                 });
             }
+            Debug.Log(m_ChunkTiers[0].Percent + "  " + m_ChunkTiers[1].Percent + "  " + m_ChunkTiers[2].Percent + "  ");
         }
         
         public int GetTier(int seed)
         {
+            Debug.Log(m_ChunkTiers[0].Percent + "  " + m_ChunkTiers[1].Percent + "  " + m_ChunkTiers[2].Percent + "  ");
+
             var random = new System.Random(seed);
 
             var list = new List<int>();
@@ -61,9 +64,8 @@ namespace VampireLike.Core.Levels
             return result;
         }
 
-        public Chunk GetRandomChunk(int tier, int seed)
+        public Chunk GetRandomChunk(int tier, System.Random random)
         {
-            var random = new System.Random(seed);
 
             int index = random.Next(0, m_Chunks[tier].Count);
 
@@ -103,7 +105,7 @@ namespace VampireLike.Core.Levels
         //TODO Кринж но всё по ТЗ
         private void FlowPercentage(int percent, List<ChunkTier> tiers, int currentNode, int maxNode)
         {
-            if (currentNode < maxNode/2)
+            if (currentNode <= maxNode/2)
             {
                 var tier1 = tiers.Find(item => item.Tier == 1);
                 tier1.Percent -= percent;

@@ -21,11 +21,11 @@ namespace VampireLike.Core.Players
             {
                 Player = new Player();
 
-                Player.Seed = Random.Range(0, 100000);
                 Player.Node = 0;
                 Player.QtyCompleteArean = 0;
                 Player.Level = 1;
-                Player.QtyArenas = 5;
+                Player.Seed = Player.Level;
+                Player.QtyArenas = 6;
             }
         }
 
@@ -43,6 +43,7 @@ namespace VampireLike.Core.Players
         {
             Player.QtyCompleteArean = 0;
             Player.Level++;
+            Player.Seed = Player.Level;
             Player.Node = 0;
         }
 

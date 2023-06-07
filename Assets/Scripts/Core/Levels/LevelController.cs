@@ -13,15 +13,18 @@ namespace VampireLike.Core.Levels
         [SerializeField] private Level m_Level;
         [SerializeField] private ChunkConfigurator m_ChunkConfigurator;
 
+        System.Random random;
+
         public void Init()
         {
+            random = new System.Random(PlayerController.Instance.Player.Seed);
             m_ChunkConfigurator.Init();
             m_Level.OnSetChunk += OnSetChunk.Invoke;
         }
 
         public void FirstArena()
         {
-            SetChunk(m_ChunkConfigurator.GetRandomChunk(1, PlayerController.Instance.Player.Seed));
+            SetChunk(m_ChunkConfigurator.GetRandomChunk(1, random));
             m_Level.InstallCurrentChunk();
         }
 
@@ -29,10 +32,10 @@ namespace VampireLike.Core.Levels
         {
             int seed = PlayerController.Instance.Player.Seed;
 
-            m_ChunkConfigurator.Overflow(PlayerController.Instance.Player.Node, PlayerController.Instance.Player.QtyArenas - 1);
+            m_ChunkConfigurator.Overflow(PlayerController.Instance.Player.QtyCompleteArean-1, PlayerController.Instance.Player.QtyArenas - 1);
             m_ChunkConfigurator.Show();
             m_Level.NextArena();
-            SetChunk(m_ChunkConfigurator.GetRandomChunk(m_ChunkConfigurator.GetTier(seed), seed));
+            SetChunk(m_ChunkConfigurator.GetRandomChunk(m_ChunkConfigurator.GetTier(seed), random));
         }
 
         public void SetChunk(Chunk chunk)
