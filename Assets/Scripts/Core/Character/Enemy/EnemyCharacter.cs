@@ -10,6 +10,7 @@ namespace VampireLike.Core.Characters.Enemies
     {
         [SerializeField] private Transform m_WeaponPoint;
         [SerializeField] private WeaponType m_WeaponType;
+        [SerializeField] private EnemyType m_EnemyType;
 
         private CharacterWeapon m_CharacterWeapon;
         private IAttaching m_Attaching;
