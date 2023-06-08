@@ -19,16 +19,16 @@ namespace VampireLike.Core.Characters
         private CharacterData m_CharacterData;
         private HpBar m_HpBar;
 
-        public CharacterData CharacterData => m_CharacterData;
-
         protected IMoving m_Moving;
+
+        public CharacterData CharacterData => m_CharacterData;
 
         public void SetCharacterData(CharacterData characterData)
         {
             m_CharacterData = characterData;
         }
 
-        public void SetCharacterMovement(IMoving moving)
+        public virtual void SetCharacterMovement(IMoving moving)
         {
             m_Moving = moving;
         }

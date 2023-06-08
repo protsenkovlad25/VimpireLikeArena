@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace VampireLike.Core.Weapons
+namespace VampireLike.Core.Movements
 {
     public class ProjectileMovement : IMoving
     {

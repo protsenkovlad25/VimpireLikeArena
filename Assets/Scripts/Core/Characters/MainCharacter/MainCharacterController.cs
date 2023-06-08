@@ -1,8 +1,5 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using VampireLike.Core.Movements;
 using VampireLike.Core.Weapons;
 
 namespace VampireLike.Core.Characters
@@ -35,7 +32,7 @@ namespace VampireLike.Core.Characters
 
         public void Init()
         {
-            m_MainCharacter.SetCharacterMovement(new CharacterMovement());
+            m_MainCharacter.SetCharacterMovement(new ControlledMovement());
             m_MainCharacter.SetCharacterData(new CharacterData()
             {
                 Speed = 5,

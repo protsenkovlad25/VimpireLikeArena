@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-namespace VampireLike.Core.Characters.Enemies
+namespace VampireLike.Core.Movements
 {
     public class EnemyMovement : IMoving
     {

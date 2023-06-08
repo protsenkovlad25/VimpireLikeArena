@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-namespace VampireLike.Core.Weapons
+namespace VampireLike.Core.Movements
 {
     public class DirectMovement : IMoving
     {

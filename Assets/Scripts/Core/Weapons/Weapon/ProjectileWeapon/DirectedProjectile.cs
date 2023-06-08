@@ -5,11 +5,9 @@ using UnityEngine;
 
 namespace VampireLike.Core.Weapons
 {
-
     public class DirectedProjectile : Projectile
     {
         private Vector3 m_Target;
-
 
         public override void Move(float speed, Vector3 point, float distance)
         {

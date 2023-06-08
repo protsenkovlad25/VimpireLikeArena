@@ -15,6 +15,7 @@ namespace VampireLike.Core.Weapons
 
             base.Move(speed, point, distance);
         }
+
         private void Update()
         {
             if (!m_IsMove)

@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace VampireLike.Core.Characters
+namespace VampireLike.Core.Movements
 {
-    public class CharacterMovement : IMoving
+    public class ControlledMovement : IMoving
     {
         public void Move(Vector3 direction, float speed, Transform transform)
         {
