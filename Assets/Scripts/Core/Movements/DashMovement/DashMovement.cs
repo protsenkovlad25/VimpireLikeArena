@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 
@@ -10,15 +8,10 @@ namespace VampireLike.Core.Movements
         private bool m_IsStop;
         private bool m_IsDash;
         private bool m_IsCharging;
-        private float m_Force = 700;
+        private float m_Force = 750;
 
         public void Move(Vector3 target, float speed, Transform transform, Rigidbody rigidbody)
         {
-            if (m_IsStop)
-            {
-                return;
-            }
-
             if (m_IsDash)
             {
                 return;
@@ -36,29 +29,23 @@ namespace VampireLike.Core.Movements
 
         private async Task Charging(Vector3 target, float speed, Transform transform, Rigidbody rigidbody)
         {
-            Debug.Log("Charging");
             m_IsCharging = true;
             await Task.Delay(System.TimeSpan.FromSeconds(3f));
-            Debug.Log("Charging end");
+            
             await Dash(target, speed, transform, rigidbody);
 
             m_IsDash = false;
             m_IsCharging = false;
-            Debug.Log("Dash and Charging false");
         }
 
         private async Task Dash(Vector3 target, float speed, Transform transform, Rigidbody rigidbody)
         {
-            Debug.Log("Dashhhh");
             m_IsDash = true;
             m_IsCharging = false;
 
             Vector3 force = transform.forward * m_Force;
 
             rigidbody.AddForce(force, ForceMode.Force);
-
-            await Task.Delay(System.TimeSpan.FromSeconds(1f));
-            Debug.Log("Dash end");
         }
 
         public void Start()
