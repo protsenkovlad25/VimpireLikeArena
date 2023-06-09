@@ -1,7 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using VampireLike.Core.Input;
 using VampireLike.Core.Weapons;
 
 namespace VampireLike.Core.Characters.Enemies
@@ -20,6 +18,11 @@ namespace VampireLike.Core.Characters.Enemies
         public WeaponType GetWeaponType()
         {
             return m_WeaponType;
+        }
+
+        public EnemyType GetEnemyType()
+        {
+            return m_EnemyType;
         }
 
         public void Move(IAttaching targetPosition)
@@ -79,7 +82,10 @@ namespace VampireLike.Core.Characters.Enemies
             while (gameObject.activeInHierarchy)
             {
                 m_IsMove = true;
-                m_Moving.Move(targetPosition.GetTarget().position, CharacterData.Speed * Time.deltaTime, transform);               
+                m_Moving.Move(targetPosition.GetTarget().position, 
+                    CharacterData.Speed * Time.deltaTime, 
+                    transform, 
+                    gameObject.GetComponent<Rigidbody>());               
                 yield return null;
             }
 

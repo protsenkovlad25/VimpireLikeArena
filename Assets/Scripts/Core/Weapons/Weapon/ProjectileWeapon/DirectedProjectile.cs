@@ -5,11 +5,9 @@ using UnityEngine;
 
 namespace VampireLike.Core.Weapons
 {
-
     public class DirectedProjectile : Projectile
     {
         private Vector3 m_Target;
-
 
         public override void Move(float speed, Vector3 point, float distance)
         {
@@ -29,7 +27,7 @@ namespace VampireLike.Core.Weapons
             var step = m_Speed * Time.deltaTime;
             var oldPostion = transform.position;
 
-            m_Moving.Move(m_Target, step, transform);
+            m_Moving.Move(m_Target, step, transform, gameObject.GetComponent<Rigidbody>());
 
             if (Vector3.Distance(m_StartPosition, transform.position) >= m_Distance)
             {

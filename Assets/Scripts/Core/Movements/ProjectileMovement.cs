@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace VampireLike.Core.Weapons
+namespace VampireLike.Core.Movements
 {
     public class ProjectileMovement : IMoving
     {
-        public void Move(Vector3 target, float speed, Transform transform)
+        public void Move(Vector3 target, float speed, Transform transform, Rigidbody rigidbody)
         {
             transform.position = Vector3.MoveTowards(transform.position, target, speed);
 

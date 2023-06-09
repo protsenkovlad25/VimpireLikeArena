@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-namespace VampireLike.Core.Characters.Enemies
+namespace VampireLike.Core.Movements
 {
     public class EnemyMovement : IMoving
     {
         private bool m_IsStop;
 
-        public void Move(Vector3 target, float speed, Transform transform)
+        public void Move(Vector3 target, float speed, Transform transform, Rigidbody rigidbody)
         {
             if (m_IsStop)
             {

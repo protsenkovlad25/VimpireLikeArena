@@ -1,10 +1,9 @@
-using DG.Tweening;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using VampireLike.Core.Input;
+using VampireLike.Core.Characters.Enemies.Config;
+using VampireLike.Core.Movements;
 using VampireLike.Core.Weapons;
 
 namespace VampireLike.Core.Characters.Enemies
@@ -12,6 +11,8 @@ namespace VampireLike.Core.Characters.Enemies
     public class EnemeisController : MonoBehaviour, IIniting, IAttaching
     {
         public event Action OnAllDeadEnemies;
+
+        [SerializeField] private EnemyConfigurator m_EnemyConfigurator;
 
         [SerializeField] private List<EnemyCharacter> m_Enemies;
         [SerializeField] private bool m_IsMove;
@@ -138,13 +139,8 @@ namespace VampireLike.Core.Characters.Enemies
         {
             foreach (var enemy in m_Enemies)
             {
-                enemy.SetCharacterData(new CharacterData()
-                {
-                    Speed = 4,
-                    ScaleDamage = 2,
-                    HealthPoints = 5
-                });
-                enemy.SetCharacterMovement(new EnemyMovement());
+                enemy.SetCharacterData(m_EnemyConfigurator.GetData(enemy.GetEnemyType()));
+                enemy.SetCharacterMovement(m_EnemyConfigurator.GetMovement(enemy.GetEnemyType()));
                 enemy.Set(m_Attaching);
                 enemy.Init();
                 enemy.OnDie += OnEnemyDie;

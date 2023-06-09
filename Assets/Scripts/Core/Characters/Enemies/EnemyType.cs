@@ -5,6 +5,8 @@ using UnityEngine;
 
 public enum EnemyType
 {
-    Enemy,
-    PushEnemy
+    SpikyEnemy,
+    PushingEnemy,
+    ShootingEnemy,
+    RocketShootingEnemy
 }

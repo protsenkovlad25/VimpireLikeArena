@@ -1,7 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using VampireLike.Core.Characters;
 using VampireLike.Core.Characters.Enemies;
 
 namespace VampireLike.Core.Levels

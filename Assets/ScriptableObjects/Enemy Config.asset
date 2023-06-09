@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2d1a016dc5457c418ec5e90fc1e79aa, type: 3}
+  m_Name: Enemy Config
+  m_EditorClassIdentifier: 
+  m_EnemyData:
+  - m_Name: Spiky Enemy
+    m_EnemyType: 0
+    m_HealthPoints: 10
+    m_Speed: 4
+    m_ScaleDamage: 1
+    m_EnemyMovementType: 1
+  - m_Name: Pushing Enemy
+    m_EnemyType: 1
+    m_HealthPoints: 5
+    m_Speed: 4
+    m_ScaleDamage: 1
+    m_EnemyMovementType: 0
+  - m_Name: Shooting Enemy
+    m_EnemyType: 2
+    m_HealthPoints: 5
+    m_Speed: 4
+    m_ScaleDamage: 1
+    m_EnemyMovementType: 0
+  - m_Name: Rocket Shooting  Enemy
+    m_EnemyType: 3
+    m_HealthPoints: 5
+    m_Speed: 4
+    m_ScaleDamage: 1
+    m_EnemyMovementType: 0
