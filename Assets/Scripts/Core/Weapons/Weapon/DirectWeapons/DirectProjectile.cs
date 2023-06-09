@@ -27,7 +27,7 @@ namespace VampireLike.Core.Weapons
             var step = m_Speed * Time.deltaTime;
             var oldPostion = transform.position;
 
-            m_Moving.Move(transform.eulerAngles, step, transform);
+            m_Moving.Move(transform.eulerAngles, step, transform, gameObject.GetComponent<Rigidbody>());
 
             if (Vector3.Distance(m_StartPosition, transform.position) >= m_Distance)
             {

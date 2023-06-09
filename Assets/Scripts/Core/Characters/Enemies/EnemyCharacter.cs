@@ -82,7 +82,10 @@ namespace VampireLike.Core.Characters.Enemies
             while (gameObject.activeInHierarchy)
             {
                 m_IsMove = true;
-                m_Moving.Move(targetPosition.GetTarget().position, CharacterData.Speed * Time.deltaTime, transform);               
+                m_Moving.Move(targetPosition.GetTarget().position, 
+                    CharacterData.Speed * Time.deltaTime, 
+                    transform, 
+                    gameObject.GetComponent<Rigidbody>());               
                 yield return null;
             }
 

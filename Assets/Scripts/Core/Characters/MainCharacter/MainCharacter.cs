@@ -22,7 +22,7 @@ namespace VampireLike.Core.Characters
 
         public void Move(Vector2 deriction)
         {
-            m_Moving.Move(new Vector3(deriction.x, 0f, deriction.y), CharacterData.Speed, transform);
+            m_Moving.Move(new Vector3(deriction.x, 0f, deriction.y), CharacterData.Speed, transform, gameObject.GetComponent<Rigidbody>());
         }
 
         public override void TakeDamage(int damage)

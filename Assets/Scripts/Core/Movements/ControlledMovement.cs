@@ -6,7 +6,7 @@ namespace VampireLike.Core.Movements
 {
     public class ControlledMovement : IMoving
     {
-        public void Move(Vector3 direction, float speed, Transform transform)
+        public void Move(Vector3 direction, float speed, Transform transform, Rigidbody rigidbody)
         {
             var currentPostion = transform.position;
 

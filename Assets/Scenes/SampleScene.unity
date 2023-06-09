@@ -1336,6 +1336,50 @@ MonoBehaviour:
   m_RoadParent: {fileID: 1596751357}
   m_ArenaParent: {fileID: 1347529005}
   m_ChunkParent: {fileID: 1984111648}
+--- !u!1 &1131913853
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1131913854}
+  - component: {fileID: 1131913855}
+  m_Layer: 0
+  m_Name: EnemyConfigurator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1131913854
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1131913853}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1413794066}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1131913855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1131913853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8292cf566f20b3940af67fb3dd0b2ca3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EnemyConfig: {fileID: 11400000, guid: 29a0bca487bbc3843bb7bb81e4253655, type: 2}
 --- !u!1 &1134911277
 GameObject:
   m_ObjectHideFlags: 0
@@ -1668,7 +1712,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1131913854}
   m_Father: {fileID: 555584404}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1684,6 +1729,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc6c1079e5dd4fe4180661f387664d40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_EnemyConfigurator: {fileID: 1131913855}
   m_Enemies: []
   m_IsMove: 1
 --- !u!1001 &1453697227

@@ -9,7 +9,7 @@ namespace VampireLike.Core.Movements
     {
         private bool m_IsStop;
 
-        public void Move(Vector3 target, float speed, Transform transform)
+        public void Move(Vector3 target, float speed, Transform transform, Rigidbody rigidbody)
         {
             if (m_IsStop)
             {
