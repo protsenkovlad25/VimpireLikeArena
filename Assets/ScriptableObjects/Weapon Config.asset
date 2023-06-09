@@ -20,15 +20,15 @@ MonoBehaviour:
     m_Damage: 2
     m_ProjectileType: 1
     m_ProjectileSpeed: 12
-    m_Distance: 1
+    m_Distance: 50
   - m_Name: Melee Weapon
-    m_WeaponType: 3
+    m_WeaponType: 2
     m_AttackSpeed: 1.5
     m_RepulsiveForce: 100
     m_Damage: 1
     m_ProjectileType: 0
-    m_ProjectileSpeed: 15
-    m_Distance: 1
+    m_ProjectileSpeed: 0
+    m_Distance: 0
   - m_Name: Tangent Weapon
     m_WeaponType: 3
     m_AttackSpeed: 0.5
@@ -38,37 +38,26 @@ MonoBehaviour:
     m_ProjectileSpeed: 0
     m_Distance: 0
   - m_Name: Direct Weapon
-    m_WeaponType: 3
+    m_WeaponType: 4
     m_AttackSpeed: 0.5
     m_RepulsiveForce: 100
     m_Damage: 1
-    m_ProjectileType: 0
+    m_ProjectileType: 3
     m_ProjectileSpeed: 25
     m_Distance: 10
-  - m_Name: Push Weapon
-    m_WeaponType: 3
-    m_AttackSpeed: 1.5
-    m_RepulsiveForce: 500
-    m_Damage: 1
-    m_ProjectileType: 0
-    m_ProjectileSpeed: 15
-    m_Distance: 1
   m_ListModelWeapons:
   - m_Name: Simple Projectile
     m_WeaponType: 1
     m_WeaponBehaviour: {fileID: 469436177383617848, guid: 5bd930b9bf2eb444a8e749531144fee2, type: 3}
   - m_Name: Tangent Weapon
     m_WeaponType: 3
-    m_WeaponBehaviour: {fileID: 744339978039708569, guid: 5c4819dbbd5d3474087340178df3aa2e, type: 3}
+    m_WeaponBehaviour: {fileID: 744339978039708569, guid: 5910f1d7a59c0f64e844e20cf068233d, type: 3}
   - m_Name: Melee Weapon
     m_WeaponType: 2
-    m_WeaponBehaviour: {fileID: 8551724534071085408, guid: 7338f5a3357619d4c809617cd5d6174b, type: 3}
+    m_WeaponBehaviour: {fileID: 744339978039708569, guid: 5c4819dbbd5d3474087340178df3aa2e, type: 3}
   - m_Name: Direct
     m_WeaponType: 4
     m_WeaponBehaviour: {fileID: 6169490842623932695, guid: fb81c1dc8aeda1245bc7383741258bb1, type: 3}
-  - m_Name: Push Weapon
-    m_WeaponType: 2
-    m_WeaponBehaviour: {fileID: 8551724534071085408, guid: 7338f5a3357619d4c809617cd5d6174b, type: 3}
   m_ListModelProjectile:
   - m_Name: Simple Projectile
     m_ProjectileType: 1
@@ -80,8 +69,5 @@ MonoBehaviour:
     m_ProjectileType: 0
     m_Projectile: {fileID: 0}
   - m_Name: Direct Projectile
-    m_ProjectileType: 0
-    m_Projectile: {fileID: 0}
-  - m_Name: Push Projectile
-    m_ProjectileType: 0
-    m_Projectile: {fileID: 0}
+    m_ProjectileType: 3
+    m_Projectile: {fileID: 5077908403257476351, guid: edc39d23f8d9ce745943d37ab13b2617, type: 3}

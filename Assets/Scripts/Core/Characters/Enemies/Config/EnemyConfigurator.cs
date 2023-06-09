@@ -38,7 +38,7 @@ namespace VampireLike.Core.Characters.Enemies.Config
                     movement = new DashMovement();
                     break;
                 case EnemyMovementType.DistanceMovement:
-                    movement = new EnemyMovement();
+                    movement = new DistanceMovement();
                     break;
             }
 
