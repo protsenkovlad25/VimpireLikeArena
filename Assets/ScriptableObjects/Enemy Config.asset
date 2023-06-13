@@ -15,20 +15,20 @@ MonoBehaviour:
   m_EnemyData:
   - m_Name: Spiky Enemy
     m_EnemyType: 0
-    m_HealthPoints: 10
+    m_HealthPoints: 4
     m_Speed: 4
     m_ScaleDamage: 1
     m_EnemyMovementType: 0
   - m_Name: Pushing Enemy
     m_EnemyType: 1
-    m_HealthPoints: 10
+    m_HealthPoints: 4
     m_Speed: 4
     m_ScaleDamage: 1
     m_EnemyMovementType: 1
   - m_Name: Shooting Enemy
     m_EnemyType: 2
-    m_HealthPoints: 18
-    m_Speed: 4
+    m_HealthPoints: 180
+    m_Speed: 10
     m_ScaleDamage: 1
     m_EnemyMovementType: 2
   - m_Name: Rocket Shooting  Enemy

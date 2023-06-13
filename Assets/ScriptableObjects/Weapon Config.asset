@@ -33,7 +33,7 @@ MonoBehaviour:
     m_ProjectileType: 0
     m_ProjectileSpeed: 0
     m_Distance: 0
-  - m_Name: Tangent Weapon
+  - m_Name: Touching Weapon
     m_WeaponType: 4
     m_AttackSpeed: 0.5
     m_RepulsiveForce: 0
@@ -64,12 +64,12 @@ MonoBehaviour:
     m_ProjectileSpeed: 12
     m_Distance: 10
   m_ListModelWeapons:
-  - m_Name: Simple Weapon
+  - m_Name: Simple Shooting Weapon
     m_WeaponType: 1
     m_WeaponBehaviour: {fileID: -6428339379427183598, guid: 5bd930b9bf2eb444a8e749531144fee2, type: 3}
-  - m_Name: Tangent Weapon
+  - m_Name: Touching Weapon
     m_WeaponType: 4
-    m_WeaponBehaviour: {fileID: 744339978039708569, guid: 5910f1d7a59c0f64e844e20cf068233d, type: 3}
+    m_WeaponBehaviour: {fileID: 7343093295803128732, guid: daabf6c307e9f994d88fa11ffef37445, type: 3}
   - m_Name: Pushing Weapon
     m_WeaponType: 5
     m_WeaponBehaviour: {fileID: 212678764110084006, guid: 5c4819dbbd5d3474087340178df3aa2e, type: 3}
