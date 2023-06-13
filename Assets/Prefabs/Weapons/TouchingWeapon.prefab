@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 744339978039708570}
   - component: {fileID: 744339978039708567}
   - component: {fileID: 744339978039708568}
-  - component: {fileID: 212678764110084006}
+  - component: {fileID: 7343093295803128732}
   m_Layer: 8
-  m_Name: PushWeapon
+  m_Name: TouchingWeapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -62,7 +62,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 1
---- !u!114 &212678764110084006
+--- !u!114 &7343093295803128732
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -71,6 +71,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 744339978039708571}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 087b261846a899644a1fcbffb6195fd6, type: 3}
+  m_Script: {fileID: 11500000, guid: 9590c8030d315324097623bb72d72687, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

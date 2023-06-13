@@ -22,6 +22,8 @@ namespace VampireLike.Core.Weapons
                 Damage = data.Damage,
                 AttackSpeed = data.AttackSpeed,
                 RepulsiveForce = data.RepulsiveForce,
+                MagazineSize = data.MagazineSize,
+                RechargeTime = data.RechargeTime,
                 ProjectileSpeed = data.ProjectileSpeed,
                 Distance = data.Distance,
                 ProjectilePref = projectile.Projectile
