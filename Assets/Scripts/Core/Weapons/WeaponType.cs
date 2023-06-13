@@ -7,10 +7,10 @@ namespace VampireLike.Core.Weapons
     public enum WeaponType
     {
         None,
-        SimpleWeaponProjectile,
-        Melee,
-        Tangent,
-        Direct,
-        Push
+        SimpleShooting,
+        InfinityShooting,
+        RocketShooting,
+        Touching,
+        Pushing
     }
 }

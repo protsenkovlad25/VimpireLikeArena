@@ -13,27 +13,33 @@ MonoBehaviour:
   m_Name: Weapon Config
   m_EditorClassIdentifier: 
   m_WeaponData:
-  - m_Name: Simple Projectile
+  - m_Name: Simple Shooting Weapon
     m_WeaponType: 1
     m_AttackSpeed: 1
     m_RepulsiveForce: 250
     m_Damage: 2
+    m_MagazineSize: 8
+    m_RechargeTime: 2
     m_ProjectileType: 1
     m_ProjectileSpeed: 12
-    m_Distance: 50
-  - m_Name: Melee Weapon
-    m_WeaponType: 2
+    m_Distance: 20
+  - m_Name: Pushing Weapon
+    m_WeaponType: 5
     m_AttackSpeed: 1.5
     m_RepulsiveForce: 100
     m_Damage: 1
+    m_MagazineSize: 0
+    m_RechargeTime: 0
     m_ProjectileType: 0
     m_ProjectileSpeed: 0
     m_Distance: 0
   - m_Name: Tangent Weapon
-    m_WeaponType: 3
+    m_WeaponType: 4
     m_AttackSpeed: 0.5
     m_RepulsiveForce: 0
     m_Damage: 5
+    m_MagazineSize: 0
+    m_RechargeTime: 0
     m_ProjectileType: 0
     m_ProjectileSpeed: 0
     m_Distance: 0
@@ -42,29 +48,41 @@ MonoBehaviour:
     m_AttackSpeed: 0.5
     m_RepulsiveForce: 100
     m_Damage: 1
+    m_MagazineSize: 0
+    m_RechargeTime: 0
     m_ProjectileType: 3
     m_ProjectileSpeed: 25
     m_Distance: 10
-  m_ListModelWeapons:
-  - m_Name: Simple Projectile
-    m_WeaponType: 1
-    m_WeaponBehaviour: {fileID: 469436177383617848, guid: 5bd930b9bf2eb444a8e749531144fee2, type: 3}
-  - m_Name: Tangent Weapon
-    m_WeaponType: 3
-    m_WeaponBehaviour: {fileID: 744339978039708569, guid: 5910f1d7a59c0f64e844e20cf068233d, type: 3}
-  - m_Name: Melee Weapon
+  - m_Name: Infinity Shooting Weapon
     m_WeaponType: 2
-    m_WeaponBehaviour: {fileID: 744339978039708569, guid: 5c4819dbbd5d3474087340178df3aa2e, type: 3}
+    m_AttackSpeed: 1
+    m_RepulsiveForce: 250
+    m_Damage: 2
+    m_MagazineSize: 8
+    m_RechargeTime: 0
+    m_ProjectileType: 1
+    m_ProjectileSpeed: 12
+    m_Distance: 10
+  m_ListModelWeapons:
+  - m_Name: Simple Weapon
+    m_WeaponType: 1
+    m_WeaponBehaviour: {fileID: -6428339379427183598, guid: 5bd930b9bf2eb444a8e749531144fee2, type: 3}
+  - m_Name: Tangent Weapon
+    m_WeaponType: 4
+    m_WeaponBehaviour: {fileID: 744339978039708569, guid: 5910f1d7a59c0f64e844e20cf068233d, type: 3}
+  - m_Name: Pushing Weapon
+    m_WeaponType: 5
+    m_WeaponBehaviour: {fileID: 212678764110084006, guid: 5c4819dbbd5d3474087340178df3aa2e, type: 3}
   - m_Name: Direct
     m_WeaponType: 4
     m_WeaponBehaviour: {fileID: 6169490842623932695, guid: fb81c1dc8aeda1245bc7383741258bb1, type: 3}
+  - m_Name: Infinity Shooting Weapon
+    m_WeaponType: 2
+    m_WeaponBehaviour: {fileID: 558255923814313856, guid: 2397e89c285cf2b478f79fcac371e772, type: 3}
   m_ListModelProjectile:
   - m_Name: Simple Projectile
     m_ProjectileType: 1
     m_Projectile: {fileID: 5939607146184074369, guid: d2425206efd9ef94f8aba21ddd7d2285, type: 3}
-  - m_Name: Melee Projectile
-    m_ProjectileType: 0
-    m_Projectile: {fileID: 0}
   - m_Name: None
     m_ProjectileType: 0
     m_Projectile: {fileID: 0}

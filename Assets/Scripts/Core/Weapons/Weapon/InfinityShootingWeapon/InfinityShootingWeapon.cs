@@ -1,10 +1,11 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using VampireLike.Core.Movements;
 
 namespace VampireLike.Core.Weapons
 {
-    public class ProjectileWeapon : WeaponBehaviour, INeeding<IAttaching>
+    public class InfinityShootingWeapon : WeaponBehaviour, INeeding<IAttaching>
     {
         [SerializeField] private Transform m_StartPoint;
         [SerializeField] private bool m_IsStop;
@@ -14,8 +15,6 @@ namespace VampireLike.Core.Weapons
         private PoolBehaviour<Projectile> m_Pool;
         private ProjectileWeaponData m_ProjectileWeaponData;
 
-        private int m_CurrentNumberBullets;
-
         private IMoving m_Moving;
 
         public override void Init()
@@ -24,7 +23,6 @@ namespace VampireLike.Core.Weapons
             m_Pool.CreateParent(transform);
             m_Pool.Pooling(m_ProjectileWeaponData.ProjectilePref, 2);
             m_Moving = new ProjectileMovement();
-            m_CurrentNumberBullets = m_ProjectileWeaponData.MagazineSize;
         }
 
         public void Set(IAttaching generic)
@@ -35,7 +33,7 @@ namespace VampireLike.Core.Weapons
         public override void Shoot()
         {
             StartCoroutine(ShootCoroutine());
-            
+
         }
 
         public override void Stop()
@@ -92,26 +90,10 @@ namespace VampireLike.Core.Weapons
                 projectile.SetMovement(m_Moving);
                 projectile.Move(m_ProjectileWeaponData.ProjectileSpeed, m_Attaching.GetTarget().position, m_ProjectileWeaponData.Distance);
 
-                m_CurrentNumberBullets--;
                 m_ShootParticle.Play();
-                
-                if (m_CurrentNumberBullets == 0)
-                {
-                    Debug.Log("Bullet 0");
-                    m_CurrentNumberBullets = m_ProjectileWeaponData.MagazineSize;
-
-                    yield return new WaitForSeconds(m_ProjectileWeaponData.RechargeTime);
-                    Debug.Log("Recharge stop");
-                }
 
                 yield return new WaitForSeconds(m_ProjectileWeaponData.AttackSpeed);
             }
-        }
-
-        private void Recharge()
-        {
-           
-            Debug.Log("Recharge start");
         }
 
         private void OnHit(Projectile projectile)

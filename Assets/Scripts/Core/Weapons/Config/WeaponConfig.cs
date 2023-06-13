@@ -31,6 +31,8 @@ namespace VampireLike.Core.Weapons
         [SerializeField] private float m_AttackSpeed;
         [SerializeField] private float m_RepulsiveForce;
         [SerializeField] private int m_Damage;
+        [SerializeField] private int m_MagazineSize;
+        [SerializeField] private float m_RechargeTime;
 
         [Space]
         [Header("Projectile Weapon")]
@@ -44,6 +46,8 @@ namespace VampireLike.Core.Weapons
         public float AttackSpeed => m_AttackSpeed;
         public float RepulsiveForce => m_RepulsiveForce;
         public int Damage => m_Damage;
+        public int MagazineSize => m_MagazineSize;
+        public float RechargeTime => m_RechargeTime;
 
         public ProjectileType ProjectileType => m_ProjectileType;
         public float ProjectileSpeed => m_ProjectileSpeed;

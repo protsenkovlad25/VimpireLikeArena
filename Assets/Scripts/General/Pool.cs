@@ -26,7 +26,7 @@ namespace VampireLike
                 item.gameObject.SetActive(true);
                 return item;
             }
-            return m_Objects[0];
+            return null;
         }
 
         public void ReturnToPool(T obj)

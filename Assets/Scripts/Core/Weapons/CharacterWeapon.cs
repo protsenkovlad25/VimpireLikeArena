@@ -48,6 +48,16 @@ namespace VampireLike.Core.Weapons
                 return;
             }
 
+            if (weapon.TryGetComponent<InfinityShootingWeapon>(out var infinityShootingWeapon))
+            {
+                infinityShootingWeapon.Set(m_Attaching);
+            }
+
+            if (weapon.TryGetComponent<SimpleShootingWeapon>(out var simpleShootingWeapon))
+            {
+                simpleShootingWeapon.Set(m_Attaching);
+            }
+
             if (weapon.TryGetComponent<ProjectileWeapon>(out var projectileWeapon))
             {
                 projectileWeapon.Set(m_Attaching);

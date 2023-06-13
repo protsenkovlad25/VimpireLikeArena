@@ -7,7 +7,7 @@ namespace VampireLike.Core.Movements
     public class DistanceMovement : IMoving
     {
         private bool m_IsStop;
-        private int m_MinDistance = 3;
+        private int m_MinDistance = 5;
         private int m_CheckDistance = 2;
 
         public void Move(Vector3 target, float speed, Transform transform, Rigidbody rigidbody)
@@ -24,9 +24,10 @@ namespace VampireLike.Core.Movements
             var difference = target - transform.position;
             if (difference.magnitude < m_MinDistance)
             {
-                if (Physics.Raycast(transform.position + difference.normalized * m_CheckDistance, new Vector3(0, -1, 0), 3))
+                if (Physics.Raycast(transform.position + -difference.normalized * m_CheckDistance, new Vector3(0, -1, 0), 5))
                 {
-                    transform.position = Vector3.MoveTowards(transform.position, difference.normalized, speed);
+                    Debug.Log((transform.position + -difference.normalized * m_CheckDistance).ToString());
+                    transform.position = Vector3.MoveTowards(transform.position, transform.position + -difference.normalized * m_CheckDistance, speed);
                 }
             }
         }

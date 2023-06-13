@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 469436177383617849}
-  - component: {fileID: 469436177383617848}
+  - component: {fileID: 558255923814313856}
   m_Layer: 6
-  m_Name: ProjectileWeapon
+  m_Name: InfinityShootingWeapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32,7 +32,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &469436177383617848
+--- !u!114 &558255923814313856
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,7 +41,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 469436177383617850}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93dbc64f3b9d08042963e24e90fa4660, type: 3}
+  m_Script: {fileID: 11500000, guid: b1919b930ef22234b9345d6885821f9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_StartPoint: {fileID: 469436177396386438}
@@ -138,7 +138,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e0df5c7e6fd39134fbdc3a7de4d53e07, type: 2}
+  - {fileID: 2100000, guid: 6075dc5e2b53a5d4798ba4e966f78c41, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
