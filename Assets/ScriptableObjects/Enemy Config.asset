@@ -27,13 +27,13 @@ MonoBehaviour:
     m_EnemyMovementType: 1
   - m_Name: Shooting Enemy
     m_EnemyType: 2
-    m_HealthPoints: 180
+    m_HealthPoints: 4
     m_Speed: 10
     m_ScaleDamage: 1
     m_EnemyMovementType: 2
   - m_Name: Rocket Shooting  Enemy
     m_EnemyType: 3
-    m_HealthPoints: 5
+    m_HealthPoints: 100
     m_Speed: 4
     m_ScaleDamage: 1
     m_EnemyMovementType: 2
