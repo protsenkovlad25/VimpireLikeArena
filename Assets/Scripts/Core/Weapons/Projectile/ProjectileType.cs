@@ -10,6 +10,7 @@ namespace VampireLike.Core.Weapons
         None,
         SimpleProjectile,
         MeleeProjectile,
-        DirectProjectile
+        DirectProjectile,
+        RocketProjectile
     }
 }

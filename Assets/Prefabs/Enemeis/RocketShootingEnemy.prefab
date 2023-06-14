@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 4300449760493720338}
   - component: {fileID: 4300449760493720428}
   - component: {fileID: 4300449760493720431}
+  - component: {fileID: 4601896418377127503}
   m_Layer: 8
   m_Name: RocketShootingEnemy
   m_TagString: Untagged
@@ -144,6 +145,22 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 1
+--- !u!114 &4601896418377127503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4300449760493720336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b47aee581c45594c935d91a69403b53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hpBarPrefab: {fileID: 6744790681143353430, guid: 9dfffb2a29c514f4cbef6b17ca5bed2c, type: 3}
+  m_WeaponPoint: {fileID: 4300449761019960015}
+  m_WeaponType: 3
+  m_EnemyType: 3
 --- !u!1 &4300449761019960012
 GameObject:
   m_ObjectHideFlags: 0

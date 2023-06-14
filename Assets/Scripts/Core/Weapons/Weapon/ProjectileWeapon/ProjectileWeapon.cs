@@ -35,7 +35,6 @@ namespace VampireLike.Core.Weapons
         public override void Shoot()
         {
             StartCoroutine(ShootCoroutine());
-            
         }
 
         public override void Stop()
@@ -97,21 +96,13 @@ namespace VampireLike.Core.Weapons
                 
                 if (m_CurrentNumberBullets == 0)
                 {
-                    Debug.Log("Bullet 0");
                     m_CurrentNumberBullets = m_ProjectileWeaponData.MagazineSize;
 
                     yield return new WaitForSeconds(m_ProjectileWeaponData.RechargeTime);
-                    Debug.Log("Recharge stop");
                 }
 
                 yield return new WaitForSeconds(m_ProjectileWeaponData.AttackSpeed);
             }
-        }
-
-        private void Recharge()
-        {
-           
-            Debug.Log("Recharge start");
         }
 
         private void OnHit(Projectile projectile)
