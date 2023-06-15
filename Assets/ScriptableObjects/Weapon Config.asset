@@ -67,7 +67,7 @@ MonoBehaviour:
     m_WeaponType: 3
     m_AttackSpeed: 5
     m_RepulsiveForce: 250
-    m_Damage: 2
+    m_Damage: 20
     m_MagazineSize: 0
     m_RechargeTime: 0
     m_ProjectileType: 0

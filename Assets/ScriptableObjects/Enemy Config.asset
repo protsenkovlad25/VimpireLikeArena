@@ -15,7 +15,7 @@ MonoBehaviour:
   m_EnemyData:
   - m_Name: Spiky Enemy
     m_EnemyType: 0
-    m_HealthPoints: 4
+    m_HealthPoints: 1
     m_Speed: 4
     m_ScaleDamage: 1
     m_EnemyMovementType: 0

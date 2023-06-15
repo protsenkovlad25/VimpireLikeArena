@@ -64,11 +64,11 @@ namespace VampireLike.Core.Weapons
                 rocket.Damage = m_ProjectileWeaponData.Damage;
                 rocket.RepulsiveForce = m_ProjectileWeaponData.RepulsiveForce;
 
-                //yield return new WaitForSeconds(5f);
                 yield return new WaitForSeconds(m_ProjectileWeaponData.AttackSpeed);
 
-                rocket.transform.DOMove(transform.position + rocket.transform.right * dir*3, .2f);
+                rocket.transform.DOMove(transform.position + rocket.transform.right * dir * 3, .2f);
                 dir = -dir;
+
                 if (m_Attaching.GetTarget() == null)
                 {
                     yield break;

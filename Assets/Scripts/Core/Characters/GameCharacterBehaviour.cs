@@ -40,11 +40,11 @@ namespace VampireLike.Core.Characters
             m_HpBar.Init(m_CharacterData.HealthPoints);
         }
 
-        public void Push(Vector3 direction ,float force)
+        public void Push(Vector3 direction ,float force, ForceMode mode = ForceMode.Force)
         {
             if (TryGetComponent<Rigidbody>(out var rigidbody))
             {
-                rigidbody.AddForce(direction * force, ForceMode.Force);
+                rigidbody.AddForce(direction * force, mode);
             }
         }
 
