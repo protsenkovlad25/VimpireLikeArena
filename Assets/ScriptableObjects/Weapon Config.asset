@@ -17,15 +17,15 @@ MonoBehaviour:
     m_WeaponType: 1
     m_AttackSpeed: 1
     m_RepulsiveForce: 250
-    m_Damage: 2
+    m_Damage: 5
     m_MagazineSize: 8
     m_RechargeTime: 2
     m_ProjectileType: 1
-    m_ProjectileSpeed: 12
-    m_Distance: 20
+    m_ProjectileSpeed: 15
+    m_Distance: 30
   - m_Name: Pushing Weapon
     m_WeaponType: 5
-    m_AttackSpeed: 1.5
+    m_AttackSpeed: 0
     m_RepulsiveForce: 100
     m_Damage: 1
     m_MagazineSize: 0
@@ -55,24 +55,24 @@ MonoBehaviour:
     m_Distance: 10
   - m_Name: Infinity Shooting Weapon
     m_WeaponType: 2
-    m_AttackSpeed: 1
-    m_RepulsiveForce: 250
-    m_Damage: 2
+    m_AttackSpeed: 0.5
+    m_RepulsiveForce: 0
+    m_Damage: 10
     m_MagazineSize: 8
     m_RechargeTime: 0
     m_ProjectileType: 1
-    m_ProjectileSpeed: 12
-    m_Distance: 1
+    m_ProjectileSpeed: 15
+    m_Distance: 20
   - m_Name: Rocket Shooting Weapon
     m_WeaponType: 3
-    m_AttackSpeed: 5
+    m_AttackSpeed: 2
     m_RepulsiveForce: 250
-    m_Damage: 20
+    m_Damage: 15
     m_MagazineSize: 0
     m_RechargeTime: 0
     m_ProjectileType: 0
     m_ProjectileSpeed: 28
-    m_Distance: 40
+    m_Distance: 30
   m_ListModelWeapons:
   - m_Name: Simple Shooting Weapon
     m_WeaponType: 1

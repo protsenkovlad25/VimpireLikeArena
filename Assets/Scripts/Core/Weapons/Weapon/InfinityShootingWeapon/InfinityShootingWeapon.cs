@@ -21,7 +21,7 @@ namespace VampireLike.Core.Weapons
         {
             m_Pool = new PoolBehaviour<Projectile>();
             m_Pool.CreateParent(transform);
-            m_Pool.Pooling(m_ProjectileWeaponData.ProjectilePref, 2);
+            m_Pool.Pooling(m_ProjectileWeaponData.ProjectilePref, 20);
             m_Moving = new ProjectileMovement();
         }
 

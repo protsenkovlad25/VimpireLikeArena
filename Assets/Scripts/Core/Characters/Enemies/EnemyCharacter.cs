@@ -99,13 +99,17 @@ namespace VampireLike.Core.Characters.Enemies
 
         private IEnumerator PauseMove()
         {
-            yield return new WaitForSeconds(0.25f);
-            m_Moving.Start();
+            if (m_EnemyType != EnemyType.PushingEnemy)
+            {
+                m_Moving.Stop();
+                yield return new WaitForSeconds(0.25f);
+                m_Moving.Start();
+            }
         }
 
         public override void TakeDamage(int damage)
         {
-            m_Moving.Stop();
+            //m_Moving.Stop();
             base.TakeDamage(damage);
 
             if (CurrentHealthPoint > 0)
