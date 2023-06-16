@@ -1,10 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using VampireLike.Core.Characters.Enemies;
 
 namespace VampireLike.Core.Weapons
 {
-
     public class CharacterWeapon : INeeding<IAttaching>
     {
         private List<WeaponBehaviour> m_Weapons;
@@ -39,7 +39,7 @@ namespace VampireLike.Core.Weapons
             }
         }
 
-        public void AddWeapon(WeaponBehaviour weapon)
+        public void AddWeapon(WeaponBehaviour weapon, EnemyCharacter enemyCharacter = null)
         {
             if (weapon == null)
             {
@@ -61,6 +61,9 @@ namespace VampireLike.Core.Weapons
             if(weapon.TryGetComponent<RocketShootingWeapon>(out var rocketShootingWeapon))
             {
                 rocketShootingWeapon.Set(m_Attaching);
+                
+                if (enemyCharacter != null)
+                    rocketShootingWeapon.SetEnemyCharacter(enemyCharacter);
             }
 
             if (weapon.TryGetComponent<ProjectileWeapon>(out var projectileWeapon))

@@ -8,7 +8,7 @@ namespace VampireLike.Core.Movements
         private bool m_IsStop;
         private bool m_IsDash;
         private bool m_IsCharging;
-        private float m_Force = 750;
+        private float m_Force = 850;
 
         public void Move(Vector3 target, float speed, Transform transform, Rigidbody rigidbody)
         {

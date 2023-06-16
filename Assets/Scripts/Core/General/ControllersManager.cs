@@ -30,6 +30,7 @@ namespace VampireLike.Core.General
             m_LevelController.OnSetChunk += OnSetChunk;
 
             EventManager.OnLose.AddListener(OnPlayerDied);
+            EventManager.OnSwitchWeapon.AddListener(SwitchEnemyWeapon);
 
             m_EnemeisController.Init();
             m_MainCharacterController.Init();
@@ -38,6 +39,11 @@ namespace VampireLike.Core.General
 
             m_LevelController.FirstArena();
             //StartGameLoop();
+        }
+
+        private void SwitchEnemyWeapon(WeaponType weaponType, INeedingWeapon needingWeapon)
+        {
+            m_WeaponsController.GaveWeapon(weaponType, needingWeapon);
         }
 
         private void OnDragJoystickPlayer(Vector2 vector2)

@@ -34,7 +34,7 @@ namespace VampireLike.Core.Weapons
             m_StartPosition = transform.position;
         }
 
-        private void OnCollisionEnter(Collision collision)
+        protected virtual void OnCollisionEnter(Collision collision)
         {
             m_IsMove = false;
 

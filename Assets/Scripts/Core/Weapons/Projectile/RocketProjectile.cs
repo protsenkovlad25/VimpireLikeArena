@@ -16,14 +16,13 @@ namespace VampireLike.Core.Weapons
 
         public void Init()
         {
-            ((RocketProjectileMovement)m_Moving).OnRocketMoveEnd = RocketMoveEnd;
+            ((RocketProjectileMovement)m_Moving).OnRocketMoveEnd += RocketMoveEnd;
         }
 
         void RocketMoveEnd()
         {
             StartCoroutine(Explosion());
-
-            //gameObject.SetActive(false);
+            m_IsMove = false;
         }
 
         public override void Move(float speed, Vector3 point, float distance)
@@ -37,7 +36,6 @@ namespace VampireLike.Core.Weapons
         {
             if (!m_IsMove)
             {
-                //gameObject.SetActive(false);
                 return;
             }
 
@@ -59,34 +57,52 @@ namespace VampireLike.Core.Weapons
             }
         }
 
+        protected override void OnCollisionEnter(Collision collision)
+        {
+            if (collision.gameObject.tag == "Player")
+            {
+                base.OnCollisionEnter(collision);
+            }
+
+            if (collision.gameObject.tag == "Wall")
+            {
+                RocketMoveEnd();
+            }
+        }
+
         private IEnumerator Explosion()
         {
             m_Explosion = Instantiate(m_ExplosionPrefab, transform).GetComponent<Explosion>();
             m_Explosion.PlayParticleExplosion();
 
+            List<GameObject> exceptions = new List<GameObject>();
             for (int i = 0; i < 4; i++)
             {
-                RaycastHit[] hits = Physics.SphereCastAll(transform.position, m_Explosion.CurrentExpDistance * (i + 1), new Vector3(0, 1, 0), .1F);
+                RaycastHit[] hits = Physics.SphereCastAll(m_Explosion.transform.position, m_Explosion.CurrentExpDistance * (i + 1f), new Vector3(0, 1, 0), .1f);
 
                 foreach(var hit in hits)
                 {
-                    if(hit.collider.gameObject.TryGetComponent(out GameCharacterBehaviour gameCharacterBehaviour))
+                    if (!exceptions.Contains(hit.collider.gameObject))
                     {
-                        hit.collider.gameObject.TryGetComponent<IRepelled>(out var repelled);
+                        if (hit.collider.gameObject.TryGetComponent(out GameCharacterBehaviour gameCharacterBehaviour))
                         {
-                            repelled.Push(transform.forward, RepulsiveForce);
-                        }
-                        //if (hit.collider.gameObject.TryGetComponent<IRepelled>(out var repelled))
-                        //{
-                        //    repelled.Push(transform.forward, RepulsiveForce);
-                        //}
-
-                        if (gameCharacterBehaviour.GetType() == typeof(MainCharacter))
-                        {
-                            hit.collider.gameObject.TryGetComponent<ITakingDamage>(out var takingDamage);
+                            Vector3 pushDir = (m_Explosion.transform.position - m_Target).normalized;
+                            hit.collider.gameObject.TryGetComponent<IRepelled>(out var repelled);
                             {
-                                takingDamage.TakeDamage(Damage * (int)(1 - i * 0.25));
+                                if (pushDir.magnitude <= .1f)
+                                    pushDir = transform.forward.normalized;
+
+                                repelled.Push(pushDir, m_Explosion.RepulsiveForce * (1F - i * 0.25f), ForceMode.Impulse);
                             }
+
+                            if (gameCharacterBehaviour.GetType() == typeof(MainCharacter))
+                            {
+                                hit.collider.gameObject.TryGetComponent<ITakingDamage>(out var takingDamage);
+                                {
+                                    takingDamage.TakeDamage((int)(Damage * (1f - i * 0.25f)));
+                                }
+                            }
+                            exceptions.Add(hit.collider.gameObject);
                         }
                     }
                 }

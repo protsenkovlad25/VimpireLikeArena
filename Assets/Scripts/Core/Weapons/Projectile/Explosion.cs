@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class Explosion : MonoBehaviour
 {
-    [SerializeField] private float m_CurrentExpDistance = 0.7f;
-    [SerializeField] private ParticleSystem m_ParticleSystem1;
-    [SerializeField] private ParticleSystem m_ParticleSystem2;
+    [SerializeField] private float m_CurrentExpDistance;
+    [SerializeField] private float m_RepulsiveForce;
+    [SerializeField] private ParticleSystem m_SmokeParticle;
+    [SerializeField] private ParticleSystem m_SparksParticle;
 
     public float CurrentExpDistance => m_CurrentExpDistance;
+    public float RepulsiveForce => m_RepulsiveForce;
 
     public void PlayParticleExplosion()
     {
-        m_ParticleSystem1.Play();
-        m_ParticleSystem2.Play();
+        m_SmokeParticle.Play();
+        m_SparksParticle.Play();
     }
 }

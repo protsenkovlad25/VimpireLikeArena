@@ -25,7 +25,7 @@ namespace VampireLike.Core.Players
                 Player.QtyCompleteArean = 0;
                 Player.Level = 1;
                 Player.Seed = Player.Level;
-                Player.QtyArenas = 6;
+                Player.QtyArenas = 5;
             }
         }
 

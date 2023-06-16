@@ -98,6 +98,7 @@ namespace VampireLike.Core.Characters.Enemies
 
         public void Init()
         {
+            EventManager.OnSwitchMovement.AddListener(SwitchMovement);
         }
 
         public void SetAttaching(IAttaching attaching)
@@ -145,6 +146,11 @@ namespace VampireLike.Core.Characters.Enemies
                 enemy.Init();
                 enemy.OnDie += OnEnemyDie;
             }
+        }
+
+        public void SwitchMovement(EnemyCharacter enemy, IMoving moving)
+        {
+            enemy.SetCharacterMovement(moving);
         }
 
         public void InitEnemeisWeapons()

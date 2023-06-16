@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using VampireLike.Core.Movements;
 using DG.Tweening;
+using System;
+using VampireLike.Core.Characters.Enemies;
 
 namespace VampireLike.Core.Weapons
 {
@@ -13,6 +15,7 @@ namespace VampireLike.Core.Weapons
         private IAttaching m_Attaching;
         private IMoving m_Moving;
         private ProjectileWeaponData m_ProjectileWeaponData;
+        private EnemyCharacter m_EnemyCharacter;
 
         public override void Init()
         {
@@ -22,6 +25,11 @@ namespace VampireLike.Core.Weapons
         public void Set(IAttaching generic)
         {
             m_Attaching = generic;
+        }
+
+        public void SetEnemyCharacter(EnemyCharacter enemyCharacter)
+        {
+            m_EnemyCharacter = enemyCharacter;
         }
 
         public override void SetWeaponData(WeaponData weaponData)
@@ -64,11 +72,11 @@ namespace VampireLike.Core.Weapons
                 rocket.Damage = m_ProjectileWeaponData.Damage;
                 rocket.RepulsiveForce = m_ProjectileWeaponData.RepulsiveForce;
 
-                //yield return new WaitForSeconds(5f);
                 yield return new WaitForSeconds(m_ProjectileWeaponData.AttackSpeed);
 
-                rocket.transform.DOMove(transform.position + rocket.transform.right * dir*3, .2f);
+                rocket.transform.DOMove(transform.position + rocket.transform.right * dir * 3, .2f);
                 dir = -dir;
+
                 if (m_Attaching.GetTarget() == null)
                 {
                     yield break;
@@ -77,6 +85,16 @@ namespace VampireLike.Core.Weapons
                 rocket.Init();
                 rocket.Move(m_ProjectileWeaponData.ProjectileSpeed, m_Attaching.GetTarget().position, m_ProjectileWeaponData.Distance);
             }
+
+            EventManager.SwitchMovement(m_EnemyCharacter, new DashMovement());
+
+            m_EnemyCharacter.WeaponType = WeaponType.Pushing;
+            m_EnemyCharacter.EnemyType = EnemyType.PushingEnemy;
+
+            EventManager.SwitchWeapon(m_EnemyCharacter.WeaponType, m_EnemyCharacter);
+
+            yield return new WaitForSeconds(5f);
+            Destroy(gameObject);
         }
     }
 }
