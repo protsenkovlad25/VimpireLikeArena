@@ -26,7 +26,7 @@ namespace VampireLike.Core.Movements
 
             if (difference.magnitude < m_MinDistance)
             {
-                if (Physics.Raycast(retreatDirection, new Vector3(0, -1, 0), 5))
+                if (Physics.Raycast(retreatDirection, new Vector3(0, -1, 0), 5f))
                 {
                     transform.position = Vector3.MoveTowards(transform.position, retreatDirection, speed);
                 }
@@ -38,7 +38,7 @@ namespace VampireLike.Core.Movements
                     while (repeat != 0)
                     {
                         var newDirection = Quaternion.Euler(0, randomAngle, 0) * -difference.normalized;
-                        if (Physics.Raycast(transform.position + newDirection * m_CheckDistance, new Vector3(0, -1, 0), 5))
+                        if (Physics.Raycast(transform.position + newDirection * m_CheckDistance, new Vector3(0, -1, 0), 5f))
                         {
                             transform.position = Vector3.MoveTowards(transform.position, transform.position + newDirection * m_CheckDistance, speed);
                             break;

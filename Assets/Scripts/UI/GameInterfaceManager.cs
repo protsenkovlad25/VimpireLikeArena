@@ -22,7 +22,7 @@ public class GameInterfaceManager : MonoBehaviour
     {
         EventManager.OnWin.AddListener(CompleteLevel);
         EventManager.OnLose.AddListener(LoseLevel);
-        //EventManager.MainCharacterTakeDamage.AddListener(RedScreenTransparencyChange);
+        EventManager.MainCharacterTakeDamage.AddListener(RedScreenTransparencyChange);
 
         initialHealth = m_MainCharacter.CharacterData.HealthPoints;
     }

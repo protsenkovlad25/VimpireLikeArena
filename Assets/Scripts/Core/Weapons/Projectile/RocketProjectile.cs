@@ -63,6 +63,11 @@ namespace VampireLike.Core.Weapons
             {
                 base.OnCollisionEnter(collision);
             }
+
+            if (collision.gameObject.tag == "Wall")
+            {
+                RocketMoveEnd();
+            }
         }
 
         private IEnumerator Explosion()

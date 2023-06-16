@@ -10,6 +10,9 @@ namespace VampireLike.Core.Characters.Enemies
         [SerializeField] private WeaponType m_WeaponType;
         [SerializeField] private EnemyType m_EnemyType;
 
+        public WeaponType WeaponType { get; set; }
+        public EnemyType EnemyType { get; set; }
+
         private CharacterWeapon m_CharacterWeapon;
         private IAttaching m_Attaching;
 
@@ -54,7 +57,7 @@ namespace VampireLike.Core.Characters.Enemies
                 m_CharacterWeapon.Set(m_Attaching);
             }
 
-            m_CharacterWeapon.AddWeapon(generic);
+            m_CharacterWeapon.AddWeapon(generic, this);
         }
 
         public void Set(IAttaching generic)

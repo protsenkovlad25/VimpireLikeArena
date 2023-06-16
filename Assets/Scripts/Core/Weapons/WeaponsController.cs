@@ -14,7 +14,7 @@ namespace VampireLike.Core.Weapons
             foreach (var item in needingWeapons)
             {
                 GaveWeapon(item);
-            }
+            } 
         }
 
         public void GaveWeapon(INeedingWeapon needingWeapon)
@@ -33,6 +33,15 @@ namespace VampireLike.Core.Weapons
             needingWeapon.Set(builder.Build());
         }
 
+        public void GaveWeapon(WeaponType weaponType, INeedingWeapon needingWeapon)
+        {
+            var data = m_WeaponConfigurator.GetData(weaponType);
 
+            var builder = new WeaponBuilder(needingWeapon.Where())
+                                .SetWeaponData(data.WeaponData)
+                                .SetWeaponBehaviour(data.WeaponBehaviour);
+
+            needingWeapon.Set(builder.Build());
+        }
     }
 }

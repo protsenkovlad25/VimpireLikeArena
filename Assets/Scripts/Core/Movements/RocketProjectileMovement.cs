@@ -7,7 +7,7 @@ namespace VampireLike.Core.Movements
 {
     public class RocketProjectileMovement : IMoving
     {
-        public Action OnRocketMoveEnd;
+        public event Action OnRocketMoveEnd;
         public bool isMove;
 
         public void Move(Vector3 target, float speed, Transform transform, Rigidbody rigidbody)
@@ -23,7 +23,7 @@ namespace VampireLike.Core.Movements
 
             if (Mathf.Abs((transform.position - target).magnitude) < .01F)
             {
-                OnRocketMoveEnd.Invoke();
+                OnRocketMoveEnd?.Invoke();
             }
         }
 
