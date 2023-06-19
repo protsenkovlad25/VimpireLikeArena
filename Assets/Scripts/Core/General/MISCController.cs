@@ -9,11 +9,13 @@ namespace VampireLike.Core
     {
         [SerializeField] private FollowerCamera m_FollowerCamera;
         [SerializeField] private ShakeCamera m_ShakeCamera;
+        [SerializeField] private LimitedCamera m_LimitedCamera;
 
         public void Init()
         {
-            m_FollowerCamera.FixPostion();
+            //m_FollowerCamera.FixPosition();
             m_ShakeCamera.Init();
+            m_LimitedCamera.Init();
         }
     }
 }

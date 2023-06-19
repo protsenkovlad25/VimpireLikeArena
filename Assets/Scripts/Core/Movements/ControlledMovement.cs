@@ -8,6 +8,7 @@ namespace VampireLike.Core.Movements
     {
         public void Move(Vector3 direction, float speed, Transform transform, Rigidbody rigidbody)
         {
+
             var currentPostion = transform.position;
 
             var directionVector3 = new Vector3(direction.x, 0f, direction.z);

@@ -1,10 +1,9 @@
 using DG.Tweening;
 using UnityEngine;
-using VampireLike.Core.Characters;
 
 public class ShakeCamera : MonoBehaviour
 {
-    [SerializeField] Camera Camera;
+    [SerializeField] private Camera m_Camera;
 
     public void Init()
     {
@@ -13,6 +12,6 @@ public class ShakeCamera : MonoBehaviour
 
     public void Shake()
     {
-        Camera.DOShakePosition(0.5f, new Vector3(1, 1, 1), 10);
+        m_Camera.DOShakePosition(0.5f, new Vector3(1, 1, 1), 10);
     }
 }

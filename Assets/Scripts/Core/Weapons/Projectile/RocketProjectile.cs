@@ -1,9 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using System;
 using VampireLike.Core.Movements;
-using VampireLike.Core.Characters;
 
 namespace VampireLike.Core.Weapons
 {
@@ -73,42 +70,9 @@ namespace VampireLike.Core.Weapons
         private IEnumerator Explosion()
         {
             m_Explosion = Instantiate(m_ExplosionPrefab, transform).GetComponent<Explosion>();
-            m_Explosion.PlayParticleExplosion();
+            m_Explosion.Init(m_Target, transform, Damage);
 
-            List<GameObject> exceptions = new List<GameObject>();
-            for (int i = 0; i < 4; i++)
-            {
-                RaycastHit[] hits = Physics.SphereCastAll(m_Explosion.transform.position, m_Explosion.CurrentExpDistance * (i + 1f), new Vector3(0, 1, 0), .1f);
-
-                foreach(var hit in hits)
-                {
-                    if (!exceptions.Contains(hit.collider.gameObject))
-                    {
-                        if (hit.collider.gameObject.TryGetComponent(out GameCharacterBehaviour gameCharacterBehaviour))
-                        {
-                            Vector3 pushDir = (m_Explosion.transform.position - m_Target).normalized;
-                            hit.collider.gameObject.TryGetComponent<IRepelled>(out var repelled);
-                            {
-                                if (pushDir.magnitude <= .1f)
-                                    pushDir = transform.forward.normalized;
-
-                                repelled.Push(pushDir, m_Explosion.RepulsiveForce * (1F - i * 0.25f), ForceMode.Impulse);
-                            }
-
-                            if (gameCharacterBehaviour.GetType() == typeof(MainCharacter))
-                            {
-                                hit.collider.gameObject.TryGetComponent<ITakingDamage>(out var takingDamage);
-                                {
-                                    takingDamage.TakeDamage((int)(Damage * (1f - i * 0.25f)));
-                                }
-                            }
-                            exceptions.Add(hit.collider.gameObject);
-                        }
-                    }
-                }
-
-                yield return new WaitForSeconds(0.2f);
-            }
+            yield return new WaitForSeconds(1f);
 
             gameObject.SetActive(false);
         }

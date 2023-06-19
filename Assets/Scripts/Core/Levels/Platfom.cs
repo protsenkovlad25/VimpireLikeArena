@@ -32,10 +32,21 @@ namespace VampireLike.Core.Levels
         {
             if (collision.gameObject.TryGetComponent<IHero>(out var hero))
             {
-                m_IsExite = false;
-                Move(Vector3.up * 10 * -1);
-                OnExitePlatform?.Invoke();
+                StartCoroutine(LoweringPlatform());
             }
+        }
+
+        private IEnumerator LoweringPlatform()
+        {
+            m_IsExite = false;
+            Move(Vector3.up * 10 * -1);
+
+            gameObject.GetComponent<MeshRenderer>().material.DOFade(0, 1f);
+
+            yield return new WaitForSeconds(1f);
+
+            OnExitePlatform?.Invoke();
+            gameObject.SetActive(false);
         }
     }
 }
