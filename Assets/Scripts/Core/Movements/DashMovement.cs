@@ -8,7 +8,7 @@ namespace VampireLike.Core.Movements
         private bool m_IsStop;
         private bool m_IsDash;
         private bool m_IsCharging;
-        private float m_Force = 850;
+        private float m_Force = 60f;
 
         public void Move(Vector3 target, float speed, Transform transform, Rigidbody rigidbody)
         {
@@ -31,8 +31,14 @@ namespace VampireLike.Core.Movements
         {
             m_IsCharging = true;
             await Task.Delay(System.TimeSpan.FromSeconds(3f));
-            
+
             await Dash(target, speed, transform, rigidbody);
+
+
+            await Task.Delay(System.TimeSpan.FromSeconds(.25f));
+
+
+            await DashStop(rigidbody);
 
             m_IsDash = false;
             m_IsCharging = false;
@@ -45,7 +51,13 @@ namespace VampireLike.Core.Movements
 
             Vector3 force = transform.forward * m_Force;
 
-            rigidbody.AddForce(force, ForceMode.Force);
+
+            rigidbody.AddForce(force, ForceMode.Impulse);
+        }
+
+        private async Task DashStop(Rigidbody rigidbody)
+        {
+            rigidbody.AddForce(-rigidbody.velocity*.9f, ForceMode.Impulse);
         }
 
         public void Start()

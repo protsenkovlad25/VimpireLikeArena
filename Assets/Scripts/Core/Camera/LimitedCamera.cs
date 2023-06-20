@@ -1,4 +1,5 @@
 using UnityEngine;
+using DG.Tweening;
 
 namespace VampireLike.Core.Cameras
 {
@@ -6,20 +7,24 @@ namespace VampireLike.Core.Cameras
     {
         [SerializeField] private Camera m_Camera;
         [SerializeField] private Transform m_Target;
+        [SerializeField] private Transform m_Arena;
+        [SerializeField] private int m_PercantageArenaVisibility;
 
-        private Vector3 m_RightPos;
-        private Vector3 m_LeftPos;
+        private Vector3 m_RightScreenPoint;
+        private Vector3 m_LeftScreenPoint;
         private Vector3 m_StartPosition;
-        private Vector3 m_LastPosition;
+        private Vector3 m_LastTargetPosition;
         private bool m_IsLimited;
 
         public void Init()
         {
-            m_RightPos = new Vector3(m_Camera.pixelWidth, m_Camera.pixelHeight / 2, 0);
-            m_LeftPos = new Vector3(0, m_Camera.pixelHeight / 2, 0);
+            m_RightScreenPoint = new Vector3(m_Camera.pixelWidth, m_Camera.pixelHeight / 2, 0);
+            m_LeftScreenPoint = new Vector3(0, m_Camera.pixelHeight / 2, 0);
+
+            SettingCameraPosition();
 
             m_StartPosition = m_Target.position - m_Camera.transform.position;
-            m_LastPosition = m_Target.position - m_Camera.transform.position;
+            m_LastTargetPosition = m_Target.position - m_Camera.transform.position;
 
             m_IsLimited = false;
         }
@@ -34,28 +39,42 @@ namespace VampireLike.Core.Cameras
                 NotLimitMovement(interpolatePosition);
             }
 
-            m_LastPosition = m_Target.position;
+            m_LastTargetPosition = m_Target.position;
         }
 
         private void LimitMovement()
         {
-            Ray leftRay = m_Camera.ScreenPointToRay(m_LeftPos);
-            Ray rightRay = m_Camera.ScreenPointToRay(m_RightPos);
+            Ray leftRay = m_Camera.ScreenPointToRay(m_LeftScreenPoint);
+            Ray rightRay = m_Camera.ScreenPointToRay(m_RightScreenPoint);
 
-            float deltaPosX = m_Target.position.x - m_LastPosition.x;
-            float deltaPosZ = m_Target.position.z - m_LastPosition.z; //m_LimitOnZ ? 0 : m_Target.position.z - m_StartPosition.z;
+            float deltaPosX = m_Target.position.x - m_LastTargetPosition.x;
+            float deltaPosZ = m_Target.position.z - m_LastTargetPosition.z; //m_LimitOnZ ? 0 : m_Target.position.z - m_StartPosition.z;
 
-            if ((deltaPosX > 0 && Physics.Raycast(rightRay, out RaycastHit hitR, 50)))
+            if ((deltaPosX > 0 && Physics.Raycast(rightRay, out RaycastHit hitR, 100)))
             {
                 if (hitR.collider.TryGetComponent<OnColiderEnterComponent>(out OnColiderEnterComponent c))
-                    m_Camera.transform.position += new Vector3(deltaPosX, 0, deltaPosZ);
+                    if (m_Camera.transform.position.x - m_Target.position.x < 1)
+                    {
+                        m_Camera.transform.position += new Vector3(deltaPosX, 0, deltaPosZ);
+                    }
 
             }
-            else if (deltaPosX < 0 && Physics.Raycast(leftRay, out RaycastHit hitL, 50))
+            else if (deltaPosX < 0 && Physics.Raycast(leftRay, out RaycastHit hitL, 100))
             {
                 if (hitL.collider.TryGetComponent<OnColiderEnterComponent>(out OnColiderEnterComponent c))
-                    m_Camera.transform.position += new Vector3(deltaPosX, 0, deltaPosZ);
+                    if (m_Camera.transform.position.x - m_Target.position.x > -1)
+                    {
+                        m_Camera.transform.position += new Vector3(deltaPosX, 0, deltaPosZ);
+                    }
             }
+        }
+
+        private void SettingCameraPosition()
+        {
+            float diameterArena = m_Arena.transform.localScale.x * 2;
+            float requiredDistance = diameterArena * m_PercantageArenaVisibility / 100; 
+
+            m_Camera.transform.DOMove(-m_Camera.transform.forward * requiredDistance * Mathf.Sin(60 * Mathf.Deg2Rad),.5F);
         }
 
         private void NotLimitMovement(Vector3 newPosition)

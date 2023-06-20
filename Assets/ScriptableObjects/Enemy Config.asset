@@ -21,7 +21,7 @@ MonoBehaviour:
     m_EnemyMovementType: 0
   - m_Name: Pushing Enemy
     m_EnemyType: 1
-    m_HealthPoints: 15
+    m_HealthPoints: 30
     m_Speed: 5
     m_ScaleDamage: 1
     m_EnemyMovementType: 1
