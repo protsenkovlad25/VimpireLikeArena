@@ -5,10 +5,18 @@ namespace VampireLike.Core.Movements
 {
     public class DashMovement : IMoving
     {
+        private ParticleSystem m_DashParticle;
+
         private bool m_IsStop;
         private bool m_IsDash;
         private bool m_IsCharging;
         private float m_Force = 60f;
+
+
+        public void SetParticle(ParticleSystem particle)
+        {
+            m_DashParticle = particle;
+        }
 
         public void Move(Vector3 target, float speed, Transform transform, Rigidbody rigidbody)
         {
@@ -53,6 +61,7 @@ namespace VampireLike.Core.Movements
 
 
             rigidbody.AddForce(force, ForceMode.Impulse);
+            transform.GetComponentInChildren<ParticleSystem>().Play();
         }
 
         private async Task DashStop(Rigidbody rigidbody)

@@ -88,7 +88,7 @@ namespace VampireLike.Core.Characters.Enemies
                 m_Moving.Move(targetPosition.GetTarget().position, 
                     CharacterData.Speed * Time.deltaTime, 
                     transform, 
-                    gameObject.GetComponent<Rigidbody>());               
+                    gameObject.GetComponent<Rigidbody>());
                 yield return null;
             }
 
