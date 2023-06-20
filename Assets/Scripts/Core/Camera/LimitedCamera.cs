@@ -14,6 +14,7 @@ namespace VampireLike.Core.Cameras
         private Vector3 m_LeftScreenPoint;
         private Vector3 m_StartPosition;
         private Vector3 m_LastTargetPosition;
+        private Vector3 m_CurrentPosition;
         private bool m_IsLimited;
 
         public void Init()
@@ -55,7 +56,7 @@ namespace VampireLike.Core.Cameras
                 if (hitR.collider.TryGetComponent<OnColiderEnterComponent>(out OnColiderEnterComponent c))
                     if (m_Camera.transform.position.x - m_Target.position.x < 1)
                     {
-                        m_Camera.transform.position += new Vector3(deltaPosX, 0, deltaPosZ);
+                        m_CurrentPosition += new Vector3(deltaPosX, 0, deltaPosZ);
                     }
 
             }
@@ -64,17 +65,29 @@ namespace VampireLike.Core.Cameras
                 if (hitL.collider.TryGetComponent<OnColiderEnterComponent>(out OnColiderEnterComponent c))
                     if (m_Camera.transform.position.x - m_Target.position.x > -1)
                     {
-                        m_Camera.transform.position += new Vector3(deltaPosX, 0, deltaPosZ);
+                        m_CurrentPosition += new Vector3(deltaPosX, 0, deltaPosZ);
                     }
+            }
+
+
+        }
+
+        private void FixedUpdate()
+        {
+            if(m_IsLimited)
+            {
+                m_Camera.transform.position = m_CurrentPosition;
             }
         }
 
         private void SettingCameraPosition()
         {
             float diameterArena = m_Arena.transform.localScale.x * 2;
-            float requiredDistance = diameterArena * m_PercantageArenaVisibility / 100; 
+            float requiredDistance = diameterArena * m_PercantageArenaVisibility / 100;
 
-            m_Camera.transform.DOMove(-m_Camera.transform.forward * requiredDistance * Mathf.Sin(60 * Mathf.Deg2Rad),.5F);
+            m_CurrentPosition = m_Arena.transform.position-m_Camera.transform.forward * requiredDistance * Mathf.Sin(60 * Mathf.Deg2Rad);
+
+            m_Camera.transform.DOMove(m_CurrentPosition,.5F);
         }
 
         private void NotLimitMovement(Vector3 newPosition)
@@ -84,7 +97,22 @@ namespace VampireLike.Core.Cameras
 
         public void ChangeLimit()
         {
-            m_IsLimited = m_IsLimited != true;
+            m_IsLimited = !m_IsLimited;
+
+            if(m_IsLimited)
+            {
+                RaycastHit[] hits = Physics.RaycastAll(m_Camera.ScreenPointToRay(new Vector3(Screen.width/2, Screen.height/2)),100);
+
+                foreach(var hit in hits)
+                {
+                    if(hit.collider.TryGetComponent<OnColiderEnterComponent>(out OnColiderEnterComponent c))
+                    {
+                        m_Arena = hit.transform;
+                        break;
+                    }
+                }
+                SettingCameraPosition();
+            }
         }
     }
 }

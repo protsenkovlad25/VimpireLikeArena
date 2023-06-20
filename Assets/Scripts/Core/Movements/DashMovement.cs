@@ -61,6 +61,7 @@ namespace VampireLike.Core.Movements
 
 
             rigidbody.AddForce(force, ForceMode.Impulse);
+
             transform.GetComponentInChildren<ParticleSystem>().Play();
         }
 
