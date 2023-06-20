@@ -85,6 +85,7 @@ namespace VampireLike.Core.General
             {
                 PlayerController.Instance.StartRoad();
                 m_LevelController.NextArena();
+                m_MISCController.ChangeCameraLimit();
             }
         }
 
@@ -94,6 +95,8 @@ namespace VampireLike.Core.General
             m_EnemeisController.InitEnemy();
             m_WeaponsController.GaveWeapons(m_EnemeisController.NeedingWeapons);
             m_EnemeisController.InitEnemeisWeapons();
+
+            m_MISCController.ChangeCameraLimit();
 
             StartCoroutine(WaitCoroutine());
             StartMainCharacterGameLoop();
