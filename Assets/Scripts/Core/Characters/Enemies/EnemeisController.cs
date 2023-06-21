@@ -134,7 +134,11 @@ namespace VampireLike.Core.Characters.Enemies
 
         public void SetEnemies(List<EnemyCharacter> enemies)
         {
-            m_Enemies = enemies;
+            //m_Enemies = enemies;
+            foreach (var en in enemies)
+            {
+                m_Enemies.Add(en);
+            }
         }
 
         public List<EnemyCharacter> GetEnemies()

@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd565a0046a4abb42b9274efad0bf160, type: 3}
+  m_Name: Waves Config
+  m_EditorClassIdentifier: 
+  m_WavesClusterKits:
+  - m_Name: Cluster 1_1
+    m_Tier: 1
+    m_Chunks:
+    - {fileID: 9114045137696439886, guid: c6dc23bd8b8f2dd4c9738b5a8a4bcb8a, type: 3}
+    - {fileID: 9114045137696439886, guid: 4f518f8b70d565144be657cb2a495c2f, type: 3}
+    - {fileID: 9114045137696439886, guid: ff2e274bd6e64b14fbe13f05a08e70f8, type: 3}
+  - m_Name: Cluster 1_2
+    m_Tier: 1
+    m_Chunks:
+    - {fileID: 9114045137696439886, guid: b4e87754509ec344e8d2356fe12b386a, type: 3}
+    - {fileID: 9114045137696439886, guid: 32953145c630cae4584437a9a2e043f3, type: 3}
+  - m_Name: Cluster 1_3
+    m_Tier: 1
+    m_Chunks:
+    - {fileID: 9114045137696439886, guid: b4e87754509ec344e8d2356fe12b386a, type: 3}
+  - m_Name: Cluster 2_1
+    m_Tier: 2
+    m_Chunks:
+    - {fileID: 772425971244350116, guid: 76d2bce4884571c4da2a0fda608a26c4, type: 3}
+    - {fileID: 772425971244350116, guid: 6be07763efe044f49a75570768984ce2, type: 3}
+    - {fileID: 772425971244350116, guid: dec0738a2fb0c2442bd03815eed8519f, type: 3}
+  - m_Name: Cluster 2_2
+    m_Tier: 2
+    m_Chunks:
+    - {fileID: 772425971244350116, guid: 3f7e25c098e5fa9489afc31fa7aa4b4b, type: 3}
+    - {fileID: 772425971244350116, guid: 9007e7eb7fd3ffe4e838e21fb44a67a6, type: 3}
+  - m_Name: Cluster 2_3
+    m_Tier: 2
+    m_Chunks:
+    - {fileID: 772425971244350116, guid: dec0738a2fb0c2442bd03815eed8519f, type: 3}
+  - m_Name: Cluster 3_1
+    m_Tier: 3
+    m_Chunks:
+    - {fileID: 5429627594649381980, guid: 5786fe64007d8cf439b618a4ab3e2534, type: 3}
+    - {fileID: 5429627594649381980, guid: b1c88709059939441be0a43d81fd1c3c, type: 3}
+    - {fileID: 5429627594649381980, guid: 0a3939faabec0934591ddb014aba613a, type: 3}
+  - m_Name: Cluster 3_2
+    m_Tier: 3
+    m_Chunks:
+    - {fileID: 5429627594649381980, guid: 56b7380e208143b4885f5c0cc84c6e3f, type: 3}
+    - {fileID: 5429627594649381980, guid: aa29015b7b6771a419afa349fb19f66f, type: 3}
+  - m_Name: Cluster 3_3
+    m_Tier: 3
+    m_Chunks:
+    - {fileID: 5429627594649381980, guid: aa29015b7b6771a419afa349fb19f66f, type: 3}
+  m_WavesClusterTierConfig:
+    m_PrecentageOverflow: 80
+    m_StartDataWavesClusters:
+    - m_Tier: 1
+      m_Percent: 80
+    - m_Tier: 2
+      m_Percent: 20
+    - m_Tier: 3
+      m_Percent: 0

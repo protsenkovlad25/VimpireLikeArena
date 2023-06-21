@@ -9,6 +9,7 @@ namespace VampireLike.Core.Levels
     public class Level : MonoBehaviour
     {
         public event Action<Chunk> OnSetChunk;
+        public event Action OnStartFight;
 
         [SerializeField] private Arena m_PrefabArena;
         [SerializeField] private Road m_PrefabRoad;
@@ -58,6 +59,7 @@ namespace VampireLike.Core.Levels
         {
             m_InstiateChunk = Instantiate(m_CurrentChunkPrefab, m_CurrentArena.CenterArena.position, Quaternion.identity, m_ChunkParent);
             OnSetChunk?.Invoke(m_InstiateChunk);
+            OnStartFight?.Invoke();
         }
     }
 }

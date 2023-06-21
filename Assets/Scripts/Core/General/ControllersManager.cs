@@ -71,21 +71,28 @@ namespace VampireLike.Core.General
 
         private void OnAllDeadEnemies()
         {
-            PlayerController.Instance.CompleteArena();
-            m_MainCharacterController.StopShoot();
-
-            if (PlayerController.Instance.IsCompleteLevel())
+            if (m_LevelController.IsFight == false)
             {
-                PlayerController.Instance.CompleteLevel();
+                PlayerController.Instance.CompleteArena();
+                m_MainCharacterController.StopShoot();
 
-                SavePlayerData.SaveData();
-                EventManager.Win();
+                if (PlayerController.Instance.IsCompleteLevel())
+                {
+                    PlayerController.Instance.CompleteLevel();
+
+                    SavePlayerData.SaveData();
+                    EventManager.Win();
+                }
+                else
+                {
+                    PlayerController.Instance.StartRoad();
+                    m_LevelController.NextArena();
+                    m_MISCController.ChangeCameraLimit();
+                }
             }
             else
             {
-                PlayerController.Instance.StartRoad();
-                m_LevelController.NextArena();
-                m_MISCController.ChangeCameraLimit();
+                m_LevelController.StartNextChunk();
             }
         }
 
