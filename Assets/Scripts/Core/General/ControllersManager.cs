@@ -95,6 +95,7 @@ namespace VampireLike.Core.General
             m_EnemeisController.InitEnemy();
             m_WeaponsController.GaveWeapons(m_EnemeisController.NeedingWeapons);
             m_EnemeisController.InitEnemeisWeapons();
+            m_EnemeisController.Landing();
 
             m_MISCController.ChangeCameraLimit();
 
@@ -116,7 +117,7 @@ namespace VampireLike.Core.General
 
         private IEnumerator SpawnPause()
         {
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(1.3f);
         }
     }
 }

@@ -14,7 +14,7 @@ namespace VampireLike.Core.Weapons
 
         private IAttaching m_Attaching;
         private IMoving m_Moving;
-        private ProjectileWeaponData m_ProjectileWeaponData;
+        private ProjectileWeaponData m_ProjectileWeaponData;    
         private EnemyCharacter m_EnemyCharacter;
 
         public override void Init()
@@ -74,13 +74,14 @@ namespace VampireLike.Core.Weapons
 
                 yield return new WaitForSeconds(m_ProjectileWeaponData.AttackSpeed);
 
-                rocket.transform.DOMove(transform.position + rocket.transform.right * dir * 3, .2f);
+                rocket.transform.DOMove(transform.position + rocket.transform.right * dir * 3, .2f).SetEase(Ease.InExpo);
                 dir = -dir;
 
                 if (m_Attaching.GetTarget() == null)
                 {
                     yield break;
                 }
+
                 rocket.SetMovement(m_Moving);
                 rocket.Init();
                 rocket.Move(m_ProjectileWeaponData.ProjectileSpeed, m_Attaching.GetTarget().position, m_ProjectileWeaponData.Distance);

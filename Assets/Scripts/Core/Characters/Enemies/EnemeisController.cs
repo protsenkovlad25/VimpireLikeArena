@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -148,8 +149,17 @@ namespace VampireLike.Core.Characters.Enemies
                 enemy.SetCharacterData(m_EnemyConfigurator.GetData(enemy.GetEnemyType()));
                 enemy.SetCharacterMovement(m_EnemyConfigurator.GetMovement(enemy.GetEnemyType()));
                 enemy.Set(m_Attaching);
+                enemy.transform.position += new Vector3(0, 50, 0);
                 enemy.Init();
                 enemy.OnDie += OnEnemyDie;
+            }
+        }
+
+        public void Landing()
+        {
+            foreach (var enemy in m_Enemies)
+            {
+                enemy.transform.DOMoveY(1.6f, .8f).SetEase(Ease.OutCubic);
             }
         }
 

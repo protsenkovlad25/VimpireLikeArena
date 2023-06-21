@@ -33,6 +33,7 @@ namespace VampireLike.Core.Weapons
         {
             if (!m_IsMove)
             {
+                transform.localPosition = new Vector3(transform.localPosition.x, 0, transform.localPosition.z);
                 return;
             }
 
