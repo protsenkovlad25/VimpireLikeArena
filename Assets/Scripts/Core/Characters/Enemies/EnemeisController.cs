@@ -14,9 +14,12 @@ namespace VampireLike.Core.Characters.Enemies
         public event Action OnAllDeadEnemies;
 
         [SerializeField] private EnemyConfigurator m_EnemyConfigurator;
+        [SerializeField] private GameObject m_MarkPrefab;
 
         [SerializeField] private List<EnemyCharacter> m_Enemies;
         [SerializeField] private bool m_IsMove;
+
+        private List<GameObject> m_Marks;
 
         private IAttaching m_Attaching;
 
@@ -134,11 +137,7 @@ namespace VampireLike.Core.Characters.Enemies
 
         public void SetEnemies(List<EnemyCharacter> enemies)
         {
-            //m_Enemies = enemies;
-            foreach (var en in enemies)
-            {
-                m_Enemies.Add(en);
-            }
+            m_Enemies = enemies;
         }
 
         public List<EnemyCharacter> GetEnemies()
@@ -156,14 +155,50 @@ namespace VampireLike.Core.Characters.Enemies
                 enemy.transform.position += new Vector3(0, 50, 0);
                 enemy.Init();
                 enemy.OnDie += OnEnemyDie;
+                enemy.gameObject.SetActive(false);
             }
         }
 
-        public void Landing()
+        public void ActivateEnemies()
         {
             foreach (var enemy in m_Enemies)
             {
-                enemy.transform.DOMoveY(1.6f, .8f).SetEase(Ease.OutCubic);
+                enemy.gameObject.SetActive(true);
+            }
+        }
+
+        public void SetMark(List<EnemyCharacter> enemies)
+        {
+            foreach (var enemy in enemies)
+            {
+                for (int i = 0; i < m_Enemies.Count; i++)
+                {
+                    if (enemy == m_Enemies[i])
+                    {
+                        if (Physics.Raycast(m_Enemies[i].transform.position, new Vector3(0, -1, 0), out RaycastHit hit, 50f))
+                        {
+                            if (hit.collider.TryGetComponent<OnColiderEnterComponent>(out OnColiderEnterComponent c))
+                            {
+                                GameObject mark;
+                                mark = Instantiate(m_MarkPrefab, hit.point + new Vector3(0, 0.2f, 0), Quaternion.identity);
+
+                                m_Marks.Add(mark);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        public void Landing(List<EnemyCharacter> enemies)
+        {
+            foreach (var enemy in enemies)
+            {
+                for (int i = 0; i < m_Enemies.Count; i++)
+                {
+                    if (enemy == m_Enemies[i])
+                        enemy.transform.DOMoveY(1.6f, .8f).SetEase(Ease.OutCubic);
+                }
             }
         }
 

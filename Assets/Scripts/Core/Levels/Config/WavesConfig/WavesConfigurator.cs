@@ -16,7 +16,6 @@ namespace VampireLike.Core.Levels
 
             m_WavesClusterTiers = new List<WavesClusterTier>();
 
-
             foreach (var item in m_WavesConfig.WaveClusterKits)
             {
                 if (m_WavesClusters.ContainsKey(item.Tier))
@@ -50,13 +49,10 @@ namespace VampireLike.Core.Levels
                     Percent = item.Percent
                 });
             }
-            Debug.Log(m_WavesClusterTiers[0].Percent + "  " + m_WavesClusterTiers[1].Percent + "  " + m_WavesClusterTiers[2].Percent + "  ");
         }
 
         public int GetTier(int seed)
         {
-            Debug.Log(m_WavesClusterTiers[0].Percent + "  " + m_WavesClusterTiers[1].Percent + "  " + m_WavesClusterTiers[2].Percent + "  ");
-
             var random = new System.Random(seed);
 
             var list = new List<int>();
@@ -76,7 +72,6 @@ namespace VampireLike.Core.Levels
 
         public WavesCluster GetRandomWavesCluster(int tier, System.Random random)
         {
-            if (m_WavesClusters[1][0] == null) Debug.Log("PISKA");
             int index = random.Next(0, m_WavesClusters[tier].Count);
 
             return m_WavesClusters[tier][index];

@@ -10,6 +10,7 @@ public static class EventManager
     public static UnityEvent MainCharacterTakeDamage = new UnityEvent();
     public static UnityEvent<EnemyCharacter, IMoving> OnSwitchMovement = new UnityEvent<EnemyCharacter, IMoving>();
     public static UnityEvent<WeaponType, INeedingWeapon> OnSwitchWeapon = new UnityEvent<WeaponType, INeedingWeapon>();
+    public static UnityEvent OnInitEnemiesInAdvance = new UnityEvent();
 
     public static void Lose()
     {
@@ -34,5 +35,10 @@ public static class EventManager
     public static void SwitchWeapon(WeaponType weaponType, INeedingWeapon needingWeapon)
     {
         OnSwitchWeapon?.Invoke(weaponType, needingWeapon);
+    }
+
+    public static void InitEnemiesInAdvance()
+    {
+        OnInitEnemiesInAdvance?.Invoke();
     }
 }

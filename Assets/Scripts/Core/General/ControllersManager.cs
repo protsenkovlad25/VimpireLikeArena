@@ -19,6 +19,8 @@ namespace VampireLike.Core.General
         [SerializeField] private LevelController m_LevelController;
         [SerializeField] private MISCController m_MISCController;
 
+        private bool m_FirstArena;
+
         public void ControllersInit()
         {
             m_EnemeisController.SetAttaching(m_MainCharacterController);
@@ -26,8 +28,10 @@ namespace VampireLike.Core.General
             m_WeaponsController.GaveWeapon(m_MainCharacterController);
 
             m_PlayerInput.OnInput += OnDragJoystickPlayer;
-            m_EnemeisController.OnAllDeadEnemies += OnAllDeadEnemies;
+            //m_EnemeisController.OnAllDeadEnemies += OnAllDeadEnemies;
+            m_EnemeisController.OnAllDeadEnemies += m_LevelController.IsCompleteWavesCluster;
             m_LevelController.OnSetChunk += OnSetChunk;
+            m_LevelController.OnAllWavesSpawned += LevelCompleteCheck;
 
             EventManager.OnLose.AddListener(OnPlayerDied);
             EventManager.OnSwitchWeapon.AddListener(SwitchEnemyWeapon);
@@ -64,35 +68,23 @@ namespace VampireLike.Core.General
             m_EnemeisController.Attach();
         }
 
-        private void StartMainCharacterGameLoop()
+        private void LevelCompleteCheck()
         {
-            m_MainCharacterController.StartShoot();
-        }
+            PlayerController.Instance.CompleteArena();
+            m_MainCharacterController.StopShoot();
 
-        private void OnAllDeadEnemies()
-        {
-            if (m_LevelController.IsFight == false)
+            if (PlayerController.Instance.IsCompleteLevel())
             {
-                PlayerController.Instance.CompleteArena();
-                m_MainCharacterController.StopShoot();
+                PlayerController.Instance.CompleteLevel();
 
-                if (PlayerController.Instance.IsCompleteLevel())
-                {
-                    PlayerController.Instance.CompleteLevel();
-
-                    SavePlayerData.SaveData();
-                    EventManager.Win();
-                }
-                else
-                {
-                    PlayerController.Instance.StartRoad();
-                    m_LevelController.NextArena();
-                    m_MISCController.ChangeCameraLimit();
-                }
+                SavePlayerData.SaveData();
+                EventManager.Win();
             }
             else
             {
-                m_LevelController.StartNextChunk();
+                PlayerController.Instance.StartRoad();
+                m_LevelController.NextArena();
+                m_MISCController.ChangeCameraLimit();
             }
         }
 
@@ -100,19 +92,27 @@ namespace VampireLike.Core.General
         {
             m_EnemeisController.SetEnemies(chunk.Enemies);
             m_EnemeisController.InitEnemy();
+            m_EnemeisController.ActivateEnemies();
             m_WeaponsController.GaveWeapons(m_EnemeisController.NeedingWeapons);
             m_EnemeisController.InitEnemeisWeapons();
-            m_EnemeisController.Landing();
+            m_EnemeisController.Landing(chunk.Enemies);
 
-            m_MISCController.ChangeCameraLimit();
+            if (m_LevelController.IsFight == false)
+                m_MISCController.ChangeCameraLimit();
 
             StartCoroutine(WaitCoroutine());
-            StartMainCharacterGameLoop();
+            StartCoroutine(StartMainCharacterGameLoop());
         }
 
         private void OnPlayerDied()
         {
             PlayerController.Instance.LoseLevel();
+        }
+
+        private IEnumerator StartMainCharacterGameLoop()
+        {
+            yield return new WaitForSeconds(1f);
+            m_MainCharacterController.StartShoot();
         }
 
         private IEnumerator WaitCoroutine()
