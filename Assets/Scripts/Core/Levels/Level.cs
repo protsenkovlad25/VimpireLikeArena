@@ -9,7 +9,6 @@ namespace VampireLike.Core.Levels
     public class Level : MonoBehaviour
     {
         public event Action<Chunk> OnSetChunk;
-        public event Action<Chunk> OnSetFirstChunk;
         public event Action OnStartFight;
 
         [SerializeField] private Arena m_PrefabArena;

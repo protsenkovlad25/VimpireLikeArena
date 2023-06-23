@@ -96,7 +96,7 @@ public class GameInterfaceManager : MonoBehaviour
     {
         Sequence sequence = DOTween.Sequence();
 
-        sequence.Append(m_SpawnChunkTimer.DOColor(m_SpawnChunkTimer.color - new Color(0,0,0,1),0.25f));
+        sequence.Append(m_SpawnChunkTimer.DOColor(m_SpawnChunkTimer.color - new Color(0,0,0,1), 0.25f));
         sequence.Append(m_SpawnChunkTimer.DOColor(m_SpawnChunkTimer.color, 0.25f));
 
         sequence.SetLoops(3);

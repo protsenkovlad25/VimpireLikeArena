@@ -39,6 +39,7 @@ MonoBehaviour:
     m_Chunks:
     - {fileID: 772425971244350116, guid: 3f7e25c098e5fa9489afc31fa7aa4b4b, type: 3}
     - {fileID: 772425971244350116, guid: 9007e7eb7fd3ffe4e838e21fb44a67a6, type: 3}
+    - {fileID: 772425971244350116, guid: 3f7e25c098e5fa9489afc31fa7aa4b4b, type: 3}
   - m_Name: Cluster 2_3
     m_Tier: 2
     m_Chunks:

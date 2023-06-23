@@ -22,7 +22,7 @@ namespace VampireLike.Core.Levels
             m_Tween = DOTween.To(() => transform.position,
                                     setter => transform.position = setter,
                                     transform.position + position,
-                                    1.5f)
+                                    1f)
                             .SetEase(Ease.OutBack);
 
             m_Tween.Play();

@@ -1806,7 +1806,7 @@ MonoBehaviour:
   m_ChunkConfigurator: {fileID: 530392910}
   m_WavesConfigurator: {fileID: 738263236}
   m_GIM: {fileID: 1255847962}
-  m_SpawnChunkDelay: 20
+  m_SpawnChunkDelay: 11
 --- !u!1 &1255847961
 GameObject:
   m_ObjectHideFlags: 0

@@ -102,6 +102,7 @@ namespace VampireLike.Core.Characters.Enemies
 
         public void Init()
         {
+            m_Marks = new List<GameObject>();
             EventManager.OnSwitchMovement.AddListener(SwitchMovement);
         }
 
@@ -137,7 +138,11 @@ namespace VampireLike.Core.Characters.Enemies
 
         public void SetEnemies(List<EnemyCharacter> enemies)
         {
-            m_Enemies = enemies;
+            //m_Enemies = enemies;
+            foreach (var enemy in enemies)
+            {
+                m_Enemies.Add(enemy);
+            }
         }
 
         public List<EnemyCharacter> GetEnemies()
@@ -145,25 +150,37 @@ namespace VampireLike.Core.Characters.Enemies
             return m_Enemies;
         }
 
-        public void InitEnemy()
+        public void InitEnemy(List<EnemyCharacter> enemies)
         {
-            foreach (var enemy in m_Enemies)
+            foreach (var enemy in enemies)
             {
-                enemy.SetCharacterData(m_EnemyConfigurator.GetData(enemy.GetEnemyType()));
-                enemy.SetCharacterMovement(m_EnemyConfigurator.GetMovement(enemy.GetEnemyType()));
-                enemy.Set(m_Attaching);
-                enemy.transform.position += new Vector3(0, 50, 0);
-                enemy.Init();
-                enemy.OnDie += OnEnemyDie;
-                enemy.gameObject.SetActive(false);
+                for (int i = 0; i < m_Enemies.Count; i++)
+                {
+                    if (enemy == m_Enemies[i])
+                    {
+                        enemy.SetCharacterData(m_EnemyConfigurator.GetData(enemy.GetEnemyType()));
+                        enemy.SetCharacterMovement(m_EnemyConfigurator.GetMovement(enemy.GetEnemyType()));
+                        enemy.Set(m_Attaching);
+                        enemy.transform.position += new Vector3(0, 50, 0);
+                        enemy.Init();
+                        enemy.OnDie += OnEnemyDie;
+                        enemy.gameObject.SetActive(false);
+                    }
+                }
             }
         }
 
-        public void ActivateEnemies()
+        public void ActivateEnemies(List<EnemyCharacter> enemies)
         {
-            foreach (var enemy in m_Enemies)
+            foreach (var enemy in enemies)
             {
-                enemy.gameObject.SetActive(true);
+                for (int i = 0; i < m_Enemies.Count; i++)
+                {
+                    if (enemy == m_Enemies[i])
+                    {
+                        enemy.gameObject.SetActive(true);
+                    }
+                }
             }
         }
 
@@ -175,14 +192,16 @@ namespace VampireLike.Core.Characters.Enemies
                 {
                     if (enemy == m_Enemies[i])
                     {
-                        if (Physics.Raycast(m_Enemies[i].transform.position, new Vector3(0, -1, 0), out RaycastHit hit, 50f))
+                        if (Physics.Raycast(m_Enemies[i].transform.position, new Vector3(0, -1, 0), out RaycastHit hit, 100f))
                         {
+                            Debug.Log("MARK");
                             if (hit.collider.TryGetComponent<OnColiderEnterComponent>(out OnColiderEnterComponent c))
                             {
                                 GameObject mark;
-                                mark = Instantiate(m_MarkPrefab, hit.point + new Vector3(0, 0.2f, 0), Quaternion.identity);
+                                mark = Instantiate(m_MarkPrefab, hit.point + new Vector3(0, .1f, 0), m_MarkPrefab.transform.rotation);
 
-                                m_Marks.Add(mark);
+                                if(mark != null)
+                                    m_Marks.Add(mark);
                             }
                         }
                     }
@@ -197,7 +216,14 @@ namespace VampireLike.Core.Characters.Enemies
                 for (int i = 0; i < m_Enemies.Count; i++)
                 {
                     if (enemy == m_Enemies[i])
-                        enemy.transform.DOMoveY(1.6f, .8f).SetEase(Ease.OutCubic);
+                    {
+                        enemy.transform.localScale = new Vector3(.7f, 1.4f, .7f);
+
+                        Sequence s = DOTween.Sequence();
+                        s.Append(enemy.transform.DOMoveY(1.6f, .8f).SetEase(Ease.InQuad));
+                        s.Insert(.7f, enemy.transform.DOScale(new Vector3(1.2f,.7f,1.2f), .15f));
+                        s.Append(enemy.transform.DOScale(1, .2f));
+                    }
                 }
             }
         }

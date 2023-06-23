@@ -2,13 +2,13 @@ using System;
 using System.Collections;
 using UnityEngine;
 using VampireLike.Core.Players;
+using DG.Tweening;
 
 namespace VampireLike.Core.Levels
 {
     public class LevelController : MonoBehaviour
     {
         public event Action<Chunk> OnSetChunk;
-        public event Action<Chunk> OnSetFirstChunk;
         public event Action OnAllWavesSpawned;
 
         [SerializeField] private Level m_Level;
@@ -22,10 +22,15 @@ namespace VampireLike.Core.Levels
         private float m_CurrentTime;
         private bool m_IsFight;
         private bool m_PauseSpawn;
-        private bool m_SpawnWarning;
+        private bool m_TimerEnd;
         private int m_CurrentChunkNumber;
 
         public bool IsFight => m_IsFight;
+        public bool PauseSpawn
+        {
+            get => m_PauseSpawn;
+            set => m_PauseSpawn = value;
+        }
 
         System.Random random;
 
@@ -38,7 +43,9 @@ namespace VampireLike.Core.Levels
             m_Level.OnStartFight += StartFight;
 
             m_CurrentChunkNumber = 0;
-            m_SpawnWarning = true;
+            m_IsFight = false;
+            m_TimerEnd = false;
+            m_PauseSpawn = false;
         }
 
         public void Update()
@@ -47,21 +54,25 @@ namespace VampireLike.Core.Levels
             {
                 if (m_CurrentChunkNumber + 1 != m_WavesCluster.Chunks.Count)
                 {
-                    if (m_CurrentTime <= 0 )
+                    if (m_CurrentTime <= 1.5f && m_TimerEnd == false)
                     {
-                        m_CurrentChunkNumber++;
-                        SetChunk(m_WavesCluster.Chunks[m_CurrentChunkNumber]);
-                        m_Level.InstallCurrentChunk();
+                        InstallNextChunk();
+                        m_TimerEnd = true;
+                        m_PauseSpawn = true;
+                    }
+                    else if (m_CurrentTime <= 0)
+                    {
                         m_CurrentTime = m_SpawnChunkDelay;
+                        m_TimerEnd = false;
                         m_PauseSpawn = false;
                     }
                     m_CurrentTime -= Time.deltaTime;
                     UpdateTimer();
                 }
-                else
+                else if (m_PauseSpawn == false)
                 {
+
                     m_GIM.ChunkTimerText("Last Wave");
-                    m_CurrentTime = 0;
                 }
             }
         }
@@ -95,18 +106,29 @@ namespace VampireLike.Core.Levels
             //SetChunk(m_ChunkConfigurator.GetRandomChunk(m_ChunkConfigurator.GetTier(seed), random));
         }
 
+        public void InstallNextChunk()
+        {
+            m_CurrentChunkNumber++;
+            SetChunk(m_WavesCluster.Chunks[m_CurrentChunkNumber]);
+            m_Level.InstallCurrentChunk();
+        }
+
         public void IsCompleteWavesCluster()
         {
             if (m_CurrentChunkNumber + 1 == m_WavesCluster.Chunks.Count)
             {
                 m_IsFight = false;
-                m_SpawnWarning = false;
                 m_CurrentTime = 0;
                 m_GIM.OffTimer();
                 OnAllWavesSpawned?.Invoke();
             }
             else
-                SpawnDelay();
+            {
+                m_CurrentTime = 1.5f;
+                m_TimerEnd = false;
+                m_PauseSpawn = false;
+
+            }
         }
 
         public void SetChunk(Chunk chunk)
@@ -117,29 +139,10 @@ namespace VampireLike.Core.Levels
         public void StartFight()
         {
             m_IsFight = true;
+            m_TimerEnd = false;
             m_GIM.OnTimer();
             m_CurrentTime = m_SpawnChunkDelay;
             m_GIM.UpdateSpawnChunkTimer((int)m_CurrentTime);
-        }
-
-        private void SpawnDelay()
-        {
-            m_PauseSpawn = true;
-            m_CurrentTime = 1.5f;
-            //EventManager.InitEnemiesInAdvance();
-            //m_GIM.TimerBlinking();
-        }
-
-        public Chunk GetNextChunk()
-        {
-            Debug.Log(m_WavesCluster.Chunks[m_CurrentChunkNumber + 1].Enemies.Count + " EMEIES CUNK");
-            return m_WavesCluster.Chunks[m_CurrentChunkNumber + 1];
-        }
-
-        public Chunk GetCurrentChunk()
-        {
-            m_WavesCluster = m_WavesConfigurator.GetRandomWavesCluster(1, random);
-            return m_WavesCluster.Chunks[m_CurrentChunkNumber];
         }
 
         public void UpdateTimer()
@@ -147,6 +150,7 @@ namespace VampireLike.Core.Levels
             if (m_PauseSpawn)
             {
                 m_GIM.ChunkTimerText("New Wave");
+                //m_GIM.TimerBlinking();
             }
             else
                 m_GIM.UpdateSpawnChunkTimer((int)m_CurrentTime);

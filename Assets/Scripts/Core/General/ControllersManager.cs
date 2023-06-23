@@ -19,8 +19,6 @@ namespace VampireLike.Core.General
         [SerializeField] private LevelController m_LevelController;
         [SerializeField] private MISCController m_MISCController;
 
-        private bool m_FirstArena;
-
         public void ControllersInit()
         {
             m_EnemeisController.SetAttaching(m_MainCharacterController);
@@ -90,16 +88,33 @@ namespace VampireLike.Core.General
 
         private void OnSetChunk(Chunk chunk)
         {
+            StartCoroutine(InitEnemies(chunk));
+        }
+
+        private IEnumerator InitEnemies(Chunk chunk)
+        {
+            if (m_LevelController.IsFight == false)
+            {
+                m_MISCController.ChangeCameraLimit();
+            }
             m_EnemeisController.SetEnemies(chunk.Enemies);
-            m_EnemeisController.InitEnemy();
-            m_EnemeisController.ActivateEnemies();
+            m_EnemeisController.InitEnemy(chunk.Enemies);
+            m_EnemeisController.SetMark(chunk.Enemies);
+
+            //m_MainCharacterController.StopShoot();
+
+            yield return new WaitForSeconds(1f);
+
+            m_EnemeisController.ActivateEnemies(chunk.Enemies);
             m_WeaponsController.GaveWeapons(m_EnemeisController.NeedingWeapons);
             m_EnemeisController.InitEnemeisWeapons();
             m_EnemeisController.Landing(chunk.Enemies);
 
-            if (m_LevelController.IsFight == false)
-                m_MISCController.ChangeCameraLimit();
+            //m_EnemeisController.RemoveMarks();
 
+            m_LevelController.PauseSpawn = false;
+
+            m_MainCharacterController.StopShoot();
             StartCoroutine(WaitCoroutine());
             StartCoroutine(StartMainCharacterGameLoop());
         }
@@ -111,7 +126,7 @@ namespace VampireLike.Core.General
 
         private IEnumerator StartMainCharacterGameLoop()
         {
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(.5f);
             m_MainCharacterController.StartShoot();
         }
 
