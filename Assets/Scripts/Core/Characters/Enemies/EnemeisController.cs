@@ -192,16 +192,18 @@ namespace VampireLike.Core.Characters.Enemies
                 {
                     if (enemy == m_Enemies[i])
                     {
-                        if (Physics.Raycast(m_Enemies[i].transform.position, new Vector3(0, -1, 0), out RaycastHit hit, 100f))
-                        {
+                        RaycastHit[] hits = Physics.RaycastAll(m_Enemies[i].transform.position, new Vector3(0, -1, 0), 100f);
+                        foreach(RaycastHit hit in hits)
+                        { 
                             Debug.Log("MARK");
                             if (hit.collider.TryGetComponent<OnColiderEnterComponent>(out OnColiderEnterComponent c))
                             {
                                 GameObject mark;
                                 mark = Instantiate(m_MarkPrefab, hit.point + new Vector3(0, .1f, 0), m_MarkPrefab.transform.rotation);
 
-                                if(mark != null)
+                                if (mark != null)
                                     m_Marks.Add(mark);
+                                break;
                             }
                         }
                     }
