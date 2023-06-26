@@ -1,5 +1,6 @@
 using DG.Tweening;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -15,11 +16,13 @@ namespace VampireLike.Core.Characters.Enemies
 
         [SerializeField] private EnemyConfigurator m_EnemyConfigurator;
         [SerializeField] private GameObject m_MarkPrefab;
+        [SerializeField] private GameObject m_SpawnParticlePrefab;
 
         [SerializeField] private List<EnemyCharacter> m_Enemies;
         [SerializeField] private bool m_IsMove;
 
         private List<GameObject> m_Marks;
+        private SpawnParticle m_SpawnParticle;
 
         private IAttaching m_Attaching;
 
@@ -225,9 +228,18 @@ namespace VampireLike.Core.Characters.Enemies
                         s.Append(enemy.transform.DOMoveY(1.6f, .8f).SetEase(Ease.InQuad));
                         s.Insert(.7f, enemy.transform.DOScale(new Vector3(1.2f,.7f,1.2f), .15f));
                         s.Append(enemy.transform.DOScale(1, .2f));
+                        StartCoroutine(PlaySpawnParticle(enemy.transform));
                     }
                 }
             }
+        }
+
+        private IEnumerator PlaySpawnParticle(Transform enemyTransform)
+        {
+            yield return new WaitForSeconds(0.8f);
+
+            m_SpawnParticle = Instantiate(m_SpawnParticlePrefab, enemyTransform).GetComponent<SpawnParticle>();
+            m_SpawnParticle.PlayParticle();
         }
 
         public void SwitchMovement(EnemyCharacter enemy, IMoving moving)
