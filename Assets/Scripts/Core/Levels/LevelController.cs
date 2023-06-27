@@ -12,8 +12,8 @@ namespace VampireLike.Core.Levels
         public event Action OnAllWavesSpawned;
 
         [SerializeField] private Level m_Level;
-        [SerializeField] private ChunkConfigurator m_ChunkConfigurator;
         [SerializeField] private WavesConfigurator m_WavesConfigurator;
+        [SerializeField] private WavesController m_WavesController;
         [SerializeField] private GameInterfaceManager m_GIM;
         
         [SerializeField] private float m_SpawnChunkDelay;
@@ -37,8 +37,7 @@ namespace VampireLike.Core.Levels
         public void Init()
         {
             random = new System.Random(PlayerController.Instance.Player.Seed);
-            m_ChunkConfigurator.Init();
-            m_WavesConfigurator.Init();
+            m_WavesController.Init();
             m_Level.OnSetChunk += OnSetChunk.Invoke;
             m_Level.OnStartFight += StartFight;
 
@@ -79,38 +78,26 @@ namespace VampireLike.Core.Levels
 
         public void FirstArena()
         {
-            m_WavesCluster = m_WavesConfigurator.GetRandomWavesCluster(1, random);
-            SetChunk(m_WavesCluster.Chunks[m_CurrentChunkNumber]);
-
-            //SetChunk(m_ChunkConfigurator.GetRandomChunk(1, random));
-
-            m_Level.InstallCurrentChunk();
-
-            m_CurrentTime = m_SpawnChunkDelay;
+            //m_WavesController.InitializeWaves(m_WavesConfigurator.GetRandomWavesCluster(1, random));
+            //m_WavesController.SpawnFirstChunk();
         }
 
         public void NextArena()
         {
             int seed = PlayerController.Instance.Player.Seed;
 
-            //m_ChunkConfigurator.Overflow(PlayerController.Instance.Player.QtyCompleteArean - 1, PlayerController.Instance.Player.QtyArenas - 1);
-            //m_ChunkConfigurator.Show();
-
             m_WavesConfigurator.Overflow(PlayerController.Instance.Player.QtyCompleteArean - 1, PlayerController.Instance.Player.QtyArenas - 1);
 
             m_Level.NextArena();
-            m_WavesCluster = m_WavesConfigurator.GetRandomWavesCluster(m_WavesConfigurator.GetTier(seed), random);
-            m_CurrentChunkNumber = 0;
-            SetChunk(m_WavesCluster.Chunks[m_CurrentChunkNumber]);
 
-            //SetChunk(m_ChunkConfigurator.GetRandomChunk(m_ChunkConfigurator.GetTier(seed), random));
+            //m_WavesController.InitializeWaves(m_WavesConfigurator.GetRandomWavesCluster(m_WavesConfigurator.GetTier(seed), random));
         }
 
         public void InstallNextChunk()
         {
             m_CurrentChunkNumber++;
-            SetChunk(m_WavesCluster.Chunks[m_CurrentChunkNumber]);
-            m_Level.InstallCurrentChunk();
+            //SetChunk(m_WavesCluster.Chunks[m_CurrentChunkNumber]);
+            //m_Level.InstallCurrentChunk();
         }
 
         public void IsCompleteWavesCluster()
@@ -129,11 +116,6 @@ namespace VampireLike.Core.Levels
                 m_PauseSpawn = false;
 
             }
-        }
-
-        public void SetChunk(Chunk chunk)
-        {
-            m_Level.SetChunk(chunk);
         }
 
         public void StartFight()

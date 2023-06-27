@@ -5,13 +5,12 @@ namespace VampireLike.Core
 {
     public class MISCController : MonoBehaviour
     {
-        //[SerializeField] private FollowerCamera m_FollowerCamera;
         [SerializeField] private ShakeCamera m_ShakeCamera;
         [SerializeField] private LimitedCamera m_LimitedCamera;
 
         public void Init()
         {
-            //m_FollowerCamera.FixPosition();
+            EventManager.OnStartArena.AddListener(ChangeCameraLimit);
             m_ShakeCamera.Init();
             m_LimitedCamera.Init();
         }

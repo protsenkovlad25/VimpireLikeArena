@@ -16,8 +16,8 @@ namespace VampireLike.Core.General
         [SerializeField] private PlayerInput m_PlayerInput;
         [SerializeField] private MainCharacterController m_MainCharacterController;
         [SerializeField] private WeaponsController m_WeaponsController;
-        [SerializeField] private LevelController m_LevelController;
         [SerializeField] private MISCController m_MISCController;
+        [SerializeField] private Level m_Level;
 
         public void ControllersInit()
         {
@@ -26,20 +26,21 @@ namespace VampireLike.Core.General
             m_WeaponsController.GaveWeapon(m_MainCharacterController);
 
             m_PlayerInput.OnInput += OnDragJoystickPlayer;
-            //m_EnemeisController.OnAllDeadEnemies += OnAllDeadEnemies;
-            m_EnemeisController.OnAllDeadEnemies += m_LevelController.IsCompleteWavesCluster;
-            m_LevelController.OnSetChunk += OnSetChunk;
-            m_LevelController.OnAllWavesSpawned += LevelCompleteCheck;
+            m_EnemeisController.OnAllDeadEnemies += m_Level.NextWave;
+            m_Level.OnSetChunk += OnSetChunk;
+            m_Level.OnSpawnPauseEnd += ActivatesEnemies;
+            m_Level.OnArenaIsCleared += LevelCompleteCheck;
 
             EventManager.OnLose.AddListener(OnPlayerDied);
             EventManager.OnSwitchWeapon.AddListener(SwitchEnemyWeapon);
 
             m_EnemeisController.Init();
             m_MainCharacterController.Init();
-            m_LevelController.Init();
             m_MISCController.Init();
+            m_Level.Init();
 
-            m_LevelController.FirstArena();
+            m_MISCController.ChangeCameraLimit();
+            m_Level.FirstArena();
             //StartGameLoop();
         }
 
@@ -57,7 +58,7 @@ namespace VampireLike.Core.General
         {
             m_PlayerInput.OnInput -= OnDragJoystickPlayer;
             m_EnemeisController.OnAllDeadEnemies -= m_MainCharacterController.StopShoot;
-            m_LevelController.OnSetChunk -= OnSetChunk;
+            m_Level.OnSetChunk -= OnSetChunk;
         }
 
         private void StartEnemyGameLoop()
@@ -81,38 +82,35 @@ namespace VampireLike.Core.General
             else
             {
                 PlayerController.Instance.StartRoad();
-                m_LevelController.NextArena();
+                m_Level.NextArena();
                 m_MISCController.ChangeCameraLimit();
             }
         }
 
         private void OnSetChunk(Chunk chunk)
         {
-            StartCoroutine(InitEnemies(chunk));
-        }
-
-        private IEnumerator InitEnemies(Chunk chunk)
-        {
-            if (m_LevelController.IsFight == false)
-            {
-                m_MISCController.ChangeCameraLimit();
-            }
             m_EnemeisController.SetEnemies(chunk.Enemies);
             m_EnemeisController.InitEnemy(chunk.Enemies);
             m_EnemeisController.SetMark(chunk.Enemies);
 
+            //m_EnemeisController.ActivateEnemies(chunk.Enemies);
+            //m_WeaponsController.GaveWeapons(m_EnemeisController.NeedingWeapons);
+            //m_EnemeisController.InitEnemeisWeapons();
+            //m_EnemeisController.Landing(chunk.Enemies);
+
             //m_MainCharacterController.StopShoot();
+            //StartCoroutine(WaitCoroutine());
+            //StartCoroutine(StartMainCharacterGameLoop());
 
-            yield return new WaitForSeconds(1f);
+            //StartCoroutine(InitEnemies(chunk));
+        }
 
+        private void ActivatesEnemies(Chunk chunk)
+        {
             m_EnemeisController.ActivateEnemies(chunk.Enemies);
             m_WeaponsController.GaveWeapons(m_EnemeisController.NeedingWeapons);
             m_EnemeisController.InitEnemeisWeapons();
             m_EnemeisController.Landing(chunk.Enemies);
-
-            //m_EnemeisController.RemoveMarks();
-
-            m_LevelController.PauseSpawn = false;
 
             m_MainCharacterController.StopShoot();
             StartCoroutine(WaitCoroutine());
@@ -126,7 +124,7 @@ namespace VampireLike.Core.General
 
         private IEnumerator StartMainCharacterGameLoop()
         {
-            yield return new WaitForSeconds(.5f);
+            yield return new WaitForSeconds(.8f);
             m_MainCharacterController.StartShoot();
         }
 

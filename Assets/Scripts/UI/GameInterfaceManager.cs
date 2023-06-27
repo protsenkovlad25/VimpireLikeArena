@@ -25,7 +25,6 @@ public class GameInterfaceManager : MonoBehaviour
         EventManager.OnWin.AddListener(CompleteLevel);
         EventManager.OnLose.AddListener(LoseLevel);
         EventManager.MainCharacterTakeDamage.AddListener(RedScreenTransparencyChange);
-        EventManager.OnInitEnemiesInAdvance.AddListener(TimerBlinking);
 
         initialHealth = m_MainCharacter.CharacterData.HealthPoints;
     }

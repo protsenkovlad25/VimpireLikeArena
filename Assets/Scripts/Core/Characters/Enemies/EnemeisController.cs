@@ -197,8 +197,7 @@ namespace VampireLike.Core.Characters.Enemies
                     {
                         RaycastHit[] hits = Physics.RaycastAll(m_Enemies[i].transform.position, new Vector3(0, -1, 0), 100f);
                         foreach(RaycastHit hit in hits)
-                        { 
-                            Debug.Log("MARK");
+                        {
                             if (hit.collider.TryGetComponent<OnColiderEnterComponent>(out OnColiderEnterComponent c))
                             {
                                 GameObject mark;
