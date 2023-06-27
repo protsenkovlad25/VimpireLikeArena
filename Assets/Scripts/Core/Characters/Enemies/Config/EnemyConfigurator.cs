@@ -32,7 +32,7 @@ namespace VampireLike.Core.Characters.Enemies.Config
             switch(data.EnemyMovementType)
             {
                 case EnemyMovementType.DirectedMovement:
-                    movement = new DirectedMovement();
+                    movement = new EnemyMovement();
                     break;
                 case EnemyMovementType.DashMovement:
                     movement = new DashMovement();

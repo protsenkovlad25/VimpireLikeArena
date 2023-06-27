@@ -80,7 +80,7 @@ namespace VampireLike.Core.Levels
         public void Overflow(int currentNode, int maxNode)
         {
             int procent = PowerOverflowing(maxNode, m_WavesConfig.WavesClusterTierConfig.PrecentageOverflow);
-            Debug.LogError(procent);
+            
             FlowPercentage(procent, m_WavesClusterTiers, currentNode, maxNode);
         }
 

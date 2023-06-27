@@ -4,6 +4,6 @@ namespace VampireLike.Core
 {
     public interface IBypassing
     {
-        void Bypass(float speed, Transform transform, Vector3 difference);
+        void Bypass(float speed, Transform transform, Vector3 difference, float halfLengthWall);
     }
 }

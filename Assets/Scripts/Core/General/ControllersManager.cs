@@ -26,7 +26,7 @@ namespace VampireLike.Core.General
             m_WeaponsController.GaveWeapon(m_MainCharacterController);
 
             m_PlayerInput.OnInput += OnDragJoystickPlayer;
-            m_EnemeisController.OnAllDeadEnemies += m_Level.NextWave;
+            m_EnemeisController.OnAllDeadEnemies += NextWave;
             m_Level.OnSetChunk += OnSetChunk;
             m_Level.OnSpawnPauseEnd += ActivatesEnemies;
             m_Level.OnArenaIsCleared += LevelCompleteCheck;
@@ -115,6 +115,12 @@ namespace VampireLike.Core.General
             m_MainCharacterController.StopShoot();
             StartCoroutine(WaitCoroutine());
             StartCoroutine(StartMainCharacterGameLoop());
+        }
+
+        private void NextWave()
+        {
+            m_Level.NextWave();
+            m_MainCharacterController.StopShoot();
         }
 
         private void OnPlayerDied()

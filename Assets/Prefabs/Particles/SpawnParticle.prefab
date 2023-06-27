@@ -96,6 +96,34 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1561170670989684561, guid: 038fd9599ae665a42b3c29a4780067e7, type: 3}
+      propertyPath: looping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1561170670989684561, guid: 038fd9599ae665a42b3c29a4780067e7, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.b
+      value: 0.80566037
+      objectReference: {fileID: 0}
+    - target: {fileID: 1561170670989684561, guid: 038fd9599ae665a42b3c29a4780067e7, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 0.8785377
+      objectReference: {fileID: 0}
+    - target: {fileID: 1561170670989684561, guid: 038fd9599ae665a42b3c29a4780067e7, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1561170670989684561, guid: 038fd9599ae665a42b3c29a4780067e7, type: 3}
+      propertyPath: InitialModule.startColor.minColor.b
+      value: 0.6264151
+      objectReference: {fileID: 0}
+    - target: {fileID: 1561170670989684561, guid: 038fd9599ae665a42b3c29a4780067e7, type: 3}
+      propertyPath: InitialModule.startColor.minColor.g
+      value: 0.77121544
+      objectReference: {fileID: 0}
+    - target: {fileID: 1561170670989684561, guid: 038fd9599ae665a42b3c29a4780067e7, type: 3}
+      propertyPath: InitialModule.startColor.minColor.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7862294553716742593, guid: 038fd9599ae665a42b3c29a4780067e7, type: 3}
       propertyPath: m_Name
       value: Particle

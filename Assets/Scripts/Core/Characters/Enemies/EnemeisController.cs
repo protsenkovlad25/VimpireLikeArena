@@ -17,12 +17,14 @@ namespace VampireLike.Core.Characters.Enemies
         [SerializeField] private EnemyConfigurator m_EnemyConfigurator;
         [SerializeField] private GameObject m_MarkPrefab;
         [SerializeField] private GameObject m_SpawnParticlePrefab;
+        [SerializeField] private GameObject m_DeathParticlePrefab;
 
         [SerializeField] private List<EnemyCharacter> m_Enemies;
         [SerializeField] private bool m_IsMove;
 
         private List<GameObject> m_Marks;
         private SpawnParticle m_SpawnParticle;
+        private DeathParticle m_DeathParticle;
 
         private IAttaching m_Attaching;
 
@@ -130,6 +132,7 @@ namespace VampireLike.Core.Characters.Enemies
             Debug.LogError("Die");
             characterBehaviour.OnDie -= OnEnemyDie;
             characterBehaviour.gameObject.SetActive(false);
+            PlayDeathParticle(characterBehaviour.gameObject.transform.position);
             m_Enemies.Remove(characterBehaviour.GetComponent<EnemyCharacter>());
 
 
@@ -227,18 +230,42 @@ namespace VampireLike.Core.Characters.Enemies
                         s.Append(enemy.transform.DOMoveY(1.6f, .8f).SetEase(Ease.InQuad));
                         s.Insert(.7f, enemy.transform.DOScale(new Vector3(1.2f,.7f,1.2f), .15f));
                         s.Append(enemy.transform.DOScale(1, .2f));
-                        StartCoroutine(PlaySpawnParticle(enemy.transform));
+                        StartCoroutine(PlaySpawnParticle(enemy.transform.position));
                     }
                 }
             }
         }
 
-        private IEnumerator PlaySpawnParticle(Transform enemyTransform)
+        private void PlayDeathParticle(Vector3 position)
+        {
+            m_DeathParticle = Instantiate(m_DeathParticlePrefab, position, Quaternion.identity).GetComponent<DeathParticle>();
+            m_DeathParticle.PlayParticle();
+
+            StartCoroutine(DestroyParticle(m_DeathParticle));
+        }
+
+        private IEnumerator PlaySpawnParticle(Vector3 position)
         {
             yield return new WaitForSeconds(0.8f);
 
-            m_SpawnParticle = Instantiate(m_SpawnParticlePrefab, enemyTransform).GetComponent<SpawnParticle>();
+            m_SpawnParticle = Instantiate(m_SpawnParticlePrefab, position, Quaternion.identity).GetComponent<SpawnParticle>();
             m_SpawnParticle.PlayParticle();
+
+            StartCoroutine(DestroyParticle(m_SpawnParticle));
+        }
+
+        private IEnumerator DestroyParticle(SpawnParticle spawnParticle)
+        {
+            yield return new WaitForSeconds(1.5f);
+
+            Destroy(spawnParticle.gameObject);
+        }
+
+        private IEnumerator DestroyParticle(DeathParticle deathParticle)
+        {
+            yield return new WaitForSeconds(1.5f);
+
+            Destroy(deathParticle.gameObject);
         }
 
         public void SwitchMovement(EnemyCharacter enemy, IMoving moving)
