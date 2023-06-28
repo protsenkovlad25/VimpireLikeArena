@@ -166,6 +166,7 @@ namespace VampireLike.Core.Characters.Enemies
                     {
                         enemy.SetCharacterData(m_EnemyConfigurator.GetData(enemy.GetEnemyType()));
                         enemy.SetCharacterMovement(m_EnemyConfigurator.GetMovement(enemy.GetEnemyType()));
+                        enemy.SetCharacterLook(new SimpleLook());
                         enemy.Set(m_Attaching);
                         enemy.transform.position += new Vector3(0, 50, 0);
                         enemy.Init();

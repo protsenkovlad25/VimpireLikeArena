@@ -17,6 +17,7 @@ namespace VampireLike.Core.Characters.Enemies
         private IAttaching m_Attaching;
 
         private bool m_IsMove;
+        private bool m_IsLook;
 
         public WeaponType GetWeaponType()
         {
@@ -85,7 +86,10 @@ namespace VampireLike.Core.Characters.Enemies
             while (gameObject.activeInHierarchy)
             {
                 m_IsMove = true;
-                m_Moving.Move(targetPosition.GetTarget().position, 
+
+                Vector3 positionToMove = m_Looking.Look(targetPosition.GetTarget().position, transform);
+
+                m_Moving.Move(positionToMove, 
                     CharacterData.Speed * Time.deltaTime, 
                     transform, 
                     gameObject.GetComponent<Rigidbody>());
@@ -116,23 +120,6 @@ namespace VampireLike.Core.Characters.Enemies
             {
                 StartCoroutine(PauseMove());
             }
-        }
-
-        public void SpawnPause()
-        {
-            StartCoroutine(WaitCoroutine());
-        }
-
-        private IEnumerator WaitCoroutine()
-        {
-            yield return MoveAndShootPause();
-        }
-
-        private IEnumerator MoveAndShootPause()
-        {
-            m_Moving.Stop();
-            StopShoot();
-            yield return new WaitForSeconds(0.5f);
         }
     }
 }

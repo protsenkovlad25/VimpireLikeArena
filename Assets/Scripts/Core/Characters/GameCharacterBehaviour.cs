@@ -20,6 +20,7 @@ namespace VampireLike.Core.Characters
         private HpBar m_HpBar;
 
         protected IMoving m_Moving;
+        protected ILooking m_Looking;
 
         public CharacterData CharacterData => m_CharacterData;
 
@@ -31,6 +32,11 @@ namespace VampireLike.Core.Characters
         public virtual void SetCharacterMovement(IMoving moving)
         {
             m_Moving = moving;
+        }
+
+        public virtual void SetCharacterLook(ILooking looking)
+        {
+            m_Looking = looking;
         }
 
         public virtual void Init()
