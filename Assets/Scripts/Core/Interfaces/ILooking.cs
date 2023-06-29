@@ -7,5 +7,7 @@ namespace VampireLike.Core
     public interface ILooking
     {
         Vector3 Look(Vector3 direction, Transform transform);
+
+        public bool LookShooting();
     }
 }

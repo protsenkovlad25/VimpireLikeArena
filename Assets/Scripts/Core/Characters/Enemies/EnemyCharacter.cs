@@ -87,6 +87,11 @@ namespace VampireLike.Core.Characters.Enemies
             {
                 m_IsMove = true;
 
+                if (m_Looking.LookShooting())
+                    StartShoot();
+                else
+                    StopShoot();
+
                 Vector3 positionToMove = m_Looking.Look(targetPosition.GetTarget().position, transform);
 
                 m_Moving.Move(positionToMove, 

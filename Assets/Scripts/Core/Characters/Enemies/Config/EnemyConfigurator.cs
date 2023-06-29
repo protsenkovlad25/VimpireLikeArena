@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using VampireLike.Core.Looks;
 using VampireLike.Core.Movements;
 
 namespace VampireLike.Core.Characters.Enemies.Config
@@ -25,11 +24,10 @@ namespace VampireLike.Core.Characters.Enemies.Config
 
         public IMoving GetMovement(EnemyType enemyType)
         {
-
             var data = m_EnemyConfig.EnemyData.Find(enemy => enemy.EnemyType.Equals(enemyType));
 
             IMoving movement = null;
-            switch(data.EnemyMovementType)
+            switch (data.EnemyMovementType)
             {
                 case EnemyMovementType.DirectedMovement:
                     movement = new DirectedMovement();
@@ -45,6 +43,30 @@ namespace VampireLike.Core.Characters.Enemies.Config
             if (movement == null) movement = new DirectedMovement();
 
             return movement;
+        }
+
+        public ILooking GetLooking(EnemyType enemyType)
+        {
+            ILooking look = null;
+            switch (enemyType)
+            {
+                case EnemyType.SpikyEnemy:
+                    look = new SimpleLook();
+                    break;
+                case EnemyType.PushingEnemy:
+                    look = new SimpleLook();
+                    break;
+                case EnemyType.ShootingEnemy:
+                    look = new CheckLook();
+                    break;
+                case EnemyType.RocketShootingEnemy:
+                    look = new CheckLook();
+                    break;
+            }
+
+            if (look == null) look = new SimpleLook();
+
+            return look;
         }
     }
 }
