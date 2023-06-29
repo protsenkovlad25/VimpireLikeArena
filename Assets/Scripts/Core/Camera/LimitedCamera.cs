@@ -87,7 +87,8 @@ namespace VampireLike.Core.Cameras
             float diameterArena = m_Arena.transform.localScale.x * 2;
             float requiredDistance = diameterArena * m_PercantageArenaVisibility / 100;
 
-            m_CurrentPosition = m_Arena.transform.position-m_Camera.transform.forward * requiredDistance * Mathf.Sin(60 * Mathf.Deg2Rad);
+            m_CurrentPosition = m_Arena.transform.position - m_Camera.transform.forward * requiredDistance * Mathf.Sin(60 * Mathf.Deg2Rad);
+            m_CurrentPosition += new Vector3(0, 0, -4);
 
             m_Camera.transform.DOMove(m_CurrentPosition,.5F);
         }

@@ -57,7 +57,7 @@ public class WavesController : MonoBehaviour
 
     public void NewTimer()
     {
-        m_TimerToNextWave = new Timer(30f);
+        m_TimerToNextWave = new Timer(m_SpawnChunkDelay - 1.5f);
         m_TimerToNextWave.OnTimesUp.AddListener(SpawnNextWave);
     }
 
