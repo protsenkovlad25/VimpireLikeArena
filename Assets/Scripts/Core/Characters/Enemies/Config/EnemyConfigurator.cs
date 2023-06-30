@@ -26,47 +26,25 @@ namespace VampireLike.Core.Characters.Enemies.Config
         {
             var data = m_EnemyConfig.EnemyData.Find(enemy => enemy.EnemyType.Equals(enemyType));
 
-            IMoving movement = null;
-            switch (data.EnemyMovementType)
+            return data.EnemyMovementType switch
             {
-                case EnemyMovementType.DirectedMovement:
-                    movement = new DirectedMovement();
-                    break;
-                case EnemyMovementType.DashMovement:
-                    movement = new DashMovement();
-                    break;
-                case EnemyMovementType.DistanceMovement:
-                    movement = new DistanceMovement();
-                    break;
-            }
-
-            if (movement == null) movement = new DirectedMovement();
-
-            return movement;
+                EnemyMovementType.DirectedMovement => new DirectedMovement(),
+                EnemyMovementType.DashMovement => new DashMovement(),
+                EnemyMovementType.DistanceMovement => new DirectedMovement(),
+                _ => new DirectedMovement(),
+            };
         }
 
         public ILooking GetLooking(EnemyType enemyType)
         {
-            ILooking look = null;
-            switch (enemyType)
+            return enemyType switch
             {
-                case EnemyType.SpikyEnemy:
-                    look = new SimpleLook();
-                    break;
-                case EnemyType.PushingEnemy:
-                    look = new SimpleLook();
-                    break;
-                case EnemyType.ShootingEnemy:
-                    look = new CheckLook();
-                    break;
-                case EnemyType.RocketShootingEnemy:
-                    look = new CheckLook();
-                    break;
-            }
-
-            if (look == null) look = new SimpleLook();
-
-            return look;
+                EnemyType.SpikyEnemy => new SimpleLook(),
+                EnemyType.PushingEnemy => new SimpleLook(),
+                EnemyType.ShootingEnemy => new CheckLook(),
+                EnemyType.RocketShootingEnemy => new CheckLook(),
+                _ => new SimpleLook(),
+            };
         }
     }
 }

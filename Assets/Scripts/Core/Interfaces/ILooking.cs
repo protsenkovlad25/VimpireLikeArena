@@ -8,6 +8,8 @@ namespace VampireLike.Core
     {
         Vector3 Look(Vector3 direction, Transform transform);
 
+        public void ClearLook();
+
         public bool LookShooting();
     }
 }

@@ -13,6 +13,7 @@ namespace VampireLike.Core.General
     public class ControllersManager : MonoBehaviour
     {
         [SerializeField] private EnemeisController m_EnemeisController;
+        [SerializeField] private SolidObjectsController m_SolidObjectsController;
         [SerializeField] private PlayerInput m_PlayerInput;
         [SerializeField] private MainCharacterController m_MainCharacterController;
         [SerializeField] private WeaponsController m_WeaponsController;
@@ -28,13 +29,14 @@ namespace VampireLike.Core.General
             m_PlayerInput.OnInput += OnDragJoystickPlayer;
             m_EnemeisController.OnAllDeadEnemies += NextWave;
             m_Level.OnSetChunk += OnSetChunk;
-            m_Level.OnSpawnPauseEnd += ActivatesEnemies;
+            m_Level.OnSpawnPauseEnd += Activates;
             m_Level.OnArenaIsCleared += LevelCompleteCheck;
 
             EventManager.OnLose.AddListener(OnPlayerDied);
             EventManager.OnSwitchWeapon.AddListener(SwitchEnemyWeapon);
 
             m_EnemeisController.Init();
+            m_SolidObjectsController.Init();
             m_MainCharacterController.Init();
             m_MISCController.Init();
             m_Level.Init();
@@ -89,29 +91,29 @@ namespace VampireLike.Core.General
 
         private void OnSetChunk(Chunk chunk)
         {
+            // -- Ememies -- //
             m_EnemeisController.SetEnemies(chunk.Enemies);
             m_EnemeisController.InitEnemy(chunk.Enemies);
             m_EnemeisController.SetMark(chunk.Enemies);
 
-            //m_EnemeisController.ActivateEnemies(chunk.Enemies);
-            //m_WeaponsController.GaveWeapons(m_EnemeisController.NeedingWeapons);
-            //m_EnemeisController.InitEnemeisWeapons();
-            //m_EnemeisController.Landing(chunk.Enemies);
-
-            //m_MainCharacterController.StopShoot();
-            //StartCoroutine(WaitCoroutine());
-            //StartCoroutine(StartMainCharacterGameLoop());
-
-            //StartCoroutine(InitEnemies(chunk));
+            // -- Walls -- //
+            m_SolidObjectsController.SetWalls(chunk.Walls);
+            m_SolidObjectsController.InitWalls();
+            m_SolidObjectsController.SetMark();
         }
 
-        private void ActivatesEnemies(Chunk chunk)
+        private void Activates(Chunk chunk)
         {
+            // -- Enemies -- //
             m_EnemeisController.ActivateEnemies(chunk.Enemies);
             m_WeaponsController.GaveWeapons(m_EnemeisController.NeedingWeapons);
             m_EnemeisController.InitEnemeisWeapons();
             m_EnemeisController.Landing(chunk.Enemies);
 
+            // -- Walls -- //
+            m_SolidObjectsController.Landing();
+
+            // -- StartShoot Enemies and MainCharacter -- //
             m_MainCharacterController.StopShoot();
             StartCoroutine(WaitCoroutine());
             StartCoroutine(StartMainCharacterGameLoop());

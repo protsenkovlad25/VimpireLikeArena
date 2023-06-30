@@ -35,12 +35,12 @@ namespace VampireLike.Core.Weapons
 
         public override void Shoot()
         {
-            StartCoroutine(ShootCoroutine());
+            StartCoroutine("ShootCoroutine");
         }
 
         public override void Stop()
         {
-            StopCoroutine(ShootCoroutine());
+            StopCoroutine("ShootCoroutine");
             m_IsStop = false;
             m_Pool.ReturnAllPull();
         }

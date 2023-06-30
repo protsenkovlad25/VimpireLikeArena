@@ -49,13 +49,10 @@ namespace VampireLike.Core.Cameras
             Ray rightRay = m_Camera.ScreenPointToRay(m_RightScreenPoint);
 
             float deltaPosX = m_Target.position.x - m_LastTargetPosition.x;
-            float deltaPosZ = m_Target.position.z - m_LastTargetPosition.z; //m_LimitOnZ ? 0 : m_Target.position.z - m_StartPosition.z;
-
-            //m_CurrentPosition += new Vector3(0, 0, deltaPosZ);
 
             if ((deltaPosX > 0 && Physics.Raycast(rightRay, out RaycastHit hitR, 100)))
             {
-                if (hitR.collider.TryGetComponent<OnColiderEnterComponent>(out OnColiderEnterComponent c))
+                if (hitR.collider.TryGetComponent<OnColiderEnterComponent>(out _))
                     if (m_Camera.transform.position.x - m_Target.position.x < 2)
                     {
                         m_CurrentPosition += new Vector3(deltaPosX, 0);
@@ -64,7 +61,7 @@ namespace VampireLike.Core.Cameras
             }
             else if (deltaPosX < 0 && Physics.Raycast(leftRay, out RaycastHit hitL, 100))
             {
-                if (hitL.collider.TryGetComponent<OnColiderEnterComponent>(out OnColiderEnterComponent c))
+                if (hitL.collider.TryGetComponent<OnColiderEnterComponent>(out _))
                     if (m_Camera.transform.position.x - m_Target.position.x > -2)
                     {
                         m_CurrentPosition += new Vector3(deltaPosX, 0);
@@ -108,7 +105,7 @@ namespace VampireLike.Core.Cameras
 
                 foreach(var hit in hits)
                 {
-                    if(hit.collider.TryGetComponent<OnColiderEnterComponent>(out OnColiderEnterComponent c))
+                    if (hit.collider.TryGetComponent<OnColiderEnterComponent>(out _))
                     {
                         m_Arena = hit.transform;
                         break;

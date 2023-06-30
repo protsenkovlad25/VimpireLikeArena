@@ -43,10 +43,8 @@ MonoBehaviour:
   - m_Name: Cluster 2_3
     m_Tier: 2
     m_Chunks:
-    - {fileID: 9114045137696439886, guid: 32953145c630cae4584437a9a2e043f3, type: 3}
-    - {fileID: 9114045137696439886, guid: 4b12faf526e351445a621322c0b12e33, type: 3}
-    - {fileID: 9114045137696439886, guid: 08e1f2d1924bf0e4091f0e8d7b1e9804, type: 3}
-    - {fileID: 5429627594649381980, guid: 3c137c41793559c499bcc3cceb2d3937, type: 3}
+    - {fileID: 9114045137696439886, guid: b8183610742943f4d92b7d082067a6d0, type: 3}
+    - {fileID: 9114045137696439886, guid: 096d360cc50ddfc45b8b4e3e0420f3e7, type: 3}
   - m_Name: Cluster 3_1
     m_Tier: 3
     m_Chunks:

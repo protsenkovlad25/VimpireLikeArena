@@ -17,7 +17,6 @@ namespace VampireLike.Core.Characters.Enemies
         private IAttaching m_Attaching;
 
         private bool m_IsMove;
-        private bool m_IsLook;
 
         public WeaponType GetWeaponType()
         {
@@ -124,6 +123,14 @@ namespace VampireLike.Core.Characters.Enemies
             if (CurrentHealthPoint > 0)
             {
                 StartCoroutine(PauseMove());
+            }
+        }
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            if (collision.collider.TryGetComponent<SolidObject>(out _))
+            {
+                m_Looking.ClearLook();
             }
         }
     }
