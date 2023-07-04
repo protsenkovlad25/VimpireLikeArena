@@ -1,17 +1,28 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using VampireLike.Core.Movements;
 using VampireLike.Core.Weapons;
 
 namespace VampireLike.Core.Characters
 {
-    public class MainCharacterController : MonoBehaviour, IAttaching, IIniting, INeedingWeapon
+    public class MainCharacterController : MonoBehaviour, IAttaching, IIniting
     {
         [SerializeField] private MainCharacter m_MainCharacter;
-        [SerializeField] private WeaponType m_WeaponType;
 
-        private CharacterWeapon m_CharacterWeapon;
+        public INeedingWeapon NeedingWeapon => m_MainCharacter.GetComponent<INeedingWeapon>();
 
-        private IAttaching m_Attaching;
+        public void StartShoot()
+        {
+            m_MainCharacter.StartShoot();
+        }
+
+        public void StopShoot()
+        {
+            m_MainCharacter.StopShoot();
+        }
 
         public void SetAttaching(IAttaching attaching)
         {
@@ -22,7 +33,7 @@ namespace VampireLike.Core.Characters
                 return;
             }
 
-            m_Attaching = attaching;
+            m_MainCharacter.Set(attaching);
         }
 
         public Transform GetTarget()
@@ -40,45 +51,13 @@ namespace VampireLike.Core.Characters
                 ScaleDamage = 1
             });
             m_MainCharacter.Init();
-            m_CharacterWeapon.Init();
+            m_MainCharacter.InitWeapon();
             m_MainCharacter.OnDie += OnMainCharacterDie;
-        }
-
-        public void StartShoot()
-        {
-            m_CharacterWeapon.Start();
-        }
-
-        public void StopShoot()
-        {
-            m_CharacterWeapon.Stop();
         }
 
         public void Move(Vector2 vector2)
         {
             m_MainCharacter.Move(vector2);
-        }
-
-        public WeaponType GetWeaponType()
-        {
-            return m_WeaponType;
-        }
-
-        public Transform Where()
-        {
-            return m_MainCharacter.WeaponPoint;
-        }
-
-        public void Set(WeaponBehaviour generic)
-        {
-            generic.gameObject.layer = 7;
-            if (m_CharacterWeapon == null)
-            {
-                m_CharacterWeapon = new CharacterWeapon();
-                m_CharacterWeapon.Set(m_Attaching);
-            }
-
-            m_CharacterWeapon.AddWeapon(generic);
         }
 
         public void OnMainCharacterDie(GameCharacterBehaviour characterBehaviour)

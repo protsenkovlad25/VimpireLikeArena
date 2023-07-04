@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using VampireLike.Core.Players;
+using VampireLike.Core.Trees;
 
 namespace VampireLike.Core.Levels
 {
@@ -26,6 +27,7 @@ namespace VampireLike.Core.Levels
         [SerializeField] private Transform m_RoadParent;
         [SerializeField] private Transform m_ArenaParent;
 
+        private TreeHolder m_TreeHolder;
         private int m_Seed;
 
         public void Init()
@@ -33,6 +35,9 @@ namespace VampireLike.Core.Levels
             m_Seed = PlayerController.Instance.Player.Seed;
             m_WavesController.Init();
             m_LevelGenerator.Init();
+
+            m_TreeHolder =  m_LevelGenerator.GenerateTree();
+
             m_WavesController.OnSetChunk += OnSetChunk.Invoke;
             m_WavesController.OnSpawnPauseEnd += OnSpawnPauseEnd.Invoke;
             m_WavesController.OnAllWavesSpawned += OnArenaIsCleared.Invoke;
@@ -67,7 +72,14 @@ namespace VampireLike.Core.Levels
 
         public void InitializeWaves()
         {
-            m_WavesController.InitializeWaves(m_LevelGenerator.GenerateWavesCluster(m_Seed), m_CurrentArena.CenterArena.position);
+            m_WavesController.InitializeWaves(GetWavesCluster().Chunks, m_CurrentArena.CenterArena.position);
+
+            m_TreeHolder.Remove(m_TreeHolder.CurrentArenaNode.WavesCluster);
+        }
+
+        public WavesCluster GetWavesCluster()
+        {
+            return m_TreeHolder.CurrentArenaNode.WavesCluster;
         }
 
         public void NextWave()

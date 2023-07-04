@@ -24,7 +24,7 @@ namespace VampireLike.Core.General
         {
             m_EnemeisController.SetAttaching(m_MainCharacterController);
             m_MainCharacterController.SetAttaching(m_EnemeisController);
-            m_WeaponsController.GaveWeapon(m_MainCharacterController);
+            m_WeaponsController.GaveWeapon(m_MainCharacterController.NeedingWeapon);
 
             m_PlayerInput.OnInput += OnDragJoystickPlayer;
             m_EnemeisController.OnAllDeadEnemies += NextWave;

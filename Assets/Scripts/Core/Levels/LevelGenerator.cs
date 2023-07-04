@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using VampireLike.Core.Players;
+using VampireLike.Core.Trees;
 
 namespace VampireLike.Core.Levels
 {
@@ -17,19 +18,30 @@ namespace VampireLike.Core.Levels
             m_WavesConfigurator.Init();
         }
 
-        public List<Chunk> GenerateWavesCluster(int seed)
+        public WavesCluster GenerateWavesCluster()
         {
-            WavesCluster wavesCluster = m_WavesConfigurator.GetRandomWavesCluster(m_WavesConfigurator.GetTier(seed), random);
+            WavesCluster wavesCluster = m_WavesConfigurator.GetRandomWavesCluster(m_WavesConfigurator.GetTier(random), random);
 
-            List<Chunk> ñhunks = new List<Chunk>();
-            foreach (var chunk in wavesCluster.Chunks)
-            {
-                ñhunks.Add(chunk);
-            }
 
             m_WavesConfigurator.Overflow(PlayerController.Instance.Player.QtyCompleteArean - 1, PlayerController.Instance.Player.QtyArenas - 1);
 
-            return ñhunks;
-        } 
+            return wavesCluster;
+        }
+
+        public TreeHolder GenerateTree()
+        {
+            TreeHolder treeHolder = new TreeHolder { Count = 5 };
+
+            for (int i = 0; i < treeHolder.Count; i++)
+            {
+                treeHolder.Add(GenerateWavesCluster());
+            }
+
+            //ArenaNode node;
+            //for (node = treeHolder.CurrentArenaNode; node != null; node = node.Next)
+            //    Debug.Log(node.WavesCluster.Chunks.Count + "chunks");
+
+            return treeHolder;
+        }
     }
 }

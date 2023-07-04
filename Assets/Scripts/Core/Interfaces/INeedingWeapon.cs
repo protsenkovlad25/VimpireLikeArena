@@ -8,6 +8,8 @@ namespace VampireLike.Core.Weapons
     {
         WeaponType GetWeaponType();
 
+        public void SetWeaponType(WeaponType weaponType);
+
         Transform Where();
     }
 }

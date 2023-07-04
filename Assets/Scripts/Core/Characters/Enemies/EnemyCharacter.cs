@@ -28,6 +28,10 @@ namespace VampireLike.Core.Characters.Enemies
             return m_EnemyType;
         }
 
+        public void SetWeaponType(WeaponType weaponType)
+        {
+        }
+
         public void Move(IAttaching targetPosition)
         {
             if (m_IsMove)

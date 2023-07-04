@@ -25,7 +25,6 @@ namespace VampireLike.Core.Levels
                         Chunks = item.Chunks,
                         Tier = item.Tier
                     };
-
                     m_WavesClusters[item.Tier].Add(newWavesCluster);
                 }
                 else
@@ -35,6 +34,7 @@ namespace VampireLike.Core.Levels
                         Chunks = item.Chunks,
                         Tier = item.Tier
                     };
+                    Debug.Log(newWavesCluster);
 
                     m_WavesClusters.Add(item.Tier, new List<WavesCluster>());
                     m_WavesClusters[item.Tier].Add(newWavesCluster);
@@ -51,10 +51,8 @@ namespace VampireLike.Core.Levels
             }
         }
 
-        public int GetTier(int seed)
+        public int GetTier(System.Random random)
         {
-            var random = new System.Random(seed);
-
             var list = new List<int>();
 
             foreach (var item in m_WavesClusterTiers)

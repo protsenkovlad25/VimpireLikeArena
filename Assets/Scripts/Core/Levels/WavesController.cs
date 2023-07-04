@@ -46,7 +46,9 @@ public class WavesController : MonoBehaviour
         m_GIM.OnTimer();
         m_GIM.ChunkTimerText("New Wave");
 
-        m_Chunks = chunks;
+        m_Chunks = new List<Chunk>();
+        m_Chunks.AddRange(chunks);
+
         m_ArenaCenterPosition = arenaCenterPosition;
 
         m_InstiateChunk = Instantiate(m_Chunks[0], m_ArenaCenterPosition, Quaternion.identity, m_ChunkParent);

@@ -9,6 +9,11 @@ namespace VampireLike.Core.Weapons
     {
         [SerializeField] private WeaponConfigurator m_WeaponConfigurator;
 
+        private void Start()
+        {
+            EventManager.OnWeaponReceived.AddListener(GaveWeapon);
+        }
+
         public void GaveWeapons(IEnumerable<INeedingWeapon> needingWeapons)
         {
             foreach (var item in needingWeapons)
@@ -42,6 +47,7 @@ namespace VampireLike.Core.Weapons
                                 .SetWeaponBehaviour(data.WeaponBehaviour);
 
             needingWeapon.Set(builder.Build());
+            needingWeapon.SetWeaponType(weaponType);
         }
     }
 }

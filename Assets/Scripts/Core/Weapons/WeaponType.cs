@@ -11,6 +11,7 @@ namespace VampireLike.Core.Weapons
         InfinityShooting,
         RocketShooting,
         Touching,
-        Pushing
+        Pushing,
+        TestWeapon
     }
 }
