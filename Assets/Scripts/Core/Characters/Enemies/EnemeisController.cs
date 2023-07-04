@@ -5,8 +5,6 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using VampireLike.Core.Characters.Enemies.Config;
-using VampireLike.Core.Looks;
-using VampireLike.Core.Movements;
 using VampireLike.Core.Weapons;
 
 namespace VampireLike.Core.Characters.Enemies
@@ -232,6 +230,7 @@ namespace VampireLike.Core.Characters.Enemies
                         s.Append(enemy.transform.DOMoveY(1.6f, .8f).SetEase(Ease.InQuad));
                         s.Insert(.7f, enemy.transform.DOScale(new Vector3(1.2f,.7f,1.2f), .15f));
                         s.Append(enemy.transform.DOScale(1, .2f));
+
                         StartCoroutine(PlaySpawnParticle(enemy.transform.position));
                     }
                 }
@@ -248,6 +247,8 @@ namespace VampireLike.Core.Characters.Enemies
 
         private IEnumerator PlaySpawnParticle(Vector3 position)
         {
+            position -= new Vector3(0, 50, 0);
+
             yield return new WaitForSeconds(0.8f);
 
             m_SpawnParticle = Instantiate(m_SpawnParticlePrefab, position, Quaternion.identity).GetComponent<SpawnParticle>();
