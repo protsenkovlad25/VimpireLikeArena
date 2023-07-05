@@ -9,7 +9,7 @@ namespace VampireLike.Core.Weapons
     {
         [SerializeField] private WeaponConfigurator m_WeaponConfigurator;
 
-        private void Start()
+        public void Init()
         {
             EventManager.OnWeaponReceived.AddListener(GaveWeapon);
         }

@@ -891,6 +891,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_WavesConfigurator: {fileID: 738263236}
+  m_PickupbleWeaponPrefab: {fileID: 5791388873559148413, guid: 7920948ad72328740be21bc8bd9ff5a4, type: 3}
+  m_PickupbleItemPrefab: {fileID: 5791388873559148413, guid: d6b3db9448556834288faf887610e174, type: 3}
 --- !u!1 &555584403
 GameObject:
   m_ObjectHideFlags: 0
@@ -2664,7 +2666,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1912719258
 MonoBehaviour:
   m_ObjectHideFlags: 0

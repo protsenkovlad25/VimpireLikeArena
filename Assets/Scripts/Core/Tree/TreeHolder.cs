@@ -26,9 +26,9 @@ namespace VampireLike.Core.Trees
             return currentArena;
         }
 
-        public void Add(WavesCluster wavesCluster)
+        public void Add(WavesCluster wavesCluster, Prize prize)
         {
-            ArenaNode newArenaNode = new ArenaNode(wavesCluster);
+            ArenaNode newArenaNode = new ArenaNode(wavesCluster, prize);
 
             if (currentArena == null)
                 currentArena = newArenaNode;
@@ -38,16 +38,15 @@ namespace VampireLike.Core.Trees
             lastArena = newArenaNode;
         }
 
-        public bool Remove(WavesCluster wavesCluster)
+        public bool Remove(WavesCluster wavesCluster, Prize prize)
         {
             ArenaNode current = currentArena;
             ArenaNode previous = null;
-            if (currentArena.WavesCluster == null) Debug.Log("Piska");
 
             while (current != null && current.WavesCluster != null)
             {
                 Debug.Log("LOL");
-                if (current.WavesCluster.Equals(wavesCluster))
+                if (current.WavesCluster.Equals(wavesCluster) && current.Prize.Equals(prize))
                 {
                     if (previous != null)
                     {

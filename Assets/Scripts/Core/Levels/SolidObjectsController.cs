@@ -12,54 +12,82 @@ public class SolidObjectsController : MonoBehaviour, IIniting
 
     public void Init()
     {
-        m_WallMarks = new List<GameObject>();
+        m_Walls = new List<SolidObject>();
+        EventManager.OnAllWavesSpawned.AddListener(DestroyWalls);
     }
 
     public void SetWalls(List<SolidObject> walls)
     {
-        m_Walls = walls;
+        foreach (var wall in walls)
+            m_Walls.Add(wall);
     }
 
-    public void InitWalls()
+    public void InitWalls(List<SolidObject> walls)
     {
-        foreach (var wall in m_Walls)
+        foreach (var wall in walls)
         {
-            wall.transform.position += new Vector3(0, 50, 0);
-            wall.gameObject.SetActive(true);
-        }
-    }
-
-    public void SetMark()
-    {
-        foreach (var wall in m_Walls)
-        {
-            RaycastHit[] hits = Physics.RaycastAll(wall.transform.position, new Vector3(0, -1, 0), 100f);
-            foreach (RaycastHit hit in hits)
+            for (int i = 0; i < m_Walls.Count; i++)
             {
-                if (hit.collider.TryGetComponent(out OnColiderEnterComponent c))
+                if (wall == m_Walls[i])
                 {
-                    GameObject mark;
-                    SpriteRenderer markRenderer;
-
-                    mark = Instantiate(m_WallMarkPrefab, hit.point + new Vector3(0, .1f, 0), m_WallMarkPrefab.transform.rotation);
-                    mark.transform.rotation = Quaternion.Euler(mark.transform.eulerAngles.x, wall.transform.eulerAngles.y, mark.transform.eulerAngles.z);
-
-                    markRenderer = mark.GetComponent<SpriteRenderer>();
-                    markRenderer.size = new Vector2(wall.transform.localScale.x, wall.transform.localScale.z);
-
-                    if (mark != null) m_WallMarks.Add(mark);
-
-                    break;
+                    wall.transform.position += new Vector3(0, 50, 0);
+                    wall.gameObject.SetActive(true);
                 }
             }
         }
     }
 
-    public void Landing()
+    public void SetMark(List<SolidObject> walls)
+    {
+        m_WallMarks = new List<GameObject>();
+
+        foreach (var wall in walls)
+        {
+            for (int i = 0; i < m_Walls.Count; i++)
+            {
+                if (wall == m_Walls[i])
+                {
+                    RaycastHit[] hits = Physics.RaycastAll(m_Walls[i].transform.position, new Vector3(0, -1, 0), 100f);
+                    foreach (RaycastHit hit in hits)
+                    {
+                        if (hit.collider.TryGetComponent(out OnColiderEnterComponent c))
+                        {
+                            GameObject mark;
+                            SpriteRenderer markRenderer;
+
+                            mark = Instantiate(m_WallMarkPrefab, hit.point + new Vector3(0, .1f, 0), m_WallMarkPrefab.transform.rotation);
+                            mark.transform.rotation = Quaternion.Euler(mark.transform.eulerAngles.x, m_Walls[i].transform.eulerAngles.y, mark.transform.eulerAngles.z);
+
+                            markRenderer = mark.GetComponent<SpriteRenderer>();
+                            markRenderer.size = new Vector2(m_Walls[i].transform.localScale.x, m_Walls[i].transform.localScale.z);
+
+                            if (mark != null) m_WallMarks.Add(mark);
+
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    public void Landing(List<SolidObject> walls)
+    {
+        foreach (var wall in walls)
+        {
+            for (int i = 0; i < m_Walls.Count; i++)
+            {
+                if (wall == m_Walls[i])
+                {
+                    m_Walls[i].transform.DOMoveY(1.6f, .8f).SetEase(Ease.InQuad);
+                }
+            }
+        }
+    }
+
+    public void DestroyWalls()
     {
         foreach (var wall in m_Walls)
-        {
-            wall.transform.DOMoveY(1.6f, .8f).SetEase(Ease.InQuad);
-        }
+            Destroy(wall.gameObject);
     }
 }

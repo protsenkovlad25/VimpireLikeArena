@@ -7,7 +7,7 @@ public class WavesController : MonoBehaviour
 {
     public event Action<Chunk> OnSetChunk;
     public event Action<Chunk> OnSpawnPauseEnd;
-    public event Action OnAllWavesSpawned;
+    //public event Action OnAllWavesSpawned;
 
     [SerializeField] private GameInterfaceManager m_GIM;
     [SerializeField] private Transform m_ChunkParent;
@@ -116,8 +116,8 @@ public class WavesController : MonoBehaviour
         {
             m_TimerToNextWave = null;
             m_GIM.OffTimer();
-            
-            OnAllWavesSpawned?.Invoke();
+
+            EventManager.AllWavesSpawned();
         }
     }
 }

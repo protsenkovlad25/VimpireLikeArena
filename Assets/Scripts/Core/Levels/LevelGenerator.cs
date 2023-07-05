@@ -11,6 +11,8 @@ namespace VampireLike.Core.Levels
         [SerializeField] private WavesConfigurator m_WavesConfigurator;
 
         System.Random random;
+        [SerializeField] GameObject m_PickupbleWeaponPrefab;
+        [SerializeField] GameObject m_PickupbleItemPrefab;
 
         public void Init()
         {
@@ -28,13 +30,18 @@ namespace VampireLike.Core.Levels
             return wavesCluster;
         }
 
+        public Prize GeneratePrize()
+        {
+            return new Prize(m_PickupbleWeaponPrefab);
+        }
+
         public TreeHolder GenerateTree()
         {
             TreeHolder treeHolder = new TreeHolder { Count = 5 };
 
             for (int i = 0; i < treeHolder.Count; i++)
             {
-                treeHolder.Add(GenerateWavesCluster());
+                treeHolder.Add(GenerateWavesCluster(), GeneratePrize());
             }
 
             //ArenaNode node;

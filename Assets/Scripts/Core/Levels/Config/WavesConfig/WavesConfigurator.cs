@@ -34,7 +34,6 @@ namespace VampireLike.Core.Levels
                         Chunks = item.Chunks,
                         Tier = item.Tier
                     };
-                    Debug.Log(newWavesCluster);
 
                     m_WavesClusters.Add(item.Tier, new List<WavesCluster>());
                     m_WavesClusters[item.Tier].Add(newWavesCluster);

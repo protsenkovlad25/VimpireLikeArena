@@ -12,7 +12,7 @@ namespace VampireLike.Core.Levels
     {
         public event Action<Chunk> OnSetChunk;
         public event Action<Chunk> OnSpawnPauseEnd;
-        public event Action OnArenaIsCleared;
+        //public event Action OnArenaIsCleared;
         public event Action OnStartFight;
 
         [SerializeField] private WavesController m_WavesController;
@@ -40,7 +40,10 @@ namespace VampireLike.Core.Levels
 
             m_WavesController.OnSetChunk += OnSetChunk.Invoke;
             m_WavesController.OnSpawnPauseEnd += OnSpawnPauseEnd.Invoke;
-            m_WavesController.OnAllWavesSpawned += OnArenaIsCleared.Invoke;
+            //m_WavesController.OnAllWavesSpawned += OnArenaIsCleared.Invoke;
+            //m_WavesController.OnAllWavesSpawned += DestroyWalls;
+            //m_WavesController.OnAllWavesSpawned += InitializePrize;
+            //EventManager.OnAllWavesSpawned.AddListener(InitializePrize);
         }
 
         public void FirstArena()
@@ -53,6 +56,7 @@ namespace VampireLike.Core.Levels
             var road = Instantiate(m_PrefabRoad, m_CurrentArena.EndPoint.position, Quaternion.identity, m_RoadParent);
             var arena = Instantiate(m_PrefabArena, m_CurrentArena.transform.position + Vector3.forward * 54, Quaternion.identity, m_ArenaParent);
             
+            arena.OnSteppedArena += RemoveWavesCluster;
             arena.OnSteppedArena += InitializeWaves;
             arena.OnSteppedArena += EventManager.StartArena;
 
@@ -73,8 +77,16 @@ namespace VampireLike.Core.Levels
         public void InitializeWaves()
         {
             m_WavesController.InitializeWaves(GetWavesCluster().Chunks, m_CurrentArena.CenterArena.position);
+        }
 
-            m_TreeHolder.Remove(m_TreeHolder.CurrentArenaNode.WavesCluster);
+        public void InitializePrize()
+        {
+            m_TreeHolder.CurrentArenaNode.Prize.SpawnPrizes(m_CurrentArena.CenterArena.position);
+        }
+
+        public void RemoveWavesCluster()
+        {
+            m_TreeHolder.Remove(m_TreeHolder.CurrentArenaNode.WavesCluster, m_TreeHolder.CurrentArenaNode.Prize);
         }
 
         public WavesCluster GetWavesCluster()

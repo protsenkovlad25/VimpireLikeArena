@@ -30,8 +30,7 @@ namespace VampireLike.Core.Weapons
 
         public WeaponBehaviour Build()
         {
-            var go = GameObject.Instantiate(m_WeaponBehaviour, m_Point.position, m_Point.rotation, m_Point);
-
+            var go = Object.Instantiate(m_WeaponBehaviour, m_Point.position, m_Point.rotation, m_Point);
 
             go.SetWeaponData(m_WeaponData);
 

@@ -30,11 +30,13 @@ namespace VampireLike.Core.General
             m_EnemeisController.OnAllDeadEnemies += NextWave;
             m_Level.OnSetChunk += OnSetChunk;
             m_Level.OnSpawnPauseEnd += Activates;
-            m_Level.OnArenaIsCleared += LevelCompleteCheck;
+            //m_Level.OnArenaIsCleared += LevelCompleteCheck;
 
+            EventManager.OnAllWavesSpawned.AddListener(LevelCompleteCheck);
             EventManager.OnLose.AddListener(OnPlayerDied);
             EventManager.OnSwitchWeapon.AddListener(SwitchEnemyWeapon);
 
+            m_WeaponsController.Init();
             m_EnemeisController.Init();
             m_SolidObjectsController.Init();
             m_MainCharacterController.Init();
@@ -84,6 +86,7 @@ namespace VampireLike.Core.General
             else
             {
                 PlayerController.Instance.StartRoad();
+                m_Level.InitializePrize();
                 m_Level.NextArena();
                 m_MISCController.ChangeCameraLimit();
             }
@@ -98,8 +101,8 @@ namespace VampireLike.Core.General
 
             // -- Walls -- //
             m_SolidObjectsController.SetWalls(chunk.Walls);
-            m_SolidObjectsController.InitWalls();
-            m_SolidObjectsController.SetMark();
+            m_SolidObjectsController.InitWalls(chunk.Walls);
+            m_SolidObjectsController.SetMark(chunk.Walls);
         }
 
         private void Activates(Chunk chunk)
@@ -111,7 +114,7 @@ namespace VampireLike.Core.General
             m_EnemeisController.Landing(chunk.Enemies);
 
             // -- Walls -- //
-            m_SolidObjectsController.Landing();
+            m_SolidObjectsController.Landing(chunk.Walls);
 
             // -- StartShoot Enemies and MainCharacter -- //
             m_MainCharacterController.StopShoot();

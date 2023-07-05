@@ -7,7 +7,7 @@ namespace VampireLike.Core.Trees
 {
     public class ArenaNode
     {
-        public ArenaNode(WavesCluster wavesCluster, Prize prize = null)
+        public ArenaNode(WavesCluster wavesCluster, Prize prize)
         {
             WavesCluster = wavesCluster;
             Prize = prize;
