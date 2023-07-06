@@ -17,7 +17,8 @@ public class Prize
         {
             ArenaPrizes.Add(Object.Instantiate(prefab));
             ArenaPrizes[i].GetComponent<PickapbleWeaponPrize>().WeaponType = WeaponType.TestWeapon;
-            ArenaPrizes[i].GetComponent<PickapbleWeaponPrize>().Initialize();
+            ArenaPrizes[i].GetComponent<PickapblePrize>().Initialize();
+            ArenaPrizes[i].GetComponent<PickapblePrize>().OnGet = DestroyObjects;
             ArenaPrizes[i].SetActive(false);
         }
     }
@@ -25,15 +26,24 @@ public class Prize
     public void SpawnPrizes(Vector3 spawnPosition)
     {
         Vector3 position = spawnPosition;
-        float dif = 1;
+        float i = 0;
 
         foreach (var prize in ArenaPrizes)
         {
-            prize.GetComponent<PickapbleWeaponPrize>().transform.position = position;
+            prize.transform.position = position;
             prize.SetActive(true);
 
-            position.x = dif * 10f * (-1f);
-            dif = -(dif + 1);
+            i++;
+            if (i % 2 == 0)
+                position.x += 5 * -i;
+            else
+                position.x += 5 * i;
         }
+    }
+
+    public void DestroyObjects()
+    {
+        foreach (var prize in ArenaPrizes)
+            Object.Destroy(prize);
     }
 }
