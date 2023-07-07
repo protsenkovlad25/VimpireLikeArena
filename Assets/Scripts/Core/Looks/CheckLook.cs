@@ -11,7 +11,7 @@ namespace VampireLike.Core.Looks
 
         private enum MovementState { Bypass, Stand, StepBack }
 
-        public Vector3 Look(Vector3 target, Transform transform)
+        public Vector3 Look(Vector3 target, Transform transform, float speed)
         {
             Vector3 directionToHero;
             Vector3 vecNormali;
@@ -52,6 +52,9 @@ namespace VampireLike.Core.Looks
 
             if (directionToHero.magnitude > m_MinDistanceToHero)
             {
+                var lookRotation = Quaternion.LookRotation((target - transform.position).normalized);
+                transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, speed);
+
                 m_State = MovementState.Stand;
                 m_BypassPosition = Vector3.zero;
                 return transform.position;

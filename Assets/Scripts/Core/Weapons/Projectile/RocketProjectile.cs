@@ -29,7 +29,7 @@ namespace VampireLike.Core.Weapons
             base.Move(speed, point, distance);
         }
 
-        private void Update()
+        protected override void Update()
         {
             if (!m_IsMove)
             {
@@ -37,22 +37,18 @@ namespace VampireLike.Core.Weapons
                 return;
             }
 
+            m_FlyTime -= Time.deltaTime;
             var step = m_Speed * Time.deltaTime;
             var oldPostion = transform.position;
 
             m_Moving.Move(m_Target, step, transform, gameObject.GetComponent<Rigidbody>());
 
-            if (Vector3.Distance(m_StartPosition, transform.position) >= m_Distance)
+            if (m_FlyTime <= 0)
             {
                 m_IsMove = false;
                 gameObject.SetActive(false);
             }
 
-            if (Vector3.Distance(oldPostion, transform.position) <= float.Epsilon)
-            {
-                m_IsMove = false;
-                gameObject.SetActive(false);
-            }
         }
 
         protected override void OnCollisionEnter(Collision collision)

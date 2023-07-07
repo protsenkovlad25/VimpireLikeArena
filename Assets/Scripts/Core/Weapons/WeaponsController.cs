@@ -24,18 +24,24 @@ namespace VampireLike.Core.Weapons
 
         public void GaveWeapon(INeedingWeapon needingWeapon)
         {
-            if (needingWeapon.GetWeaponType().Equals(WeaponType.None))
+            List<WeaponType> weaponTypes = needingWeapon.GetWeaponTypes();
+            List<Transform> weaponPoints = needingWeapon.GetWeaponPoints();
+
+            for (int i = 0; i < weaponTypes.Count; i++)
             {
-                return;
+                if (weaponTypes[i].Equals(WeaponType.None))
+                {
+                    continue;
+                }
+
+                var data = m_WeaponConfigurator.GetData(weaponTypes[i]);
+
+                var builder = new WeaponBuilder(weaponPoints[i])
+                                    .SetWeaponData(data.WeaponData)
+                                    .SetWeaponBehaviour(data.WeaponBehaviour);
+
+                needingWeapon.Set(builder.Build());
             }
-
-            var data = m_WeaponConfigurator.GetData(needingWeapon.GetWeaponType());
-
-            var builder = new WeaponBuilder(needingWeapon.Where())
-                                .SetWeaponData(data.WeaponData)
-                                .SetWeaponBehaviour(data.WeaponBehaviour);
-
-            needingWeapon.Set(builder.Build());
         }
 
         public void GaveWeapon(WeaponType weaponType, INeedingWeapon needingWeapon)

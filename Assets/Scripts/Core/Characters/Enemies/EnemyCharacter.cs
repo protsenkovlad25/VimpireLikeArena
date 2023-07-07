@@ -1,4 +1,6 @@
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using VampireLike.Core.Weapons;
 
@@ -6,21 +8,24 @@ namespace VampireLike.Core.Characters.Enemies
 {
     public class EnemyCharacter : GameCharacterBehaviour, INeedingWeapon, INeeding<IAttaching>
     {
-        [SerializeField] private Transform m_WeaponPoint;
-        [SerializeField] private WeaponType m_WeaponType;
+        [SerializeField] private List<Transform> m_WeaponPoints;
+        [SerializeField] private List<WeaponType> m_WeaponTypes;
         [SerializeField] private EnemyType m_EnemyType;
 
-        public WeaponType WeaponType { get; set; }
         public EnemyType EnemyType { get; set; }
 
-        private CharacterWeapon m_CharacterWeapon;
         private IAttaching m_Attaching;
 
         private bool m_IsMove;
 
-        public WeaponType GetWeaponType()
+        public List<WeaponType> GetWeaponTypes()
         {
-            return m_WeaponType;
+            return m_WeaponTypes;
+        }
+
+        public List<Transform> GetWeaponPoints()
+        {
+            return m_WeaponPoints;
         }
 
         public EnemyType GetEnemyType()
@@ -44,7 +49,8 @@ namespace VampireLike.Core.Characters.Enemies
 
         public void InitWeapon()
         {
-            m_CharacterWeapon.Init();
+            foreach (var weapon in m_CharacterWeapons)
+                weapon.Init();
         }
 
         public void Rotate(Vector3 angle)
@@ -54,14 +60,17 @@ namespace VampireLike.Core.Characters.Enemies
 
         public void Set(WeaponBehaviour generic)
         {
-            generic.gameObject.layer = 9;//TODO
-            if (m_CharacterWeapon == null)
+            generic.gameObject.layer = 9;
+
+            if (m_CharacterWeapons == null)
             {
-                m_CharacterWeapon = new CharacterWeapon();
-                m_CharacterWeapon.Set(m_Attaching);
+                m_CharacterWeapons = new List<CharacterWeapon>();
             }
 
-            m_CharacterWeapon.AddWeapon(generic, this);
+            m_CharacterWeapons.Add(new CharacterWeapon());
+            m_CharacterWeapons.Last().Set(m_Attaching);
+            m_CharacterWeapons.Last().AddWeapon(generic, this);
+            m_CharacterWeapons.Last().Init();
         }
 
         public void Set(IAttaching generic)
@@ -71,17 +80,19 @@ namespace VampireLike.Core.Characters.Enemies
 
         public Transform Where()
         {
-            return m_WeaponPoint;
+            return m_WeaponPoints[0];
         }
 
         public void StartShoot()
         {
-            m_CharacterWeapon.Start();
+            foreach (var weapon in m_CharacterWeapons)
+                weapon.StartShoot();
         }
 
         public void StopShoot()
         {
-            m_CharacterWeapon.Stop();
+            foreach (var weapon in m_CharacterWeapons)
+                weapon.Stop();
         }
 
         private IEnumerator MoveCoroutine(IAttaching targetPosition)
@@ -95,7 +106,7 @@ namespace VampireLike.Core.Characters.Enemies
                 //else
                 //    StopShoot();
 
-                Vector3 positionToMove = m_Looking.Look(targetPosition.GetTarget().position, transform);
+                Vector3 positionToMove = m_Looking.Look(targetPosition.GetTarget().position, transform, CharacterData.Speed);
 
                 m_Moving.Move(positionToMove, 
                     CharacterData.Speed * Time.deltaTime, 

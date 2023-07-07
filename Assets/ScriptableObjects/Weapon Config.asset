@@ -15,74 +15,64 @@ MonoBehaviour:
   m_WeaponData:
   - m_Name: Simple Shooting Weapon
     m_WeaponType: 1
-    m_AttackSpeed: 1
+    m_FireRate: 0.4
     m_RepulsiveForce: 250
     m_Damage: 5
     m_MagazineSize: 8
     m_RechargeTime: 2
     m_ProjectileType: 1
     m_ProjectileSpeed: 15
-    m_Distance: 30
+    m_FlyTime: 2
   - m_Name: Pushing Weapon
     m_WeaponType: 5
-    m_AttackSpeed: 0
+    m_FireRate: 0
     m_RepulsiveForce: 100
     m_Damage: 1
     m_MagazineSize: 0
     m_RechargeTime: 0
     m_ProjectileType: 0
     m_ProjectileSpeed: 0
-    m_Distance: 0
+    m_FlyTime: 0
   - m_Name: Touching Weapon
     m_WeaponType: 4
-    m_AttackSpeed: 0.5
+    m_FireRate: 0
     m_RepulsiveForce: 0
     m_Damage: 5
     m_MagazineSize: 0
     m_RechargeTime: 0
     m_ProjectileType: 0
     m_ProjectileSpeed: 0
-    m_Distance: 0
-  - m_Name: Direct Weapon
-    m_WeaponType: 4
-    m_AttackSpeed: 0.5
-    m_RepulsiveForce: 100
-    m_Damage: 1
-    m_MagazineSize: 0
-    m_RechargeTime: 0
-    m_ProjectileType: 3
-    m_ProjectileSpeed: 25
-    m_Distance: 10
+    m_FlyTime: 0
   - m_Name: Infinity Shooting Weapon
     m_WeaponType: 2
-    m_AttackSpeed: 0.5
-    m_RepulsiveForce: 0
+    m_FireRate: 0.5
+    m_RepulsiveForce: 10
     m_Damage: 10
     m_MagazineSize: 8
     m_RechargeTime: 0
     m_ProjectileType: 1
-    m_ProjectileSpeed: 15
-    m_Distance: 20
+    m_ProjectileSpeed: 10
+    m_FlyTime: 2
   - m_Name: Rocket Shooting Weapon
     m_WeaponType: 3
-    m_AttackSpeed: 2
+    m_FireRate: 3
     m_RepulsiveForce: 250
     m_Damage: 15
     m_MagazineSize: 0
     m_RechargeTime: 0
     m_ProjectileType: 0
-    m_ProjectileSpeed: 28
-    m_Distance: 30
+    m_ProjectileSpeed: 40
+    m_FlyTime: 1
   - m_Name: Test Weapon
     m_WeaponType: 6
-    m_AttackSpeed: 2
+    m_FireRate: 0
     m_RepulsiveForce: 250
     m_Damage: 15
     m_MagazineSize: 0
     m_RechargeTime: 0
     m_ProjectileType: 0
     m_ProjectileSpeed: 28
-    m_Distance: 30
+    m_FlyTime: 0
   m_ListModelWeapons:
   - m_Name: Simple Shooting Weapon
     m_WeaponType: 1
@@ -93,9 +83,6 @@ MonoBehaviour:
   - m_Name: Pushing Weapon
     m_WeaponType: 5
     m_WeaponBehaviour: {fileID: 212678764110084006, guid: 08bf238f9f626bc438f7363d72464980, type: 3}
-  - m_Name: Direct
-    m_WeaponType: 4
-    m_WeaponBehaviour: {fileID: 6169490842623932695, guid: fb81c1dc8aeda1245bc7383741258bb1, type: 3}
   - m_Name: Infinity Shooting Weapon
     m_WeaponType: 2
     m_WeaponBehaviour: {fileID: 558255923814313856, guid: 2397e89c285cf2b478f79fcac371e772, type: 3}
@@ -112,9 +99,6 @@ MonoBehaviour:
   - m_Name: None
     m_ProjectileType: 0
     m_Projectile: {fileID: 0}
-  - m_Name: Direct Projectile
-    m_ProjectileType: 3
-    m_Projectile: {fileID: 5077908403257476351, guid: edc39d23f8d9ce745943d37ab13b2617, type: 3}
   - m_Name: Rocket Projectile
     m_ProjectileType: 4
     m_Projectile: {fileID: 0}

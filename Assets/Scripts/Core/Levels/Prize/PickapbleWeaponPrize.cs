@@ -6,7 +6,6 @@ using VampireLike.Core.Weapons;
 
 public class PickapbleWeaponPrize : PickapblePrize, INeedingWeapon
 {
-    [SerializeField] private Transform m_PrizePoint;
 
     private WeaponType m_WeaponType;
 
@@ -19,6 +18,7 @@ public class PickapbleWeaponPrize : PickapblePrize, INeedingWeapon
     public override void Initialize()
     {
         EventManager.WeaponReceived(m_WeaponType, this);
+        base.Initialize();
     }
 
     public override void GetPrize(MainCharacter mainCharacter)
@@ -32,9 +32,14 @@ public class PickapbleWeaponPrize : PickapblePrize, INeedingWeapon
         return m_PrizePoint;
     }
 
-    public WeaponType GetWeaponType()
+    public List<WeaponType> GetWeaponTypes()
     {
-        return m_WeaponType;
+        return new List<WeaponType> { m_WeaponType };
+    }
+
+    public List<Transform> GetWeaponPoints()
+    {
+        return new List<Transform> { m_PrizePoint };
     }
 
     public void SetWeaponType(WeaponType weaponType)

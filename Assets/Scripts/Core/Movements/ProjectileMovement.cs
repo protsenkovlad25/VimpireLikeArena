@@ -8,11 +8,9 @@ namespace VampireLike.Core.Movements
     {
         public void Move(Vector3 target, float speed, Transform transform, Rigidbody rigidbody)
         {
-            transform.position = Vector3.MoveTowards(transform.position, target, speed);
+            transform.position += speed * Time.deltaTime * target;
 
-            var direction = (target - transform.position).normalized;
-
-            var lookRotation = Quaternion.LookRotation(direction);
+            var lookRotation = Quaternion.LookRotation(target);
 
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, speed);
         }

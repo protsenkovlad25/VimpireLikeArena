@@ -108,6 +108,7 @@ namespace VampireLike.Core.Characters.Enemies
         {
             m_Marks = new List<GameObject>();
             EventManager.OnSwitchMovement.AddListener(SwitchMovement);
+            EventManager.OnSwitchLook.AddListener(SwitchLook);
         }
 
         public void SetAttaching(IAttaching attaching)
@@ -274,6 +275,11 @@ namespace VampireLike.Core.Characters.Enemies
         public void SwitchMovement(EnemyCharacter enemy, IMoving moving)
         {
             enemy.SetCharacterMovement(moving);
+        }
+
+        public void SwitchLook(EnemyCharacter enemy, ILooking looking)
+        {
+            enemy.SetCharacterLook(looking);
         }
 
         public void InitEnemeisWeapons()

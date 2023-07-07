@@ -9,17 +9,14 @@ namespace VampireLike.Core.Weapons
     {
         public override void Init()
         {
-            
         }
 
         public override void Shoot()
         {
-            
         }
 
-        public override void Stop()
+        public override void StopShoot()
         {
-            
         }
 
         private void OnCollisionStay(Collision collision)

@@ -6,7 +6,7 @@ namespace VampireLike.Core.Looks
     {
         private Vector3 m_BypassPosition;
 
-        public Vector3 Look(Vector3 target, Transform transform)
+        public Vector3 Look(Vector3 target, Transform transform, float speed)
         {
             Vector3 directionToHero;
             Vector3 vecNormali;

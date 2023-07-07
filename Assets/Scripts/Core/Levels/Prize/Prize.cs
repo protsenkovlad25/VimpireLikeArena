@@ -16,7 +16,7 @@ public class Prize
         for(int i = 0; i < count; i++)
         {
             ArenaPrizes.Add(Object.Instantiate(prefab));
-            ArenaPrizes[i].GetComponent<PickapbleWeaponPrize>().WeaponType = WeaponType.TestWeapon;
+            ArenaPrizes[i].GetComponent<PickapbleWeaponPrize>().WeaponType = WeaponType.SimpleShooting;
             ArenaPrizes[i].GetComponent<PickapblePrize>().Initialize();
             ArenaPrizes[i].GetComponent<PickapblePrize>().OnGet = DestroyObjects;
             ArenaPrizes[i].SetActive(false);

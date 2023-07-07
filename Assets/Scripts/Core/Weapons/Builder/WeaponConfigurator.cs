@@ -17,18 +17,17 @@ namespace VampireLike.Core.Weapons
 
             var projectile = m_WeaponConfig.ListModelProjectile.Find(item => item.ProjectileType.Equals(data.ProjectileType));
 
-            dto.WeaponData = new ProjectileWeaponData()
+            dto.WeaponData = new WeaponData
             {
                 Damage = data.Damage,
-                AttackSpeed = data.AttackSpeed,
+                FireRate = data.FireRate,
                 RepulsiveForce = data.RepulsiveForce,
                 MagazineSize = data.MagazineSize,
                 RechargeTime = data.RechargeTime,
                 ProjectileSpeed = data.ProjectileSpeed,
-                Distance = data.Distance,
+                FlyTime = data.FlyTime,
                 ProjectilePref = projectile.Projectile
             };
-
 
             dto.WeaponBehaviour = prefab.WeaponBehaviour;
             return dto;

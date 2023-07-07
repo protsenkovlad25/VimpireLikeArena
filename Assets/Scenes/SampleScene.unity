@@ -2501,7 +2501,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_GIM: {fileID: 1255847962}
   m_ChunkParent: {fileID: 1984111648}
-  m_SpawnChunkDelay: 11
+  m_SpawnChunkDelay: 31
 --- !u!1 &1797723229
 GameObject:
   m_ObjectHideFlags: 0

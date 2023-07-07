@@ -11,6 +11,7 @@ public static class EventManager
     public static UnityEvent OnAllWavesSpawned = new UnityEvent();
     public static UnityEvent MainCharacterTakeDamage = new UnityEvent();
     public static UnityEvent<EnemyCharacter, IMoving> OnSwitchMovement = new UnityEvent<EnemyCharacter, IMoving>();
+    public static UnityEvent<EnemyCharacter, ILooking> OnSwitchLook = new UnityEvent<EnemyCharacter, ILooking>();
     public static UnityEvent<WeaponType, INeedingWeapon> OnSwitchWeapon = new UnityEvent<WeaponType, INeedingWeapon>();
     public static UnityEvent<WeaponType, INeedingWeapon> OnWeaponReceived = new UnityEvent<WeaponType, INeedingWeapon>();
 
@@ -42,6 +43,11 @@ public static class EventManager
     public static void SwitchMovement(EnemyCharacter enemyCharacter, IMoving moving)
     {
         OnSwitchMovement?.Invoke(enemyCharacter, moving);
+    }
+
+    public static void SwitchLook(EnemyCharacter enemyCharacter, ILooking looking)
+    {
+        OnSwitchLook?.Invoke(enemyCharacter, looking);
     }
 
     public static void SwitchWeapon(WeaponType weaponType, INeedingWeapon needingWeapon)

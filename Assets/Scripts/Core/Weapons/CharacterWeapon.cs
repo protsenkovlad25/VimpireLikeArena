@@ -17,25 +17,32 @@ namespace VampireLike.Core.Weapons
 
         public void Init()
         {
-            foreach (var item in m_Weapons)
+            foreach (var weapon in m_Weapons)
             {
-                item.Init();
+                weapon.Init();
             }
         }
 
-        public void Start()
+        public void Shoot()
         {
-            foreach (var item in m_Weapons)
-            {
-                item.Shoot();
-            }
+            //if (m_Weapons != null)
+                foreach (var weapon in m_Weapons)
+                {
+                    weapon.Shoot();
+                }
+        }
+
+        public void StartShoot()
+        {
+            foreach (var weapon in m_Weapons)
+                weapon.StartShoot();
         }
 
         public void Stop()
         {
-            foreach (var item in m_Weapons)
+            foreach (var weapon in m_Weapons)
             {
-                item.Stop();
+                weapon.StopShoot();
             }
         }
 
@@ -69,11 +76,6 @@ namespace VampireLike.Core.Weapons
             if (weapon.TryGetComponent<ProjectileWeapon>(out var projectileWeapon))
             {
                 projectileWeapon.Set(m_Attaching);
-            }
-
-            if (weapon.TryGetComponent<DirectWeapon>(out var directWeapon))
-            {
-                directWeapon.Set(m_Attaching);
             }
 
             if (weapon.TryGetComponent<TestWeapon>(out var testWeapon))

@@ -15,23 +15,27 @@ namespace VampireLike.Core.Weapons
         
         protected bool m_IsMove;
         protected float m_Speed;
-        protected float m_Distance;
+        protected float m_FlyTime;
 
         protected Vector3 m_StartPosition;
 
         protected IMoving m_Moving;
+
+        protected Vector3 m_Direction;
+
 
         public void SetMovement(IMoving moving)
         {
             m_Moving = moving;
         }
 
-        public virtual void Move(float speed, Vector3 point, float distance)
+        public virtual void Move(float speed, Vector3 point, float flyTime)
         {
             m_Speed = speed;
             m_IsMove = true;
-            m_Distance = distance;
+            m_FlyTime = flyTime;
             m_StartPosition = transform.position;
+            m_Direction = (point - transform.position).normalized;
         }
 
         protected virtual void OnCollisionEnter(Collision collision)
@@ -57,6 +61,30 @@ namespace VampireLike.Core.Weapons
             gameObject.SetActive(false);
 
             OnHit?.Invoke(this);
+        }
+
+        protected virtual void Update()
+        {
+
+            if (!m_IsMove)
+            {
+                gameObject.SetActive(false);
+                return;
+            }
+
+            m_FlyTime -= Time.deltaTime;
+            
+            var oldPostion = transform.position;
+
+            m_Moving.Move(m_Direction, m_Speed, transform, gameObject.GetComponent<Rigidbody>());
+
+
+            if (m_FlyTime <= 0)
+            {
+                m_IsMove = false;
+                gameObject.SetActive(false);
+            }
+
         }
     }
 }

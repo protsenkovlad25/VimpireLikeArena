@@ -5,6 +5,7 @@ using UnityEngine;
 using VampireLike.Core.Input;
 using DG.Tweening;
 using VampireLike.Core.Weapons;
+using System.Linq;
 
 namespace VampireLike.Core.Characters
 {
@@ -19,7 +20,6 @@ namespace VampireLike.Core.Characters
         [SerializeField] private bool m_TakeDamage;
 
         private List<WeaponType> m_WeaponsOnMainCharacter;
-        private CharacterWeapon m_CharacterWeapon;
         private IAttaching m_Attaching;
 
         public List<Transform> WeaponPoints => m_WeaponPoints;
@@ -37,9 +37,14 @@ namespace VampireLike.Core.Characters
             m_Moving.Move(new Vector3(deriction.x, 0f, deriction.y), CharacterData.Speed, transform, gameObject.GetComponent<Rigidbody>());
         }
 
-        public WeaponType GetWeaponType()
+        public List<WeaponType> GetWeaponTypes()
         {
-            return m_MainWeaponType;
+            return new List<WeaponType> { m_MainWeaponType };
+        }
+
+        public List<Transform> GetWeaponPoints()
+        {
+            return new List<Transform> { m_MainWeaponPoint };
         }
 
         public void SetWeaponType(WeaponType weaponType)
@@ -67,13 +72,16 @@ namespace VampireLike.Core.Characters
         public void Set(WeaponBehaviour generic)
         {
             generic.gameObject.layer = 7;
-            if (m_CharacterWeapon == null)
+
+            if (m_CharacterWeapons == null)
             {
-                m_CharacterWeapon = new CharacterWeapon();
-                m_CharacterWeapon.Set(m_Attaching);
+                m_CharacterWeapons = new List<CharacterWeapon>();
             }
 
-            m_CharacterWeapon.AddWeapon(generic);
+            m_CharacterWeapons.Add(new CharacterWeapon());
+            m_CharacterWeapons.Last().Set(m_Attaching);
+            m_CharacterWeapons.Last().AddWeapon(generic);
+            m_CharacterWeapons.Last().Init();
         }
 
         public void Set(IAttaching generic)
@@ -83,17 +91,20 @@ namespace VampireLike.Core.Characters
 
         public void InitWeapon()
         {
-            m_CharacterWeapon.Init();
+            foreach (var weapon in m_CharacterWeapons)
+                weapon.Init();
         }
 
         public void StartShoot()
         {
-            m_CharacterWeapon.Start();
+            foreach (var weapon in m_CharacterWeapons)
+                weapon.StartShoot();
         }
 
         public void StopShoot()
         {
-            m_CharacterWeapon.Stop();
+            foreach (var weapon in m_CharacterWeapons)
+                weapon.Stop();
         }
 
         public override void TakeDamage(int damage)

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using VampireLike.Core.Weapons;
 
 namespace VampireLike.Core.Characters
 {
@@ -21,6 +22,7 @@ namespace VampireLike.Core.Characters
 
         protected IMoving m_Moving;
         protected ILooking m_Looking;
+        protected List<CharacterWeapon> m_CharacterWeapons;
 
         public CharacterData CharacterData => m_CharacterData;
 
@@ -70,6 +72,15 @@ namespace VampireLike.Core.Characters
         {
             Debug.Log(gameObject.name + " - I dead.");
             OnDie?.Invoke(this);
+        }
+
+        private void Update()
+        {
+            if(m_CharacterWeapons != null)
+                foreach(var weapon in m_CharacterWeapons)
+                {
+                    weapon.Shoot();
+                }
         }
     }
 }

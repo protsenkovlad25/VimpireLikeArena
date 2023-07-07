@@ -25,7 +25,7 @@ public class TestWeapon : WeaponBehaviour, INeeding<IAttaching>
     {
     }
 
-    public override void Stop()
+    public override void StopShoot()
     {
     }
 }
