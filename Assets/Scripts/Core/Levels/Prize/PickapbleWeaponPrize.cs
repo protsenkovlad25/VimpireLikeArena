@@ -7,23 +7,23 @@ using VampireLike.Core.Weapons;
 public class PickapbleWeaponPrize : PickapblePrize, INeedingWeapon
 {
 
-    private WeaponType m_WeaponType;
+    private WeaponVariant m_WeaponVariant;
 
-    public WeaponType WeaponType
+    public WeaponVariant WeaponVariant
     {
-        get => m_WeaponType;
-        set => m_WeaponType = value;
+        get => m_WeaponVariant;
+        set => m_WeaponVariant = value;
     }
 
     public override void Initialize()
     {
-        EventManager.WeaponReceived(m_WeaponType, this);
+        EventManager.WeaponReceived(m_WeaponVariant, this);
         base.Initialize();
     }
 
     public override void GetPrize(MainCharacter mainCharacter)
     {
-        EventManager.WeaponReceived(m_WeaponType, mainCharacter);
+        EventManager.WeaponReceived(m_WeaponVariant, mainCharacter);
         Destroy(gameObject);
     }
 
@@ -32,9 +32,9 @@ public class PickapbleWeaponPrize : PickapblePrize, INeedingWeapon
         return m_PrizePoint;
     }
 
-    public List<WeaponType> GetWeaponTypes()
+    public List<WeaponVariant> GetWeaponVariants()
     {
-        return new List<WeaponType> { m_WeaponType };
+        return new List<WeaponVariant> { m_WeaponVariant };
     }
 
     public List<Transform> GetWeaponPoints()
@@ -42,7 +42,7 @@ public class PickapbleWeaponPrize : PickapblePrize, INeedingWeapon
         return new List<Transform> { m_PrizePoint };
     }
 
-    public void SetWeaponType(WeaponType weaponType)
+    public void SetWeaponVariant(WeaponVariant weaponVariant)
     { }
 
     public void Set(WeaponBehaviour generic)

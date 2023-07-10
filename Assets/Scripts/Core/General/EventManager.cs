@@ -12,8 +12,8 @@ public static class EventManager
     public static UnityEvent MainCharacterTakeDamage = new UnityEvent();
     public static UnityEvent<EnemyCharacter, IMoving> OnSwitchMovement = new UnityEvent<EnemyCharacter, IMoving>();
     public static UnityEvent<EnemyCharacter, ILooking> OnSwitchLook = new UnityEvent<EnemyCharacter, ILooking>();
-    public static UnityEvent<WeaponType, INeedingWeapon> OnSwitchWeapon = new UnityEvent<WeaponType, INeedingWeapon>();
-    public static UnityEvent<WeaponType, INeedingWeapon> OnWeaponReceived = new UnityEvent<WeaponType, INeedingWeapon>();
+    public static UnityEvent<WeaponVariant, INeedingWeapon> OnSwitchWeapon = new UnityEvent<WeaponVariant, INeedingWeapon>();
+    public static UnityEvent<WeaponVariant, INeedingWeapon> OnWeaponReceived = new UnityEvent<WeaponVariant, INeedingWeapon>();
 
     public static void Lose()
     {
@@ -50,13 +50,13 @@ public static class EventManager
         OnSwitchLook?.Invoke(enemyCharacter, looking);
     }
 
-    public static void SwitchWeapon(WeaponType weaponType, INeedingWeapon needingWeapon)
+    public static void SwitchWeapon(WeaponVariant weaponVariant, INeedingWeapon needingWeapon)
     {
-        OnSwitchWeapon?.Invoke(weaponType, needingWeapon);
+        OnSwitchWeapon?.Invoke(weaponVariant, needingWeapon);
     }
 
-    public static void WeaponReceived(WeaponType weaponType, INeedingWeapon needingWeapon)
+    public static void WeaponReceived(WeaponVariant weaponVariant, INeedingWeapon needingWeapon)
     {
-        OnWeaponReceived?.Invoke(weaponType, needingWeapon);
+        OnWeaponReceived?.Invoke(weaponVariant, needingWeapon);
     }
 }

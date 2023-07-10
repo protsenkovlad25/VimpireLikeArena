@@ -8,10 +8,10 @@ namespace VampireLike.Core.Weapons
     {
         [SerializeField] private WeaponConfig m_WeaponConfig;
 
-        public WeaponDTO GetData(WeaponType weaponType)
+        public WeaponDTO GetData(WeaponVariant weaponVariant)
         {
-            var data = m_WeaponConfig.WeaponData.Find(item => item.WeaponType.Equals(weaponType));
-            var prefab = m_WeaponConfig.ListModelWeapons.Find(item => item.WeaponType.Equals(weaponType));
+            var data = m_WeaponConfig.WeaponData.Find(item => item.WeaponType.Equals(weaponVariant));
+            var prefab = m_WeaponConfig.ListModelWeapons.Find(item => item.WeaponVariant.Equals(weaponVariant));
 
             var dto = new WeaponDTO();
 

@@ -27,7 +27,7 @@ namespace VampireLike.Core.Weapons
         [SerializeField] private string m_Name;
 
         [Header("General")]
-        [SerializeField] private WeaponType m_WeaponType;
+        [SerializeField] private WeaponVariant m_WeaponVariant;
         [SerializeField] private float m_FireRate;
         [SerializeField] private float m_RepulsiveForce;
         [SerializeField] private int m_Damage;
@@ -42,7 +42,7 @@ namespace VampireLike.Core.Weapons
 
         public string Name => m_Name;
 
-        public WeaponType WeaponType => m_WeaponType;
+        public WeaponVariant WeaponType => m_WeaponVariant;
         public float FireRate => m_FireRate;
         public float RepulsiveForce => m_RepulsiveForce;
         public int Damage => m_Damage;
@@ -58,11 +58,11 @@ namespace VampireLike.Core.Weapons
     public class ListModelWeapon
     {
         [SerializeField] private string m_Name;
-        [SerializeField] private WeaponType m_WeaponType;
+        [SerializeField] private WeaponVariant m_WeaponVariant;
         [SerializeField] private WeaponBehaviour m_WeaponBehaviour;
 
         public string Name => m_Name;
-        public WeaponType WeaponType => m_WeaponType;
+        public WeaponVariant WeaponVariant => m_WeaponVariant;
         public WeaponBehaviour WeaponBehaviour => m_WeaponBehaviour;
     }
 

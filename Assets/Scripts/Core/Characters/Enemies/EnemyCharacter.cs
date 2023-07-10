@@ -9,7 +9,7 @@ namespace VampireLike.Core.Characters.Enemies
     public class EnemyCharacter : GameCharacterBehaviour, INeedingWeapon, INeeding<IAttaching>
     {
         [SerializeField] private List<Transform> m_WeaponPoints;
-        [SerializeField] private List<WeaponType> m_WeaponTypes;
+        [SerializeField] private List<WeaponVariant> m_WeaponVariants;
         [SerializeField] private EnemyType m_EnemyType;
 
         public EnemyType EnemyType { get; set; }
@@ -18,9 +18,9 @@ namespace VampireLike.Core.Characters.Enemies
 
         private bool m_IsMove;
 
-        public List<WeaponType> GetWeaponTypes()
+        public List<WeaponVariant> GetWeaponVariants()
         {
-            return m_WeaponTypes;
+            return m_WeaponVariants;
         }
 
         public List<Transform> GetWeaponPoints()
@@ -33,7 +33,7 @@ namespace VampireLike.Core.Characters.Enemies
             return m_EnemyType;
         }
 
-        public void SetWeaponType(WeaponType weaponType)
+        public void SetWeaponVariant(WeaponVariant weaponVariant)
         {
         }
 

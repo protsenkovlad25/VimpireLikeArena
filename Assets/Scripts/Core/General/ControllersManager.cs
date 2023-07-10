@@ -48,9 +48,9 @@ namespace VampireLike.Core.General
             //StartGameLoop();
         }
 
-        private void SwitchEnemyWeapon(WeaponType weaponType, INeedingWeapon needingWeapon)
+        private void SwitchEnemyWeapon(WeaponVariant weapons, INeedingWeapon needingWeapon)
         {
-            m_WeaponsController.GaveWeapon(weaponType, needingWeapon);
+            m_WeaponsController.GaveWeapon(weapons, needingWeapon);
         }
 
         private void OnDragJoystickPlayer(Vector2 vector2)

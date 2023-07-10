@@ -12,24 +12,24 @@ namespace VampireLike.Core.Characters
     public class MainCharacter : GameCharacterBehaviour, IHero, INeedingWeapon
     {
         [SerializeField] private List<Transform> m_WeaponPoints;
-        [SerializeField] private WeaponType m_MainWeaponType;
+        [SerializeField] private WeaponVariant m_MainWeaponVariant;
         [SerializeField] private Transform m_MainWeaponPoint;
 
         [SerializeField] private float m_SafeTime;
         [SerializeField] private float m_FadeTime;
         [SerializeField] private bool m_TakeDamage;
 
-        private List<WeaponType> m_WeaponsOnMainCharacter;
+        private List<WeaponVariant> m_WeaponsOnMainCharacter;
         private IAttaching m_Attaching;
 
         public List<Transform> WeaponPoints => m_WeaponPoints;
 
         public void Start()
         {
-            m_WeaponsOnMainCharacter = new List<WeaponType>();
+            m_WeaponsOnMainCharacter = new List<WeaponVariant>();
 
             for (int i = 0; i < WeaponPoints.Count; i++)
-                m_WeaponsOnMainCharacter.Add(WeaponType.None);
+                m_WeaponsOnMainCharacter.Add(WeaponVariant.None);
         }
 
         public void Move(Vector2 deriction)
@@ -37,9 +37,9 @@ namespace VampireLike.Core.Characters
             m_Moving.Move(new Vector3(deriction.x, 0f, deriction.y), CharacterData.Speed, transform, gameObject.GetComponent<Rigidbody>());
         }
 
-        public List<WeaponType> GetWeaponTypes()
+        public List<WeaponVariant> GetWeaponVariants()
         {
-            return new List<WeaponType> { m_MainWeaponType };
+            return new List<WeaponVariant> { m_MainWeaponVariant };
         }
 
         public List<Transform> GetWeaponPoints()
@@ -47,12 +47,12 @@ namespace VampireLike.Core.Characters
             return new List<Transform> { m_MainWeaponPoint };
         }
 
-        public void SetWeaponType(WeaponType weaponType)
+        public void SetWeaponVariant(WeaponVariant weaponVariant)
         {
             for (int i = 0; i < m_WeaponsOnMainCharacter.Count; i++)
-                if (m_WeaponsOnMainCharacter[i] == WeaponType.None)
+                if (m_WeaponsOnMainCharacter[i] == WeaponVariant.None)
                 {
-                    m_WeaponsOnMainCharacter[i] = weaponType;
+                    m_WeaponsOnMainCharacter[i] = weaponVariant;
                     break;
                 }
         }
@@ -62,7 +62,7 @@ namespace VampireLike.Core.Characters
             if (m_WeaponsOnMainCharacter != null)
             {
                 for (int i = 0; i < m_WeaponsOnMainCharacter.Count; i++)
-                    if (m_WeaponsOnMainCharacter[i] == WeaponType.None)
+                    if (m_WeaponsOnMainCharacter[i] == WeaponVariant.None)
                         return WeaponPoints[i];
             }
 

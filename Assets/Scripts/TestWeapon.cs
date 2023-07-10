@@ -7,10 +7,10 @@ using VampireLike.Core.Weapons;
 
 public class TestWeapon : WeaponBehaviour, INeeding<IAttaching>
 {
-    private WeaponType weaponType = WeaponType.TestWeapon;
+    private WeaponVariant weaponVariant = WeaponVariant.TestWeapon;
     private IAttaching m_Attaching;
 
-    public WeaponType WeaponType => weaponType;
+    public WeaponVariant WeaponVariant => weaponVariant;
 
     public override void Init()
     {

@@ -6,11 +6,11 @@ namespace VampireLike.Core.Weapons
 {
     public interface INeedingWeapon : INeeding<WeaponBehaviour>
     {
-        List<WeaponType> GetWeaponTypes();
+        List<WeaponVariant> GetWeaponVariants();
 
         List<Transform> GetWeaponPoints();
 
-        public void SetWeaponType(WeaponType weaponType);
+        public void SetWeaponVariant(WeaponVariant weaponVariant);
 
         Transform Where();
     }

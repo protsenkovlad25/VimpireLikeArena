@@ -81,7 +81,7 @@ namespace VampireLike.Core.Weapons
         {
             EventManager.SwitchMovement(m_EnemyCharacter, new DashMovement());
             EventManager.SwitchLook(m_EnemyCharacter, new SimpleLook());
-            EventManager.SwitchWeapon(WeaponType.Pushing, m_EnemyCharacter);
+            EventManager.SwitchWeapon(WeaponVariant.Pushing, m_EnemyCharacter);
             Destroy(this);
         }
 
@@ -113,7 +113,7 @@ namespace VampireLike.Core.Weapons
             //m_EnemyCharacter.WeaponType = WeaponType.Pushing;
             //m_EnemyCharacter.EnemyType = EnemyType.PushingEnemy;
 
-            EventManager.SwitchWeapon(WeaponType.Pushing, m_EnemyCharacter);
+            EventManager.SwitchWeapon(WeaponVariant.Pushing, m_EnemyCharacter);
 
             yield return new WaitForSeconds(5f);
             Destroy(gameObject);
