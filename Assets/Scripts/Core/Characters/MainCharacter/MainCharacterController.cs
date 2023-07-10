@@ -48,7 +48,7 @@ namespace VampireLike.Core.Characters
             {
                 Speed = 8,
                 HealthPoints = 30,
-                ScaleDamage = 1
+                BaseDamage = 1
             });
             m_MainCharacter.Init();
             m_MainCharacter.InitWeapon();

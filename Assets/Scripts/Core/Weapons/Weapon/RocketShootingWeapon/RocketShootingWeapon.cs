@@ -28,7 +28,7 @@ namespace VampireLike.Core.Weapons
             m_EnemyCharacter = enemyCharacter;
         }
 
-        public override void Shoot()
+        public override void Shoot(int baseDamage)
         {
             if (m_Delay <= 0)
             {
@@ -40,15 +40,16 @@ namespace VampireLike.Core.Weapons
                         {
                             m_RocketProjectiles[0].SetMovement(m_Moving);
                             m_RocketProjectiles[0].Init();
-                            m_RocketProjectiles[0].Damage = m_WeaponData.Damage;
-                            m_RocketProjectiles[0].RepulsiveForce = m_WeaponData.RepulsiveForce;
+
+                            m_RocketProjectiles[0].Damage = baseDamage * GetWeaponDamage();
+                            m_RocketProjectiles[0].RepulsiveForce = GetWeaponRepulsiveForce();
 
                             m_RocketProjectiles[0].transform.DOMove(transform.position + m_RocketProjectiles[0].transform.right * m_Dir * 3, .2f).SetEase(Ease.InExpo);
                             m_Dir = -m_Dir;
 
-                            m_RocketProjectiles[0].Move(m_WeaponData.ProjectileSpeed, m_Attaching.GetTarget().position, m_WeaponData.FlyTime);
+                            m_RocketProjectiles[0].Move(GetWeaponProjectileSpeed(), m_Attaching.GetTarget().position, GetWeaponFlyTime());
 
-                            m_Delay = m_WeaponData.FireRate + m_WeaponData.FireRate;
+                            m_Delay = GetWeaponFireRate() + m_WeaponData.RechargeTime;
 
                             if (m_RocketProjectiles.Count == 1)
                             {
@@ -83,40 +84,6 @@ namespace VampireLike.Core.Weapons
             EventManager.SwitchLook(m_EnemyCharacter, new SimpleLook());
             EventManager.SwitchWeapon(WeaponVariant.Pushing, m_EnemyCharacter);
             Destroy(this);
-        }
-
-        private IEnumerator ShootCoroutine()
-        {
-            int dir = -1;
-            foreach(var rocket in m_RocketProjectiles)
-            {
-                rocket.Damage = m_WeaponData.Damage;
-                rocket.RepulsiveForce = m_WeaponData.RepulsiveForce;
-
-                yield return new WaitForSeconds(m_WeaponData.FireRate);
-
-                rocket.transform.DOMove(transform.position + rocket.transform.right * dir * 3, .2f).SetEase(Ease.InExpo);
-                dir = -dir;
-
-                if (m_Attaching.GetTarget() == null)
-                {
-                    yield break;
-                }
-
-                rocket.SetMovement(m_Moving);
-                rocket.Init();
-                rocket.Move(m_WeaponData.ProjectileSpeed, m_Attaching.GetTarget().position, m_WeaponData.FlyTime);
-            }
-
-            EventManager.SwitchMovement(m_EnemyCharacter, new DashMovement());
-
-            //m_EnemyCharacter.WeaponType = WeaponType.Pushing;
-            //m_EnemyCharacter.EnemyType = EnemyType.PushingEnemy;
-
-            EventManager.SwitchWeapon(WeaponVariant.Pushing, m_EnemyCharacter);
-
-            yield return new WaitForSeconds(5f);
-            Destroy(gameObject);
         }
     }
 }

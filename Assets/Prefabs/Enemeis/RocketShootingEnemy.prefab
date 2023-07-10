@@ -81,7 +81,7 @@ MonoBehaviour:
   hpBarPrefab: {fileID: 6744790681143353430, guid: 9dfffb2a29c514f4cbef6b17ca5bed2c, type: 3}
   m_WeaponPoints:
   - {fileID: 4300449761019960015}
-  m_WeaponTypes: 03000000
+  m_WeaponVariants: 03000000
   m_EnemyType: 3
 --- !u!1 &4300449761019960012
 GameObject:

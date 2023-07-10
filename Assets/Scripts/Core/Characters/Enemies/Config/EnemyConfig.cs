@@ -21,7 +21,7 @@ namespace VampireLike.Core.Characters.Enemies.Config
         [SerializeField] private EnemyType m_EnemyType;
         [SerializeField] private int m_HealthPoints;
         [SerializeField] private float m_Speed;
-        [SerializeField] private float m_ScaleDamage;
+        [SerializeField] private int m_BaseDamage;
         [SerializeField] private EnemyMovementType m_EnemyMovementType;
 
         public string Name => m_Name;
@@ -29,7 +29,7 @@ namespace VampireLike.Core.Characters.Enemies.Config
         public EnemyType EnemyType => m_EnemyType;
         public int HealthPoints => m_HealthPoints;
         public float Speed => m_Speed;
-        public float ScaleDamage => m_ScaleDamage;
+        public int BaseDamage => m_BaseDamage;
         public EnemyMovementType EnemyMovementType => m_EnemyMovementType;
     }
 }

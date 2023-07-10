@@ -12,5 +12,7 @@ namespace VampireLike.Core.Weapons
         public float ProjectileSpeed { get; set; }
         public float FlyTime { get; set; }
         public Projectile ProjectilePref { get; set; }
+        public WeaponType WeaponType { get; set; }
+        public WeaponClass WeaponClass { get; set; }
     }
 }

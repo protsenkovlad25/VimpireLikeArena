@@ -11,6 +11,8 @@ namespace VampireLike.Core.Weapons
         [SerializeField] protected ParticleSystem m_ShootParticle;
 
         protected WeaponData m_WeaponData;
+        protected WeaponTypeDataHolder m_WeaponTypeData;
+        protected WeaponClassDataHolder m_WeaponClassData;
         protected PoolBehaviour<Projectile> m_Pool;
 
         protected int m_CurrentNumberBullets;
@@ -25,6 +27,16 @@ namespace VampireLike.Core.Weapons
             m_Attaching = generic;
         }
 
+        public virtual void SetType(WeaponTypeDataHolder weaponTypeData)
+        {
+            m_WeaponTypeData = weaponTypeData;
+        }
+
+        public virtual void SetClass(WeaponClassDataHolder weaponClassData)
+        {
+            m_WeaponClassData = weaponClassData;
+        }
+
         public virtual void Init()
         {
             m_Pool = new PoolBehaviour<Projectile>();
@@ -36,7 +48,7 @@ namespace VampireLike.Core.Weapons
             m_CurrentNumberBullets = m_WeaponData.MagazineSize;
         }
 
-        public virtual void Shoot()
+        public virtual void Shoot(int baseDamage)
         {
             if (m_Delay <= 0)
             {
@@ -53,15 +65,17 @@ namespace VampireLike.Core.Weapons
                         projectile.transform.SetParent(null);
                         projectile.gameObject.layer = gameObject.layer;
                         projectile.transform.position = m_StartPoint.position;
-                        projectile.Damage = m_WeaponData.Damage;
-                        projectile.RepulsiveForce = m_WeaponData.RepulsiveForce;
+
+                        projectile.Damage = baseDamage * GetWeaponDamage();
+                        projectile.RepulsiveForce = GetWeaponRepulsiveForce();
+                        
                         projectile.SetMovement(m_Moving);
-                        projectile.Move(m_WeaponData.ProjectileSpeed, m_Attaching.GetTarget().position, m_WeaponData.FlyTime);
+                        projectile.Move(GetWeaponProjectileSpeed(), m_Attaching.GetTarget().position, GetWeaponFlyTime());
 
                         if (m_CurrentNumberBullets != 0)
-                            m_Delay = m_WeaponData.FireRate;
+                            m_Delay = GetWeaponFireRate();
                         else
-                            m_Delay = m_WeaponData.FireRate + m_WeaponData.RechargeTime;
+                            m_Delay = GetWeaponFireRate() + m_WeaponData.RechargeTime;
                     }
                 }
             }
@@ -93,5 +107,32 @@ namespace VampireLike.Core.Weapons
 
             m_WeaponData = weaponData;
         }
+
+        #region GetWeaponDataProperty
+        public virtual int GetWeaponDamage()
+        {
+            return m_WeaponData.Damage * m_WeaponTypeData.Damage * m_WeaponClassData.Damage;
+        }
+
+        public virtual float GetWeaponRepulsiveForce()
+        {
+            return m_WeaponData.RepulsiveForce * m_WeaponTypeData.RepulsiveForce * m_WeaponClassData.RepulsiveForce;
+        }
+
+        public virtual float GetWeaponProjectileSpeed()
+        {
+            return m_WeaponData.ProjectileSpeed * m_WeaponTypeData.ProjectileSpeed * m_WeaponClassData.ProjectileSpeed;
+        }
+
+        public virtual float GetWeaponFlyTime()
+        {
+            return m_WeaponData.FlyTime * m_WeaponTypeData.FlyTime * m_WeaponClassData.FlyTime;
+        }
+
+        public virtual float GetWeaponFireRate()
+        {
+            return m_WeaponData.FireRate * m_WeaponTypeData.FireRate * m_WeaponClassData.FireRate;
+        }
+        #endregion
     }
 }

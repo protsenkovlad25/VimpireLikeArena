@@ -19,7 +19,9 @@ public class SolidObjectsController : MonoBehaviour, IIniting
     public void SetWalls(List<SolidObject> walls)
     {
         foreach (var wall in walls)
+        {
             m_Walls.Add(wall);
+        }
     }
 
     public void InitWalls(List<SolidObject> walls)
@@ -87,7 +89,6 @@ public class SolidObjectsController : MonoBehaviour, IIniting
 
     public void DestroyWalls()
     {
-        foreach (var wall in m_Walls)
-            Destroy(wall.gameObject);
+        m_Walls.Clear();
     }
 }

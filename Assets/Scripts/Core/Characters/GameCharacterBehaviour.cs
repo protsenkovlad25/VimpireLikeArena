@@ -79,7 +79,7 @@ namespace VampireLike.Core.Characters
             if(m_CharacterWeapons != null)
                 foreach(var weapon in m_CharacterWeapons)
                 {
-                    weapon.Shoot();
+                    weapon.Shoot(m_CharacterData.BaseDamage);
                 }
         }
     }

@@ -23,12 +23,12 @@ namespace VampireLike.Core.Weapons
             }
         }
 
-        public void Shoot()
+        public void Shoot(int baseDamage)
         {
             //if (m_Weapons != null)
                 foreach (var weapon in m_Weapons)
                 {
-                    weapon.Shoot();
+                    weapon.Shoot(baseDamage);
                 }
         }
 
@@ -76,11 +76,6 @@ namespace VampireLike.Core.Weapons
             if (weapon.TryGetComponent<ProjectileWeapon>(out var projectileWeapon))
             {
                 projectileWeapon.Set(m_Attaching);
-            }
-
-            if (weapon.TryGetComponent<TestWeapon>(out var testWeapon))
-            {
-                testWeapon.Set(m_Attaching);
             }
 
             m_Weapons.Add(weapon);

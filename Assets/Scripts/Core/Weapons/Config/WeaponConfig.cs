@@ -28,6 +28,8 @@ namespace VampireLike.Core.Weapons
 
         [Header("General")]
         [SerializeField] private WeaponVariant m_WeaponVariant;
+        [SerializeField] private WeaponType m_WeaponType;
+        [SerializeField] private WeaponClass m_WeaponClass;
         [SerializeField] private float m_FireRate;
         [SerializeField] private float m_RepulsiveForce;
         [SerializeField] private int m_Damage;
@@ -42,7 +44,9 @@ namespace VampireLike.Core.Weapons
 
         public string Name => m_Name;
 
-        public WeaponVariant WeaponType => m_WeaponVariant;
+        public WeaponVariant WeaponVariant => m_WeaponVariant;
+        public WeaponType WeaponType => m_WeaponType;
+        public WeaponClass WeaponClass => m_WeaponClass;
         public float FireRate => m_FireRate;
         public float RepulsiveForce => m_RepulsiveForce;
         public int Damage => m_Damage;

@@ -16,7 +16,7 @@ namespace VampireLike.Core.Characters.Enemies.Config
             {
                 HealthPoints = data.HealthPoints,
                 Speed = data.Speed,
-                ScaleDamage = data.ScaleDamage
+                BaseDamage = data.BaseDamage
             };
 
             return enemyData;

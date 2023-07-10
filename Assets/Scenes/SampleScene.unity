@@ -798,7 +798,7 @@ MonoBehaviour:
   - {fileID: 830788320}
   - {fileID: 2123194128}
   - {fileID: 776736123}
-  m_MainWeaponType: 2
+  m_MainWeaponVariant: 2
   m_MainWeaponPoint: {fileID: 595034206}
   m_SafeTime: 0.5
   m_FadeTime: 0.1
@@ -2359,6 +2359,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_WeaponConfig: {fileID: 11400000, guid: 987f531fab27c4c4492b23cf0efd985c, type: 2}
+  m_WeaponTypeConfig: {fileID: 11400000, guid: 896e3ac6e327d1d4392f4f2914f135e2, type: 2}
+  m_WeaponClassConfig: {fileID: 11400000, guid: 5757431618fea9247ae4a5c4b28c7c37, type: 2}
 --- !u!1 &1576414601
 GameObject:
   m_ObjectHideFlags: 0

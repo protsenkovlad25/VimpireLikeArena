@@ -9,9 +9,28 @@ namespace VampireLike.Core.Weapons
     {
         [SerializeField] private WeaponConfigurator m_WeaponConfigurator;
 
+        private List<WeaponTypeDataHolder> m_WeaponTypeDataHolders;
+        private List<WeaponClassDataHolder> m_WeaponClassDataHolders;
+
         public void Init()
         {
             EventManager.OnWeaponReceived.AddListener(GaveWeapon);
+        }
+
+        public void UploadWeaponTypesAndClasses()
+        {
+            InitTypesData();
+            InitClassesData();
+        }
+
+        public void InitTypesData()
+        {
+            m_WeaponTypeDataHolders = m_WeaponConfigurator.GetTypeDataHolders();
+        }
+
+        public void InitClassesData()
+        {
+            m_WeaponClassDataHolders = m_WeaponConfigurator.GetClassDataHolders();
         }
 
         public void GaveWeapons(IEnumerable<INeedingWeapon> needingWeapons)
@@ -35,11 +54,13 @@ namespace VampireLike.Core.Weapons
                 }
 
                 var data = m_WeaponConfigurator.GetData(weaponVariants[i]);
-
+                
                 var builder = new WeaponBuilder(weaponPoints[i])
                                     .SetWeaponData(data.WeaponData)
-                                    .SetWeaponBehaviour(data.WeaponBehaviour);
-
+                                    .SetWeaponBehaviour(data.WeaponBehaviour)
+                                    .SetWeaponTypeData(m_WeaponTypeDataHolders.Find(item => item.WeaponType.Equals(data.WeaponData.WeaponType)))
+                                    .SetWeaponClassData(m_WeaponClassDataHolders.Find(item => item.WeaponClass.Equals(data.WeaponData.WeaponClass)));
+                
                 needingWeapon.Set(builder.Build());
             }
         }
@@ -50,7 +71,9 @@ namespace VampireLike.Core.Weapons
 
             var builder = new WeaponBuilder(needingWeapon.Where())
                                 .SetWeaponData(data.WeaponData)
-                                .SetWeaponBehaviour(data.WeaponBehaviour);
+                                .SetWeaponBehaviour(data.WeaponBehaviour)
+                                .SetWeaponTypeData(m_WeaponTypeDataHolders.Find(item => item.WeaponType.Equals(data.WeaponData.WeaponType)))
+                                .SetWeaponClassData(m_WeaponClassDataHolders.Find(item => item.WeaponClass.Equals(data.WeaponData.WeaponClass)));
 
             needingWeapon.Set(builder.Build());
             needingWeapon.SetWeaponVariant(weaponVariant);

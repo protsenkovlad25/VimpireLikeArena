@@ -10,7 +10,7 @@ namespace VampireLike.Core.Weapons
         {
         }
 
-        public override void Shoot()
+        public override void Shoot(int baseDamage)
         {
         }
 

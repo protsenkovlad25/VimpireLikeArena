@@ -15,6 +15,8 @@ MonoBehaviour:
   m_WeaponData:
   - m_Name: Simple Shooting Weapon
     m_WeaponVariant: 1
+    m_WeaponType: 2
+    m_WeaponClass: 2
     m_FireRate: 0.4
     m_RepulsiveForce: 250
     m_Damage: 5
@@ -25,6 +27,8 @@ MonoBehaviour:
     m_FlyTime: 2
   - m_Name: Pushing Weapon
     m_WeaponVariant: 5
+    m_WeaponType: 2
+    m_WeaponClass: 2
     m_FireRate: 0
     m_RepulsiveForce: 100
     m_Damage: 1
@@ -35,6 +39,8 @@ MonoBehaviour:
     m_FlyTime: 0
   - m_Name: Touching Weapon
     m_WeaponVariant: 4
+    m_WeaponType: 2
+    m_WeaponClass: 2
     m_FireRate: 0
     m_RepulsiveForce: 0
     m_Damage: 5
@@ -45,6 +51,8 @@ MonoBehaviour:
     m_FlyTime: 0
   - m_Name: Infinity Shooting Weapon
     m_WeaponVariant: 2
+    m_WeaponType: 0
+    m_WeaponClass: 0
     m_FireRate: 0.5
     m_RepulsiveForce: 10
     m_Damage: 10
@@ -55,6 +63,8 @@ MonoBehaviour:
     m_FlyTime: 2
   - m_Name: Rocket Shooting Weapon
     m_WeaponVariant: 3
+    m_WeaponType: 2
+    m_WeaponClass: 2
     m_FireRate: 3
     m_RepulsiveForce: 250
     m_Damage: 15
@@ -63,16 +73,6 @@ MonoBehaviour:
     m_ProjectileType: 0
     m_ProjectileSpeed: 40
     m_FlyTime: 1
-  - m_Name: Test Weapon
-    m_WeaponVariant: 6
-    m_FireRate: 0
-    m_RepulsiveForce: 250
-    m_Damage: 15
-    m_MagazineSize: 0
-    m_RechargeTime: 0
-    m_ProjectileType: 0
-    m_ProjectileSpeed: 28
-    m_FlyTime: 0
   m_ListModelWeapons:
   - m_Name: Simple Shooting Weapon
     m_WeaponVariant: 1
@@ -89,9 +89,6 @@ MonoBehaviour:
   - m_Name: Rocket Shooting Weapon
     m_WeaponVariant: 3
     m_WeaponBehaviour: {fileID: 2127915202946687669, guid: a6787b0d62549374281b2c9db2f343f1, type: 3}
-  - m_Name: Test Weapon
-    m_WeaponVariant: 6
-    m_WeaponBehaviour: {fileID: 5428924608515351329, guid: 72c013c0ea8d6ad42a49dec8aa0974d6, type: 3}
   m_ListModelProjectile:
   - m_Name: Simple Projectile
     m_ProjectileType: 1

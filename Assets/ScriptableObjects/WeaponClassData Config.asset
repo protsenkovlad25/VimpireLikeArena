@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e0f574c59dcaa54bbcfa40de0cfed38, type: 3}
+  m_Name: WeaponClassData Config
+  m_EditorClassIdentifier: 
+  m_WeaponClassDataHolder:
+  - m_Name: None
+    m_WeaponClass: 2
+    m_Damage: 1
+    m_FireRate: 1
+    m_FlyTime: 1
+    m_RepulsiveForce: 1
+    m_ProjectileSpeed: 1
+  - m_Name: Plasma Class
+    m_WeaponClass: 0
+    m_Damage: 1
+    m_FireRate: 1
+    m_FlyTime: 1
+    m_RepulsiveForce: 1
+    m_ProjectileSpeed: 1
+  - m_Name: Acid Class
+    m_WeaponClass: 1
+    m_Damage: 1
+    m_FireRate: 1
+    m_FlyTime: 1
+    m_RepulsiveForce: 1
+    m_ProjectileSpeed: 1
