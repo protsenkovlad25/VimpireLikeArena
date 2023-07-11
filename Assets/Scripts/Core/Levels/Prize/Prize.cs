@@ -13,10 +13,22 @@ public class Prize
     {
         ArenaPrizes = new List<GameObject>();
 
-        for(int i = 0; i < count; i++)
+        // -- Wepoan -- //
+        /*for(int i = 0; i < count; i++)
         {
             ArenaPrizes.Add(Object.Instantiate(prefab));
             ArenaPrizes[i].GetComponent<PickapbleWeaponPrize>().WeaponVariant = WeaponVariant.SimpleShooting;
+            ArenaPrizes[i].GetComponent<PickapblePrize>().Initialize();
+            ArenaPrizes[i].GetComponent<PickapblePrize>().OnGet = DestroyObjects;
+            ArenaPrizes[i].SetActive(false);
+        }*/
+
+
+        // -- Item -- //
+        for (int i = 0; i < count; i++)
+        {
+            ArenaPrizes.Add(Object.Instantiate(prefab));
+            ArenaPrizes[i].GetComponent<PickapbleItemPrize>().SetItemPrefab(PoolResourses.GetItemObjects()[0]);
             ArenaPrizes[i].GetComponent<PickapblePrize>().Initialize();
             ArenaPrizes[i].GetComponent<PickapblePrize>().OnGet = DestroyObjects;
             ArenaPrizes[i].SetActive(false);

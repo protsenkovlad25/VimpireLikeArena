@@ -96,6 +96,11 @@ namespace VampireLike.Core.Weapons
             m_IsShoot = true;
         }
 
+        public virtual WeaponData GetWeaponData()
+        {
+            return m_WeaponData;
+        }
+
         public virtual void SetWeaponData(WeaponData weaponData)
         {
             if (weaponData == null)

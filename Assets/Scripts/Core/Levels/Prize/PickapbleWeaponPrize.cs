@@ -6,7 +6,6 @@ using VampireLike.Core.Weapons;
 
 public class PickapbleWeaponPrize : PickapblePrize, INeedingWeapon
 {
-
     private WeaponVariant m_WeaponVariant;
 
     public WeaponVariant WeaponVariant

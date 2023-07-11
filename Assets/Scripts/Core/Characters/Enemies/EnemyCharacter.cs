@@ -49,8 +49,7 @@ namespace VampireLike.Core.Characters.Enemies
 
         public void InitWeapon()
         {
-            foreach (var weapon in m_CharacterWeapons)
-                weapon.Init();
+            m_CharacterWeapon.Init();
         }
 
         public void Rotate(Vector3 angle)
@@ -62,15 +61,14 @@ namespace VampireLike.Core.Characters.Enemies
         {
             generic.gameObject.layer = 9;
 
-            if (m_CharacterWeapons == null)
+            if (m_CharacterWeapon == null)
             {
-                m_CharacterWeapons = new List<CharacterWeapon>();
+                m_CharacterWeapon = new CharacterWeapon();
+                m_CharacterWeapon.Set(m_Attaching);
             }
 
-            m_CharacterWeapons.Add(new CharacterWeapon());
-            m_CharacterWeapons.Last().Set(m_Attaching);
-            m_CharacterWeapons.Last().AddWeapon(generic, this);
-            m_CharacterWeapons.Last().Init();
+            m_CharacterWeapon.AddWeapon(generic, this);
+            m_CharacterWeapon.Weapons.Last().Init();
         }
 
         public void Set(IAttaching generic)
@@ -85,14 +83,12 @@ namespace VampireLike.Core.Characters.Enemies
 
         public void StartShoot()
         {
-            foreach (var weapon in m_CharacterWeapons)
-                weapon.StartShoot();
+            m_CharacterWeapon.StartShoot();
         }
 
         public void StopShoot()
         {
-            foreach (var weapon in m_CharacterWeapons)
-                weapon.Stop();
+            m_CharacterWeapon.Stop();
         }
 
         private IEnumerator MoveCoroutine(IAttaching targetPosition)

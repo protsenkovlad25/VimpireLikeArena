@@ -32,7 +32,11 @@ namespace VampireLike.Core.Levels
 
         public Prize GeneratePrize()
         {
-            return new Prize(m_PickupbleWeaponPrefab, 3);
+            // -- Weapon -- //
+            //return new Prize(m_PickupbleWeaponPrefab, 3);
+
+            // -- Item -- //
+            return new Prize(m_PickupbleItemPrefab, 3);
         }
 
         public TreeHolder GenerateTree()

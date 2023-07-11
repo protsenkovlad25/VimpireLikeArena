@@ -45,7 +45,6 @@ namespace VampireLike.Core.Trees
 
             while (current != null && current.WavesCluster != null)
             {
-                Debug.Log("LOL");
                 if (current.WavesCluster.Equals(wavesCluster) && current.Prize.Equals(prize))
                 {
                     if (previous != null)

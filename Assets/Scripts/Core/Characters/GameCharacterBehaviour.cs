@@ -22,9 +22,10 @@ namespace VampireLike.Core.Characters
 
         protected IMoving m_Moving;
         protected ILooking m_Looking;
-        protected List<CharacterWeapon> m_CharacterWeapons;
+        protected CharacterWeapon m_CharacterWeapon;
 
         public CharacterData CharacterData => m_CharacterData;
+        public CharacterWeapon CharacterWeapon => m_CharacterWeapon;
 
         public void SetCharacterData(CharacterData characterData)
         {
@@ -76,11 +77,13 @@ namespace VampireLike.Core.Characters
 
         private void Update()
         {
-            if(m_CharacterWeapons != null)
-                foreach(var weapon in m_CharacterWeapons)
+            if (m_CharacterWeapon != null)
+            {
+                foreach (var weapon in m_CharacterWeapon.Weapons)
                 {
                     weapon.Shoot(m_CharacterData.BaseDamage);
                 }
+            }
         }
     }
 }

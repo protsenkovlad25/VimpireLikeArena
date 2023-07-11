@@ -27,6 +27,14 @@ namespace VampireLike.Core.Characters.Enemies
 
         private IAttaching m_Attaching;
 
+        private int m_DamageModificator = 0;
+        private int m_HealthModificator = 0;
+        private float m_SpeedModificator = 0;
+
+        public int DamageModificator { get => m_DamageModificator; set => m_DamageModificator = value; }
+        public int HealthModificator { get => m_HealthModificator; set => m_HealthModificator = value; }
+        public float SpeedModificator { get => m_SpeedModificator; set => m_SpeedModificator = value; }
+
         public IEnumerable<INeedingWeapon> NeedingWeapons => m_Enemies.OfType<INeedingWeapon>();
 
         public void Attach()
@@ -164,7 +172,7 @@ namespace VampireLike.Core.Characters.Enemies
                 {
                     if (enemy == m_Enemies[i])
                     {
-                        enemy.SetCharacterData(m_EnemyConfigurator.GetData(enemy.GetEnemyType()));
+                        enemy.SetCharacterData(GetEnemyData(enemy.GetEnemyType()));
                         enemy.SetCharacterMovement(m_EnemyConfigurator.GetMovement(enemy.GetEnemyType()));
                         enemy.SetCharacterLook(m_EnemyConfigurator.GetLooking(enemy.GetEnemyType()));
                         enemy.Set(m_Attaching);
@@ -175,6 +183,17 @@ namespace VampireLike.Core.Characters.Enemies
                     }
                 }
             }
+        }
+
+        public CharacterData GetEnemyData(EnemyType enemyType)
+        {
+            CharacterData enemyData = m_EnemyConfigurator.GetData(enemyType);
+
+            enemyData.BaseDamage += m_DamageModificator;
+            enemyData.HealthPoints += m_HealthModificator;
+            enemyData.Speed += m_SpeedModificator;
+
+            return enemyData;
         }
 
         public void ActivateEnemies(List<EnemyCharacter> enemies)

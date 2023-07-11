@@ -12,6 +12,17 @@ namespace VampireLike.Core.Weapons
         private List<WeaponTypeDataHolder> m_WeaponTypeDataHolders;
         private List<WeaponClassDataHolder> m_WeaponClassDataHolders;
 
+        public List<WeaponTypeDataHolder> WeaponTypeDataHolders 
+        { 
+            get => m_WeaponTypeDataHolders;
+            set => m_WeaponTypeDataHolders = value;
+        }
+        public List<WeaponClassDataHolder> WeaponClassDataHolders
+        {
+            get => m_WeaponClassDataHolders;
+            set => m_WeaponClassDataHolders = value;
+        }
+
         public void Init()
         {
             EventManager.OnWeaponReceived.AddListener(GaveWeapon);

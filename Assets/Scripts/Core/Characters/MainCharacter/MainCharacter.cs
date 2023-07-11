@@ -73,15 +73,14 @@ namespace VampireLike.Core.Characters
         {
             generic.gameObject.layer = 7;
 
-            if (m_CharacterWeapons == null)
+            if (m_CharacterWeapon == null)
             {
-                m_CharacterWeapons = new List<CharacterWeapon>();
+                m_CharacterWeapon = new CharacterWeapon();
+                m_CharacterWeapon.Set(m_Attaching);
             }
 
-            m_CharacterWeapons.Add(new CharacterWeapon());
-            m_CharacterWeapons.Last().Set(m_Attaching);
-            m_CharacterWeapons.Last().AddWeapon(generic);
-            m_CharacterWeapons.Last().Init();
+            m_CharacterWeapon.AddWeapon(generic);
+            m_CharacterWeapon.Weapons.Last().Init();
         }
 
         public void Set(IAttaching generic)
@@ -91,20 +90,17 @@ namespace VampireLike.Core.Characters
 
         public void InitWeapon()
         {
-            foreach (var weapon in m_CharacterWeapons)
-                weapon.Init();
+            m_CharacterWeapon.Init();
         }
 
         public void StartShoot()
         {
-            foreach (var weapon in m_CharacterWeapons)
-                weapon.StartShoot();
+            m_CharacterWeapon.StartShoot();
         }
 
         public void StopShoot()
         {
-            foreach (var weapon in m_CharacterWeapons)
-                weapon.Stop();
+            m_CharacterWeapon.Stop();
         }
 
         public override void TakeDamage(int damage)

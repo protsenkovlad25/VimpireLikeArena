@@ -22,6 +22,8 @@ namespace VampireLike.Core.General
 
         public void ControllersInit()
         {
+            PoolResourses.LoadItems(m_EnemeisController, m_WeaponsController);
+
             m_EnemeisController.SetAttaching(m_MainCharacterController);
             m_MainCharacterController.SetAttaching(m_EnemeisController);
 

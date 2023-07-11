@@ -10,6 +10,8 @@ namespace VampireLike.Core.Weapons
         private List<WeaponBehaviour> m_Weapons;
         private IAttaching m_Attaching;
 
+        public List<WeaponBehaviour> Weapons => m_Weapons;
+
         public CharacterWeapon()
         {
             m_Weapons = new List<WeaponBehaviour>();
