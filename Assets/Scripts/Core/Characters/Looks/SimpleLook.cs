@@ -1,6 +1,7 @@
 using UnityEngine;
+using VampireLike.Core.Levels;
 
-namespace VampireLike.Core.Looks
+namespace VampireLike.Core.Characters
 {
     public class SimpleLook : ILooking
     {

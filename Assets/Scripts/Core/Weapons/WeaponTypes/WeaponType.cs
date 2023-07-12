@@ -1,10 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public enum WeaponType
+namespace VampireLike.Core.Weapons
 {
-    Directed,
-    Sourrounding,
-    None
+    public enum WeaponType
+    {
+        Directed,
+        Sourrounding,
+        None
+    }
 }

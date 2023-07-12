@@ -1,6 +1,6 @@
 using System.Collections;
 using UnityEngine;
-using VampireLike.Core.Movements;
+using VampireLike.Core.Levels;
 
 namespace VampireLike.Core.Weapons
 {
@@ -53,12 +53,12 @@ namespace VampireLike.Core.Weapons
 
         protected override void OnCollisionEnter(Collision collision)
         {
-            if (collision.gameObject.tag == "Player")
+            if (collision.gameObject.CompareTag("Player"))
             {
                 base.OnCollisionEnter(collision);
             }
 
-            if (collision.gameObject.tag == "Wall")
+            if (collision.gameObject.CompareTag("Wall"))
             {
                 RocketMoveEnd();
             }

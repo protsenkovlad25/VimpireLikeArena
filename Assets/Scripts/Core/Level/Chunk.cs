@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
-using VampireLike.Core.Characters.Enemies;
+using VampireLike.Core.Characters;
 
 namespace VampireLike.Core.Levels
 {

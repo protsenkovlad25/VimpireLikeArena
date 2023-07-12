@@ -1,123 +1,124 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using VampireLike.Core.Levels;
+using VampireLike.Core.General;
+using VampireLike.General;
+using VampireLike.UI;
 
-public class WavesController : MonoBehaviour
+namespace VampireLike.Core.Levels
 {
-    public event Action<Chunk> OnSetChunk;
-    public event Action<Chunk> OnSpawnPauseEnd;
-    //public event Action OnAllWavesSpawned;
-
-    [SerializeField] private GameInterfaceManager m_GIM;
-    [SerializeField] private Transform m_ChunkParent;
-    [SerializeField] private float m_SpawnChunkDelay;
-
-
-    private List<Chunk> m_Chunks;
-    private Chunk m_InstiateChunk;
-    private Vector3 m_ArenaCenterPosition;
-    private Timer m_TimerToNextWave;
-
-    private bool m_IsPauseSpawn;
-
-    private void Update()
+    public class WavesController : MonoBehaviour
     {
-        m_TimerToNextWave?.Update();
+        public event Action<Chunk> OnSetChunk;
+        public event Action<Chunk> OnSpawnPauseEnd;
 
-        if (m_TimerToNextWave != null && !m_IsPauseSpawn)
-            m_GIM.UpdateSpawnChunkTimer((int)(m_TimerToNextWave.currentTime + 1.5));
-    }
+        [SerializeField] private GameInterfaceManager m_GIM;
+        [SerializeField] private Transform m_ChunkParent;
+        [SerializeField] private float m_SpawnChunkDelay;
 
-    public void Init()
-    {
-        m_IsPauseSpawn = false;
-    }
+        private List<Chunk> m_Chunks;
+        private Chunk m_InstiateChunk;
+        private Vector3 m_ArenaCenterPosition;
+        private Timer m_TimerToNextWave;
 
-    public void InitializeWaves(List<Chunk> chunks, Vector3 arenaCenterPosition)
-    {
-        if (m_InstiateChunk != null)
+        private bool m_IsPauseSpawn;
+
+        private void Update()
         {
-            Destroy(m_InstiateChunk.gameObject);
+            m_TimerToNextWave?.Update();
+
+            if (m_TimerToNextWave != null && !m_IsPauseSpawn)
+                m_GIM.UpdateSpawnChunkTimer((int)(m_TimerToNextWave.currentTime + 1.5));
         }
 
-        //NewTimer();
-        PauseSpawn();
-        m_GIM.OnTimer();
-        m_GIM.ChunkTimerText("New Wave");
-
-        m_Chunks = new List<Chunk>();
-        m_Chunks.AddRange(chunks);
-
-        m_ArenaCenterPosition = arenaCenterPosition;
-
-        m_InstiateChunk = Instantiate(m_Chunks[0], m_ArenaCenterPosition, Quaternion.identity, m_ChunkParent);
-        m_Chunks.RemoveAt(0);
-
-        OnSetChunk?.Invoke(m_InstiateChunk);
-    }
-
-    public void NewTimer()
-    {
-        m_TimerToNextWave = new Timer(m_SpawnChunkDelay - 1.5f);
-        m_TimerToNextWave.OnTimesUp.AddListener(SpawnNextWave);
-    }
-
-    public void PauseSpawn()
-    {
-        m_IsPauseSpawn = true;
-
-        m_TimerToNextWave = new Timer(1.5f);
-        m_GIM.TimerBlinking();
-        m_TimerToNextWave.OnTimesUp.AddListener(NewTimer);
-        m_TimerToNextWave.OnTimesUp.AddListener(PauseSpawnEnd);
-    }
-
-    public void PauseSpawnEnd()
-    {
-        m_IsPauseSpawn = false;
-        OnSpawnPauseEnd.Invoke(m_InstiateChunk);
-    }
-
-    public void StopTimer()
-    {
-        m_TimerToNextWave = null;
-        m_GIM.OffTimer();
-    }
-
-    public void SpawnNextWave()
-    {
-        if (m_Chunks.Count > 0)
+        public void Init()
         {
-            if (m_Chunks.Count == 1)
-            {
-                //PauseSpawn();
-                m_IsPauseSpawn = true;
+            m_IsPauseSpawn = false;
+        }
 
-                m_TimerToNextWave = new Timer(1.5f);
-                m_TimerToNextWave.OnTimesUp.AddListener(PauseSpawnEnd);
-                m_TimerToNextWave.OnTimesUp.AddListener(StopTimer);
-
-                m_GIM.TimerBlinking();
-                m_GIM.ChunkTimerText("Last Wave");
-            }
-            else
+        public void InitializeWaves(List<Chunk> chunks, Vector3 arenaCenterPosition)
+        {
+            if (m_InstiateChunk != null)
             {
-                PauseSpawn();
-                m_GIM.ChunkTimerText("New Wave");
+                Destroy(m_InstiateChunk.gameObject);
             }
+
+            PauseSpawn();
+            m_GIM.OnTimer();
+            m_GIM.ChunkTimerText("New Wave");
+
+            m_Chunks = new List<Chunk>();
+            m_Chunks.AddRange(chunks);
+
+            m_ArenaCenterPosition = arenaCenterPosition;
 
             m_InstiateChunk = Instantiate(m_Chunks[0], m_ArenaCenterPosition, Quaternion.identity, m_ChunkParent);
             m_Chunks.RemoveAt(0);
 
             OnSetChunk?.Invoke(m_InstiateChunk);
         }
-        else
+
+        public void NewTimer()
+        {
+            m_TimerToNextWave = new Timer(m_SpawnChunkDelay - 1.5f);
+            m_TimerToNextWave.OnTimesUp.AddListener(SpawnNextWave);
+        }
+
+        public void PauseSpawn()
+        {
+            m_IsPauseSpawn = true;
+
+            m_TimerToNextWave = new Timer(1.5f);
+            m_GIM.TimerBlinking();
+            m_TimerToNextWave.OnTimesUp.AddListener(NewTimer);
+            m_TimerToNextWave.OnTimesUp.AddListener(PauseSpawnEnd);
+        }
+
+        public void PauseSpawnEnd()
+        {
+            m_IsPauseSpawn = false;
+            OnSpawnPauseEnd.Invoke(m_InstiateChunk);
+        }
+
+        public void StopTimer()
         {
             m_TimerToNextWave = null;
             m_GIM.OffTimer();
+        }
 
-            EventManager.AllWavesSpawned();
+        public void SpawnNextWave()
+        {
+            if (m_Chunks.Count > 0)
+            {
+                if (m_Chunks.Count == 1)
+                {
+                    m_IsPauseSpawn = true;
+
+                    m_TimerToNextWave = new Timer(1.5f);
+                    m_TimerToNextWave.OnTimesUp.AddListener(PauseSpawnEnd);
+                    m_TimerToNextWave.OnTimesUp.AddListener(StopTimer);
+
+                    m_GIM.TimerBlinking();
+                    m_GIM.ChunkTimerText("Last Wave");
+                }
+                else
+                {
+                    PauseSpawn();
+                    m_GIM.ChunkTimerText("New Wave");
+                }
+
+                m_InstiateChunk = Instantiate(m_Chunks[0], m_ArenaCenterPosition, Quaternion.identity, m_ChunkParent);
+                m_Chunks.RemoveAt(0);
+
+                OnSetChunk?.Invoke(m_InstiateChunk);
+            }
+            else
+            {
+                m_TimerToNextWave = null;
+                m_GIM.OffTimer();
+
+                EventManager.AllWavesSpawned();
+            }
         }
     }
 }

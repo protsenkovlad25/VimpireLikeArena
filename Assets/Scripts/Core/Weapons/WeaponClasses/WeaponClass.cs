@@ -1,10 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public enum WeaponClass
+namespace VampireLike.Core.Weapons
 {
-    Plasma,
-    Acid,
-    None
+    public enum WeaponClass
+    {
+        Plasma,
+        Acid,
+        None
+    }
 }

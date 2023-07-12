@@ -1,9 +1,7 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-namespace VampireLike.Core.Movements
+namespace VampireLike.Core.Weapons
 {
     public class RocketProjectileMovement : IMoving
     {

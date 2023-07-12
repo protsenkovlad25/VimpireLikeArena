@@ -1,5 +1,6 @@
 using UnityEngine;
 using DG.Tweening;
+using VampireLike.Core.General;
 
 namespace VampireLike.Core.Cameras
 {
@@ -67,8 +68,6 @@ namespace VampireLike.Core.Cameras
                         m_CurrentPosition += new Vector3(deltaPosX, 0);
                     }
             }
-
-
         }
 
         private void FixedUpdate()

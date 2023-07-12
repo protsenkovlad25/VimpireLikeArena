@@ -1,11 +1,10 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using VampireLike.Core.Input;
 using DG.Tweening;
 using VampireLike.Core.Weapons;
 using System.Linq;
+using VampireLike.Core.General;
 
 namespace VampireLike.Core.Characters
 {

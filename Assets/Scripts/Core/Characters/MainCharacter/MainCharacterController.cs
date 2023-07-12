@@ -1,9 +1,6 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
-using VampireLike.Core.Movements;
+using VampireLike.Core.General;
+using VampireLike.Core.Players;
 using VampireLike.Core.Weapons;
 
 namespace VampireLike.Core.Characters

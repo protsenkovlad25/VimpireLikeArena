@@ -1,11 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using VampireLike.Core.Characters;
 
 namespace VampireLike.Core.Levels
 {
-
     public class DeadGround : MonoBehaviour
     {
         private void OnCollisionEnter(Collision collision)

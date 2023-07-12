@@ -1,15 +1,14 @@
 using System.Collections;
 using UnityEngine;
 using VampireLike.Core.Characters;
-using VampireLike.Core.Characters.Enemies;
 using VampireLike.Core.Input;
 using VampireLike.Core.Levels;
 using VampireLike.Core.Players;
 using VampireLike.Core.Weapons;
+using VampireLike.General;
 
 namespace VampireLike.Core.General
 {
-
     public class ControllersManager : MonoBehaviour
     {
         [SerializeField] private EnemeisController m_EnemeisController;

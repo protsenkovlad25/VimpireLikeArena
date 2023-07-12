@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using VampireLike.Core.Movements;
+using VampireLike.General;
 
 namespace VampireLike.Core.Weapons
 {

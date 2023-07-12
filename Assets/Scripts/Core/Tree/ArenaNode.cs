@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using VampireLike.Core.Levels;
 
 namespace VampireLike.Core.Trees

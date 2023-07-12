@@ -1,8 +1,6 @@
 using UnityEngine;
-using VampireLike.Core.Looks;
-using VampireLike.Core.Movements;
 
-namespace VampireLike.Core.Characters.Enemies.Config
+namespace VampireLike.Core.Characters
 {
     public class EnemyConfigurator : MonoBehaviour
     {

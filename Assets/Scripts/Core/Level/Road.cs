@@ -9,7 +9,6 @@ namespace VampireLike.Core.Levels
         [SerializeField] private List<Platfom> m_Platfoms;
         [SerializeField] private Transform m_StartPoint;
 
-
         public void Move(Vector3 position)
         {
             StartCoroutine(MoveCoroutine(position));

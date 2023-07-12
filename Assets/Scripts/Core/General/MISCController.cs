@@ -1,7 +1,7 @@
 using UnityEngine;
 using VampireLike.Core.Cameras;
 
-namespace VampireLike.Core
+namespace VampireLike.Core.General
 {
     public class MISCController : MonoBehaviour
     {

@@ -1,18 +1,14 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using VampireLike.Core.Players;
+using VampireLike.Core.General;
 using VampireLike.Core.Trees;
 
 namespace VampireLike.Core.Levels
 {
-
     public class Level : MonoBehaviour
     {
         public event Action<Chunk> OnSetChunk;
         public event Action<Chunk> OnSpawnPauseEnd;
-        //public event Action OnArenaIsCleared;
         public event Action OnStartFight;
 
         [SerializeField] private WavesController m_WavesController;
@@ -28,11 +24,9 @@ namespace VampireLike.Core.Levels
         [SerializeField] private Transform m_ArenaParent;
 
         private TreeHolder m_TreeHolder;
-        private int m_Seed;
 
         public void Init()
         {
-            m_Seed = PlayerController.Instance.Player.Seed;
             m_WavesController.Init();
             m_LevelGenerator.Init();
 
@@ -40,10 +34,6 @@ namespace VampireLike.Core.Levels
 
             m_WavesController.OnSetChunk += OnSetChunk.Invoke;
             m_WavesController.OnSpawnPauseEnd += OnSpawnPauseEnd.Invoke;
-            //m_WavesController.OnAllWavesSpawned += OnArenaIsCleared.Invoke;
-            //m_WavesController.OnAllWavesSpawned += DestroyWalls;
-            //m_WavesController.OnAllWavesSpawned += InitializePrize;
-            //EventManager.OnAllWavesSpawned.AddListener(InitializePrize);
         }
 
         public void FirstArena()

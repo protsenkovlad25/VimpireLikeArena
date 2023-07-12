@@ -1,9 +1,8 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace VampireLike
+namespace VampireLike.General
 {
     public class PoolBehaviour<T> where T : MonoBehaviour
     {

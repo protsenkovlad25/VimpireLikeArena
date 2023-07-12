@@ -1,66 +1,68 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using VampireLike.Core;
 using VampireLike.Core.Characters;
 
-public class Explosion : MonoBehaviour
+namespace VampireLike.Core.Levels
 {
-    [SerializeField] private float m_CurrentExpDistance;
-    [SerializeField] private float m_RepulsiveForce;
-    [SerializeField] private ParticleSystem m_SmokeParticle;
-    [SerializeField] private ParticleSystem m_SparksParticle;
-
-    public float CurrentExpDistance => m_CurrentExpDistance;
-    public float RepulsiveForce => m_RepulsiveForce;
-
-    public void Init(Vector3 target, Transform rocketTransform, int damage)
+    public class Explosion : MonoBehaviour
     {
-        StartCoroutine(InitializeExplosion(target, rocketTransform, damage));
-        PlayParticleExplosion();
-    }
+        [SerializeField] private float m_CurrentExpDistance;
+        [SerializeField] private float m_RepulsiveForce;
+        [SerializeField] private ParticleSystem m_SmokeParticle;
+        [SerializeField] private ParticleSystem m_SparksParticle;
 
-    private IEnumerator InitializeExplosion(Vector3 target, Transform rocketTransform, int damage)
-    {
-        List<GameObject> exceptions = new List<GameObject>();
-        for (int i = 0; i < 4; i++)
+        public float CurrentExpDistance => m_CurrentExpDistance;
+        public float RepulsiveForce => m_RepulsiveForce;
+
+        public void Init(Vector3 target, Transform rocketTransform, int damage)
         {
-            RaycastHit[] hits = Physics.SphereCastAll(transform.position, CurrentExpDistance * (i + 1f), new Vector3(0, 1, 0), .1f);
+            StartCoroutine(InitializeExplosion(target, rocketTransform, damage));
+            PlayParticleExplosion();
+        }
 
-            foreach (var hit in hits)
+        private IEnumerator InitializeExplosion(Vector3 target, Transform rocketTransform, int damage)
+        {
+            List<GameObject> exceptions = new List<GameObject>();
+            for (int i = 0; i < 4; i++)
             {
-                if (!exceptions.Contains(hit.collider.gameObject))
+                RaycastHit[] hits = Physics.SphereCastAll(transform.position, CurrentExpDistance * (i + 1f), new Vector3(0, 1, 0), .1f);
+
+                foreach (var hit in hits)
                 {
-                    if (hit.collider.gameObject.TryGetComponent(out GameCharacterBehaviour gameCharacterBehaviour))
+                    if (!exceptions.Contains(hit.collider.gameObject))
                     {
-                        Vector3 pushDir = (transform.position - target).normalized;
-                        hit.collider.gameObject.TryGetComponent<IRepelled>(out var repelled);
+                        if (hit.collider.gameObject.TryGetComponent(out GameCharacterBehaviour gameCharacterBehaviour))
                         {
-                            if (pushDir.magnitude <= .1f)
-                                pushDir = rocketTransform.forward.normalized;
-
-                            repelled.Push(pushDir, RepulsiveForce * (1F - i * 0.25f), ForceMode.Impulse);
-                        }
-
-                        if (gameCharacterBehaviour.GetType() == typeof(MainCharacter))
-                        {
-                            hit.collider.gameObject.TryGetComponent<ITakingDamage>(out var takingDamage);
+                            Vector3 pushDir = (transform.position - target).normalized;
+                            hit.collider.gameObject.TryGetComponent<IRepelled>(out var repelled);
                             {
-                                takingDamage.TakeDamage((int)(damage * (1f - i * 0.25f)));
+                                if (pushDir.magnitude <= .1f)
+                                    pushDir = rocketTransform.forward.normalized;
+
+                                repelled.Push(pushDir, RepulsiveForce * (1F - i * 0.25f), ForceMode.Impulse);
                             }
+
+                            if (gameCharacterBehaviour.GetType() == typeof(MainCharacter))
+                            {
+                                hit.collider.gameObject.TryGetComponent<ITakingDamage>(out var takingDamage);
+                                {
+                                    takingDamage.TakeDamage((int)(damage * (1f - i * 0.25f)));
+                                }
+                            }
+                            exceptions.Add(hit.collider.gameObject);
                         }
-                        exceptions.Add(hit.collider.gameObject);
                     }
                 }
-            }
 
-            yield return new WaitForSeconds(0.2f);
+                yield return new WaitForSeconds(0.2f);
+            }
         }
-    }
-    
-    public void PlayParticleExplosion()
-    {
-        m_SmokeParticle.Play();
-        m_SparksParticle.Play();
+
+        public void PlayParticleExplosion()
+        {
+            m_SmokeParticle.Play();
+            m_SparksParticle.Play();
+        }
     }
 }

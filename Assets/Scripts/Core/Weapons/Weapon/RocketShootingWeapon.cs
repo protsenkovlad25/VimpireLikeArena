@@ -1,11 +1,8 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using VampireLike.Core.Movements;
 using DG.Tweening;
-using System;
-using VampireLike.Core.Characters.Enemies;
-using VampireLike.Core.Looks;
+using VampireLike.Core.Characters;
+using VampireLike.Core.General;
 
 namespace VampireLike.Core.Weapons
 {

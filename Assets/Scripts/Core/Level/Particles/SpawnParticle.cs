@@ -1,11 +1,14 @@
 using UnityEngine;
 
-public class SpawnParticle : MonoBehaviour
+namespace VampireLike.Core.Levels
 {
-    [SerializeField] private ParticleSystem m_SpawnParticle;
-
-    public void PlayParticle()
+    public class SpawnParticle : MonoBehaviour
     {
-        m_SpawnParticle.Play();
+        [SerializeField] private ParticleSystem m_SpawnParticle;
+
+        public void PlayParticle()
+        {
+            m_SpawnParticle.Play();
+        }
     }
 }

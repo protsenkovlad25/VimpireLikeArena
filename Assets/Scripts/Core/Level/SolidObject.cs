@@ -1,16 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using VampireLike.Core.General;
 
-public class SolidObject : MonoBehaviour
+namespace VampireLike.Core.Levels
 {
-    private void Start()
+    public class SolidObject : MonoBehaviour
     {
-        EventManager.OnAllWavesSpawned.AddListener(Destroy);
-    }
+        private void Start()
+        {
+            EventManager.OnAllWavesSpawned.AddListener(Destroy);
+        }
 
-    private void Destroy()
-    {
-        Destroy(gameObject);
+        private void Destroy()
+        {
+            Destroy(gameObject);
+        }
     }
 }

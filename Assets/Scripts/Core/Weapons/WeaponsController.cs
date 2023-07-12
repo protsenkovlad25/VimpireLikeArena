@@ -1,10 +1,9 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using VampireLike.Core.General;
 
 namespace VampireLike.Core.Weapons
 {
-
     public class WeaponsController : MonoBehaviour
     {
         [SerializeField] private WeaponConfigurator m_WeaponConfigurator;

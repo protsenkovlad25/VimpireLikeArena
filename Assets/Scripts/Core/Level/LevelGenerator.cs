@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using VampireLike.Core.Players;
 using VampireLike.Core.Trees;
@@ -10,9 +8,10 @@ namespace VampireLike.Core.Levels
     {
         [SerializeField] private WavesConfigurator m_WavesConfigurator;
 
-        System.Random random;
         [SerializeField] GameObject m_PickupbleWeaponPrefab;
         [SerializeField] GameObject m_PickupbleItemPrefab;
+
+        System.Random random;
 
         public void Init()
         {

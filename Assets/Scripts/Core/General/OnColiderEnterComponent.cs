@@ -1,9 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace VampireLike.Core
+namespace VampireLike.Core.General
 {
     public class OnColiderEnterComponent : MonoBehaviour
     {

@@ -1,9 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using VampireLike.Core.Movements;
 
-namespace VampireLike.Core.Characters.Enemies.Config
+namespace VampireLike.Core.Characters
 {
     [CreateAssetMenu(fileName = "Enemy Config", menuName = "Configs/Enemies/EnemyConfig")]
     public class EnemyConfig : ScriptableObject

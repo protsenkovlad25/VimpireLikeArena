@@ -1,54 +1,57 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using VampireLike.Core.Characters;
+using VampireLike.Core.General;
 using VampireLike.Core.Weapons;
 
-public class PickapbleWeaponPrize : PickapblePrize, INeedingWeapon
+namespace VampireLike.Core.Levels
 {
-    private WeaponVariant m_WeaponVariant;
-
-    public WeaponVariant WeaponVariant
+    public class PickapbleWeaponPrize : PickapblePrize, INeedingWeapon
     {
-        get => m_WeaponVariant;
-        set => m_WeaponVariant = value;
-    }
+        private WeaponVariant m_WeaponVariant;
 
-    public override void Initialize()
-    {
-        EventManager.WeaponReceived(m_WeaponVariant, this);
-        base.Initialize();
-    }
-
-    public override void GetPrize(MainCharacter mainCharacter)
-    {
-        foreach (var weapon in mainCharacter.CharacterWeapon.Weapons)
+        public WeaponVariant WeaponVariant
         {
-            //if (weapon.WeaponType == )
+            get => m_WeaponVariant;
+            set => m_WeaponVariant = value;
         }
 
-        EventManager.WeaponReceived(m_WeaponVariant, mainCharacter);
-        Destroy(gameObject);
+        public override void Initialize()
+        {
+            EventManager.WeaponReceived(m_WeaponVariant, this);
+            base.Initialize();
+        }
+
+        public override void GetPrize(MainCharacter mainCharacter)
+        {
+            foreach (var weapon in mainCharacter.CharacterWeapon.Weapons)
+            {
+                //if (weapon.WeaponType == )
+            }
+
+            EventManager.WeaponReceived(m_WeaponVariant, mainCharacter);
+            Destroy(gameObject);
+        }
+
+        public Transform Where()
+        {
+            return m_PrizePoint;
+        }
+
+        public List<WeaponVariant> GetWeaponVariants()
+        {
+            return new List<WeaponVariant> { m_WeaponVariant };
+        }
+
+        public List<Transform> GetWeaponPoints()
+        {
+            return new List<Transform> { m_PrizePoint };
+        }
+
+        public void SetWeaponVariant(WeaponVariant weaponVariant)
+        { }
+
+        public void Set(WeaponBehaviour generic)
+        { }
     }
-
-    public Transform Where()
-    {
-        return m_PrizePoint;
-    }
-
-    public List<WeaponVariant> GetWeaponVariants()
-    {
-        return new List<WeaponVariant> { m_WeaponVariant };
-    }
-
-    public List<Transform> GetWeaponPoints()
-    {
-        return new List<Transform> { m_PrizePoint };
-    }
-
-    public void SetWeaponVariant(WeaponVariant weaponVariant)
-    { }
-
-    public void Set(WeaponBehaviour generic)
-    { }
 }

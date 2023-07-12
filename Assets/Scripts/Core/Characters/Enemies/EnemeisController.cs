@@ -4,10 +4,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using VampireLike.Core.Characters.Enemies.Config;
+using VampireLike.Core.General;
+using VampireLike.Core.Levels;
 using VampireLike.Core.Weapons;
 
-namespace VampireLike.Core.Characters.Enemies
+namespace VampireLike.Core.Characters
 {
     public class EnemeisController : MonoBehaviour, IIniting, IAttaching
     {

@@ -1,11 +1,8 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace VampireLike.Core.Weapons
 {
-
     public abstract class Projectile : MonoBehaviour
     {
         public event Action<Projectile> OnHit;
@@ -22,7 +19,6 @@ namespace VampireLike.Core.Weapons
         protected IMoving m_Moving;
 
         protected Vector3 m_Direction;
-
 
         public void SetMovement(IMoving moving)
         {
@@ -65,7 +61,6 @@ namespace VampireLike.Core.Weapons
 
         protected virtual void Update()
         {
-
             if (!m_IsMove)
             {
                 gameObject.SetActive(false);
@@ -84,7 +79,6 @@ namespace VampireLike.Core.Weapons
                 m_IsMove = false;
                 gameObject.SetActive(false);
             }
-
         }
     }
 }

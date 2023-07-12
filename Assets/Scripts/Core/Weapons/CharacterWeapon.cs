@@ -1,7 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using VampireLike.Core.Characters.Enemies;
+using VampireLike.Core.Characters;
 
 namespace VampireLike.Core.Weapons
 {
@@ -27,11 +26,10 @@ namespace VampireLike.Core.Weapons
 
         public void Shoot(int baseDamage)
         {
-            //if (m_Weapons != null)
-                foreach (var weapon in m_Weapons)
-                {
-                    weapon.Shoot(baseDamage);
-                }
+            foreach (var weapon in m_Weapons)
+            {
+                weapon.Shoot(baseDamage);
+            }
         }
 
         public void StartShoot()

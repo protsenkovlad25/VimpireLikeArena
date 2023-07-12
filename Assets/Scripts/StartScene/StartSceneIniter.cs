@@ -1,8 +1,6 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using VampireLike.Core.Players;
-
-
+using VampireLike.UI;
 
 namespace VampireLike.StartScenes
 {

@@ -1,36 +1,38 @@
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 using UnityEngine;
-using VampireLike.Core.Players;
 
-public static class SavePlayerData
+namespace VampireLike.Core.Players
 {
-    public static void SaveData()
+    public static class SavePlayerData
     {
-        BinaryFormatter bf = new BinaryFormatter();
-        FileStream file = File.Create(Application.persistentDataPath + "/SavePlayerData.dat");
-        
-        bf.Serialize(file, PlayerController.Instance.Player);
-        file.Close();
-
-        Debug.Log("Player data is saved!");
-    }
-
-    public static Player LoadData()
-    {
-        if (File.Exists(Application.persistentDataPath + "/SavePlayerData.dat"))
+        public static void SaveData()
         {
             BinaryFormatter bf = new BinaryFormatter();
-            FileStream file = File.Open(Application.persistentDataPath + "/SavePlayerData.dat", FileMode.Open);
+            FileStream file = File.Create(Application.persistentDataPath + "/SavePlayerData.dat");
 
-            Player playerData = (Player)bf.Deserialize(file);
+            bf.Serialize(file, PlayerController.Instance.Player);
             file.Close();
 
-            Debug.Log("Player data is loaded!");
-
-            return playerData;
+            Debug.Log("Player data is saved!");
         }
-        else
-            return null;
+
+        public static Player LoadData()
+        {
+            if (File.Exists(Application.persistentDataPath + "/SavePlayerData.dat"))
+            {
+                BinaryFormatter bf = new BinaryFormatter();
+                FileStream file = File.Open(Application.persistentDataPath + "/SavePlayerData.dat", FileMode.Open);
+
+                Player playerData = (Player)bf.Deserialize(file);
+                file.Close();
+
+                Debug.Log("Player data is loaded!");
+
+                return playerData;
+            }
+            else
+                return null;
+        }
     }
 }

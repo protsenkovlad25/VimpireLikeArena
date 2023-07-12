@@ -1,12 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-
-public enum EnemyType
+namespace VampireLike.Core.Characters
 {
-    SpikyEnemy,
-    PushingEnemy,
-    ShootingEnemy,
-    RocketShootingEnemy
+    public enum EnemyType
+    {
+        SpikyEnemy,
+        PushingEnemy,
+        ShootingEnemy,
+        RocketShootingEnemy
+    }
 }

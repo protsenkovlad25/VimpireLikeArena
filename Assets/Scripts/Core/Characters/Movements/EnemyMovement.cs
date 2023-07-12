@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace VampireLike.Core.Movements
+namespace VampireLike.Core.Characters
 {
     public class EnemyMovement : IMoving, IBypassing
     {

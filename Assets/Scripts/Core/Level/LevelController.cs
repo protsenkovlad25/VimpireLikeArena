@@ -1,8 +1,7 @@
 using System;
-using System.Collections;
 using UnityEngine;
 using VampireLike.Core.Players;
-using DG.Tweening;
+using VampireLike.UI;
 
 namespace VampireLike.Core.Levels
 {
