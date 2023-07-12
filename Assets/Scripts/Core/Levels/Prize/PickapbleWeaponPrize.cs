@@ -22,6 +22,11 @@ public class PickapbleWeaponPrize : PickapblePrize, INeedingWeapon
 
     public override void GetPrize(MainCharacter mainCharacter)
     {
+        foreach (var weapon in mainCharacter.CharacterWeapon.Weapons)
+        {
+            //if (weapon.WeaponType == )
+        }
+
         EventManager.WeaponReceived(m_WeaponVariant, mainCharacter);
         Destroy(gameObject);
     }

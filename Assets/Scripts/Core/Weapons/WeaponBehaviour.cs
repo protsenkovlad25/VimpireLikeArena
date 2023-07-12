@@ -22,6 +22,9 @@ namespace VampireLike.Core.Weapons
         protected IMoving m_Moving;
         protected IAttaching m_Attaching;
 
+        public WeaponType WeaponType => m_WeaponTypeData.WeaponType;
+        public WeaponClass WeaponClass => m_WeaponClassData.WeaponClass;
+
         public virtual void Set(IAttaching generic)
         {
             m_Attaching = generic;

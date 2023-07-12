@@ -39,7 +39,7 @@ MonoBehaviour:
     m_FlyTime: 0
   - m_Name: Touching Weapon
     m_WeaponVariant: 4
-    m_WeaponType: 2
+    m_WeaponType: 0
     m_WeaponClass: 2
     m_FireRate: 0
     m_RepulsiveForce: 0
