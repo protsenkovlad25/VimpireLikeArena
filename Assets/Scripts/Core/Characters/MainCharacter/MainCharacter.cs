@@ -21,19 +21,20 @@ namespace VampireLike.Core.Characters
         private List<WeaponVariant> m_WeaponsOnMainCharacter;
         private IAttaching m_Attaching;
 
-        public List<Transform> WeaponPoints => m_WeaponPoints;
+        public WeaponVariant MainWeaponVariant => m_MainWeaponVariant;
+        public List<WeaponVariant> WeaponsOnMainCharacter => m_WeaponsOnMainCharacter;
 
         public void Start()
         {
             m_WeaponsOnMainCharacter = new List<WeaponVariant>();
 
-            for (int i = 0; i < WeaponPoints.Count; i++)
+            for (int i = 0; i < m_WeaponPoints.Count; i++)
                 m_WeaponsOnMainCharacter.Add(WeaponVariant.None);
         }
 
         public void Move(Vector2 deriction)
         {
-            m_Moving.Move(new Vector3(deriction.x, 0f, deriction.y), CharacterData.Speed, transform, gameObject.GetComponent<Rigidbody>());
+            m_Moving.Move(new Vector3(deriction.x, 0f, deriction.y), m_CharacterData.Speed, transform, gameObject.GetComponent<Rigidbody>());
         }
 
         public List<WeaponVariant> GetWeaponVariants()
@@ -62,7 +63,7 @@ namespace VampireLike.Core.Characters
             {
                 for (int i = 0; i < m_WeaponsOnMainCharacter.Count; i++)
                     if (m_WeaponsOnMainCharacter[i] == WeaponVariant.None)
-                        return WeaponPoints[i];
+                        return m_WeaponPoints[i];
             }
 
             return m_MainWeaponPoint;

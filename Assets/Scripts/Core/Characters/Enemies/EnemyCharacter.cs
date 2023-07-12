@@ -103,10 +103,10 @@ namespace VampireLike.Core.Characters
                 //else
                 //    StopShoot();
 
-                Vector3 positionToMove = m_Looking.Look(targetPosition.GetTarget().position, transform, CharacterData.Speed);
+                Vector3 positionToMove = m_Looking.Look(targetPosition.GetTarget().position, transform, m_CharacterData.Speed);
 
                 m_Moving.Move(positionToMove, 
-                    CharacterData.Speed * Time.deltaTime, 
+                    m_CharacterData.Speed * Time.deltaTime, 
                     transform, 
                     gameObject.GetComponent<Rigidbody>());
                 yield return null;

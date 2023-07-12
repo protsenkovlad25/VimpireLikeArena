@@ -13,6 +13,9 @@ namespace VampireLike.Core.Levels
             m_ItemObject = Instantiate(m_ItemPrefab, m_PrizePoint).GetComponent<ItemObject>();
             m_ItemObject.SetEnemeisController(m_ItemPrefab.GetComponent<ItemObject>().GetEnemeisController());
             m_ItemObject.SetWeaponsController(m_ItemPrefab.GetComponent<ItemObject>().GetWeaponsController());
+
+            m_ItemObject.Init();
+
             base.Initialize();
         }
 

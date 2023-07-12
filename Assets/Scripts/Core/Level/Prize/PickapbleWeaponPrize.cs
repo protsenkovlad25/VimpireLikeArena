@@ -3,12 +3,15 @@ using UnityEngine;
 using VampireLike.Core.Characters;
 using VampireLike.Core.General;
 using VampireLike.Core.Weapons;
+using VampireLike.General;
 
 namespace VampireLike.Core.Levels
 {
     public class PickapbleWeaponPrize : PickapblePrize, INeedingWeapon
     {
         private WeaponVariant m_WeaponVariant;
+        private WeaponBehaviour m_Weapon;
+        private ItemObject m_ItemObject;
 
         public WeaponVariant WeaponVariant
         {
@@ -26,7 +29,32 @@ namespace VampireLike.Core.Levels
         {
             foreach (var weapon in mainCharacter.CharacterWeapon.Weapons)
             {
-                //if (weapon.WeaponType == )
+                if (weapon.WeaponType == m_Weapon.WeaponType)
+                {
+                    // TypeSynergy
+                    //m_ItemObject = PoolResourses.GetItemObjects().Equals(item => item.ItemType == ItemType.SynergyType);
+                    foreach (var item in PoolResourses.GetItemObjects())
+                    {
+                        if (item.GetComponent<ItemObject>().ItemType == ItemType.SynergyType)
+                        {
+                            m_ItemObject = item.GetComponent<ItemObject>();
+                            break;
+                        }
+                    }
+
+                    // применить полученный item
+
+                    break;
+                }
+            }
+
+            foreach (var weapon in mainCharacter.CharacterWeapon.Weapons)
+            {
+                if (weapon.WeaponClass == m_Weapon.WeaponClass)
+                {
+                    // ClassSynergy
+                    break;
+                }
             }
 
             EventManager.WeaponReceived(m_WeaponVariant, mainCharacter);
@@ -52,6 +80,8 @@ namespace VampireLike.Core.Levels
         { }
 
         public void Set(WeaponBehaviour generic)
-        { }
+        {
+            m_Weapon = generic;
+        }
     }
 }

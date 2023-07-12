@@ -14,7 +14,7 @@ namespace VampireLike.Core.Characters
         private int m_CurrentHealthPoint;
         public int CurrentHealthPoint => m_CurrentHealthPoint;
 
-        private CharacterData m_CharacterData;
+        protected CharacterData m_CharacterData;
         private HpBar m_HpBar;
 
         protected IMoving m_Moving;
