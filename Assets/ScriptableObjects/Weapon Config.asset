@@ -92,7 +92,7 @@ MonoBehaviour:
   m_ListModelProjectile:
   - m_Name: Simple Projectile
     m_ProjectileType: 1
-    m_Projectile: {fileID: 5939607146184074369, guid: d2425206efd9ef94f8aba21ddd7d2285, type: 3}
+    m_Projectile: {fileID: 7610230993308492311, guid: e89eb999ebcd2e3419c717a63c1b358d, type: 3}
   - m_Name: None
     m_ProjectileType: 0
     m_Projectile: {fileID: 0}
