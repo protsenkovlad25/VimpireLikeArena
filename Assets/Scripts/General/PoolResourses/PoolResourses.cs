@@ -39,5 +39,10 @@ namespace VampireLike.General
         {
             return m_ItemObjects;
         }
+
+        public static List<GameObject> GetWeaponObjects()
+        {
+            return m_Weapons;
+        }
     }
 }

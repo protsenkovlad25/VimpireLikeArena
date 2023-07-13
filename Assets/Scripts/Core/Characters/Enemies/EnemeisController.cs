@@ -165,6 +165,17 @@ namespace VampireLike.Core.Characters
             return m_Enemies;
         }
 
+        public CharacterData GetEnemyData(EnemyType enemyType)
+        {
+            CharacterData enemyData = m_EnemyConfigurator.GetData(enemyType);
+
+            enemyData.BaseDamage += m_DamageModificator;
+            enemyData.HealthPoints += m_HealthModificator;
+            enemyData.Speed += m_SpeedModificator;
+
+            return enemyData;
+        }
+
         public void InitEnemy(List<EnemyCharacter> enemies)
         {
             foreach (var enemy in enemies)
@@ -184,17 +195,6 @@ namespace VampireLike.Core.Characters
                     }
                 }
             }
-        }
-
-        public CharacterData GetEnemyData(EnemyType enemyType)
-        {
-            CharacterData enemyData = m_EnemyConfigurator.GetData(enemyType);
-
-            enemyData.BaseDamage += m_DamageModificator;
-            enemyData.HealthPoints += m_HealthModificator;
-            enemyData.Speed += m_SpeedModificator;
-
-            return enemyData;
         }
 
         public void ActivateEnemies(List<EnemyCharacter> enemies)
@@ -304,9 +304,9 @@ namespace VampireLike.Core.Characters
 
         public void InitEnemeisWeapons()
         {
-            foreach (var item in m_Enemies)
+            foreach (var enemy in m_Enemies)
             {
-                item.InitWeapon();
+                enemy.InitWeapons();
             }
         }
     }

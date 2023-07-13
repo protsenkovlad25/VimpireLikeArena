@@ -9,19 +9,31 @@ namespace VampireLike.Core.Characters
 {
     public class EnemyCharacter : GameCharacterBehaviour, INeedingWeapon, INeeding<IAttaching>
     {
-        [SerializeField] private List<Transform> m_WeaponPoints;
-        [SerializeField] private List<WeaponVariant> m_WeaponVariants;
         [SerializeField] private EnemyType m_EnemyType;
 
         public EnemyType EnemyType { get; set; }
 
-        private IAttaching m_Attaching;
-
         private bool m_IsMove;
+
+        public override void Init()
+        {
+            base.Init();
+
+            GameObject weapon;
+            for (int i = 0; i < m_WeaponPrefabs.Count; i++)
+            {
+                weapon = Instantiate(m_WeaponPrefabs[i], m_WeaponPoints[i]);
+                weapon.layer = 9;
+
+                m_WeaponObjects.Add(weapon);
+                m_CharacterWeapon.AddWeapon(m_WeaponObjects[i].GetComponent<WeaponBehaviour>());
+            }
+        }
 
         public List<WeaponVariant> GetWeaponVariants()
         {
-            return m_WeaponVariants;
+            //return m_WeaponVariants;
+            return null;
         }
 
         public List<Transform> GetWeaponPoints()
@@ -48,7 +60,7 @@ namespace VampireLike.Core.Characters
             StartCoroutine(MoveCoroutine(targetPosition));
         }
 
-        public void InitWeapon()
+        public void InitWeapons()
         {
             m_CharacterWeapon.Init();
         }

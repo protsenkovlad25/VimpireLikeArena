@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using VampireLike.Core.Weapons;
 
@@ -6,24 +7,37 @@ namespace VampireLike.Core.Characters
 {
     public abstract class GameCharacterBehaviour : MonoBehaviour, ITakingDamage, IRepelled, IIniting
     {
-        [SerializeField] protected GameObject hpBarPrefab;
-
+        #region Actions
         public event Action<GameCharacterBehaviour> OnTakeDamage;
         public event Action<GameCharacterBehaviour> OnDie;
+        #endregion
 
+        #region SerializeFields
+        [SerializeField] protected List<Transform> m_WeaponPoints;
+        [SerializeField] protected List<GameObject> m_WeaponPrefabs;
+        [SerializeField] protected GameObject m_HpBarPrefab;
+        #endregion
+
+        #region Fields
         private int m_CurrentHealthPoint;
-        public int CurrentHealthPoint => m_CurrentHealthPoint;
 
-        protected CharacterData m_CharacterData;
         private HpBar m_HpBar;
 
         protected IMoving m_Moving;
         protected ILooking m_Looking;
+        protected IAttaching m_Attaching;
+        protected CharacterData m_CharacterData;
         protected CharacterWeapon m_CharacterWeapon;
+        protected List<GameObject> m_WeaponObjects;
+        #endregion
 
+        #region Properties
+        public int CurrentHealthPoint => m_CurrentHealthPoint;
         public CharacterData CharacterData => m_CharacterData;
         public CharacterWeapon CharacterWeapon => m_CharacterWeapon;
+        #endregion
 
+        #region Methods
         public void SetCharacterData(CharacterData characterData)
         {
             m_CharacterData = characterData;
@@ -41,8 +55,13 @@ namespace VampireLike.Core.Characters
 
         public virtual void Init()
         {
+            m_WeaponObjects = new List<GameObject>();
+            m_CharacterWeapon = new CharacterWeapon();
+            m_CharacterWeapon.Set(m_Attaching);
+
             m_CurrentHealthPoint = m_CharacterData.HealthPoints;
-            m_HpBar = Instantiate(hpBarPrefab, transform).GetComponent<HpBar>();
+
+            m_HpBar = Instantiate(m_HpBarPrefab, transform).GetComponent<HpBar>();
             m_HpBar.Init(m_CharacterData.HealthPoints);
         }
 
@@ -82,5 +101,6 @@ namespace VampireLike.Core.Characters
                 }
             }
         }
+        #endregion
     }
 }

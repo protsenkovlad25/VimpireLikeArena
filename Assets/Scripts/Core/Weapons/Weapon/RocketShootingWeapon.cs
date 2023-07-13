@@ -17,7 +17,7 @@ namespace VampireLike.Core.Weapons
         public override void Init()
         {
             m_Moving = new RocketProjectileMovement();
-            m_Delay = m_WeaponData.FireRate;
+            m_Delay = m_FireRate;
         }
 
         public void SetEnemyCharacter(EnemyCharacter enemyCharacter)
@@ -46,7 +46,7 @@ namespace VampireLike.Core.Weapons
 
                             m_RocketProjectiles[0].Move(GetWeaponProjectileSpeed(), m_Attaching.GetTarget().position, GetWeaponFlyTime());
 
-                            m_Delay = GetWeaponFireRate() + m_WeaponData.RechargeTime;
+                            m_Delay = GetWeaponFireRate() + m_RechargeTime;
 
                             if (m_RocketProjectiles.Count == 1)
                             {

@@ -793,13 +793,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 348d8335fc8717c4c82c2929fdbdc0ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hpBarPrefab: {fileID: 6744790681143353430, guid: 9dfffb2a29c514f4cbef6b17ca5bed2c, type: 3}
   m_WeaponPoints:
+  - {fileID: 595034206}
   - {fileID: 830788320}
   - {fileID: 2123194128}
   - {fileID: 776736123}
-  m_MainWeaponVariant: 2
-  m_MainWeaponPoint: {fileID: 595034206}
+  m_WeaponPrefabs:
+  - {fileID: 469436177383617850, guid: 2397e89c285cf2b478f79fcac371e772, type: 3}
+  m_HpBarPrefab: {fileID: 6744790681143353430, guid: 9dfffb2a29c514f4cbef6b17ca5bed2c, type: 3}
   m_SafeTime: 0.5
   m_FadeTime: 0.1
   m_TakeDamage: 1
@@ -1075,7 +1076,7 @@ GameObject:
   m_Component:
   - component: {fileID: 595034206}
   m_Layer: 7
-  m_Name: MainWeaponPoint
+  m_Name: WeaponPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

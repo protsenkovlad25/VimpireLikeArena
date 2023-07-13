@@ -15,25 +15,25 @@ namespace VampireLike.Core.Levels
             ArenaPrizes = new List<GameObject>();
 
             // -- Wepoan -- //
-            /*for(int i = 0; i < count; i++)
+            for(int i = 0; i < count; i++)
             {
                 ArenaPrizes.Add(Object.Instantiate(prefab));
-                ArenaPrizes[i].GetComponent<PickapbleWeaponPrize>().WeaponVariant = WeaponVariant.SimpleShooting;
+                ArenaPrizes[i].GetComponent<PickapbleWeaponPrize>().SetWeaponPrefab(PoolResourses.GetWeaponObjects()[0]);
                 ArenaPrizes[i].GetComponent<PickapblePrize>().Initialize();
                 ArenaPrizes[i].GetComponent<PickapblePrize>().OnGet = DestroyObjects;
                 ArenaPrizes[i].SetActive(false);
-            }*/
+            }
 
 
             // -- Item -- //
-            for (int i = 0; i < count; i++)
+            /*for (int i = 0; i < count; i++)
             {
                 ArenaPrizes.Add(Object.Instantiate(prefab));
                 ArenaPrizes[i].GetComponent<PickapbleItemPrize>().SetItemPrefab(PoolResourses.GetItemObjects()[0]);
                 ArenaPrizes[i].GetComponent<PickapblePrize>().Initialize();
                 ArenaPrizes[i].GetComponent<PickapblePrize>().OnGet = DestroyObjects;
                 ArenaPrizes[i].SetActive(false);
-            }
+            }*/
         }
 
         public void SpawnPrizes(Vector3 spawnPosition)

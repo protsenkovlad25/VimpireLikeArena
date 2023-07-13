@@ -297,6 +297,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e435e2f5c4f34448baf48f179abd758, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_StartPoint: {fileID: 0}
+  m_ShootParticle: {fileID: 0}
+  m_WeaponType: 0
+  m_WeaponClass: 1
+  m_Damage: 15
+  m_MagazineSize: 0
+  m_FlyTime: 1
+  m_FireRate: 3
+  m_RechargeTime: 0
+  m_RepulsiveForce: 250
+  m_ProjectileSpeed: 40
+  m_ProjectilePref: {fileID: 0}
   m_RocketProjectiles:
   - {fileID: 5162659261122518176}
   - {fileID: 5269978882457598697}

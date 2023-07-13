@@ -10,26 +10,31 @@ namespace VampireLike.Core.Characters
 {
     public class MainCharacter : GameCharacterBehaviour, IHero, INeedingWeapon
     {
-        [SerializeField] private List<Transform> m_WeaponPoints;
-        [SerializeField] private WeaponVariant m_MainWeaponVariant;
-        [SerializeField] private Transform m_MainWeaponPoint;
-
         [SerializeField] private float m_SafeTime;
         [SerializeField] private float m_FadeTime;
         [SerializeField] private bool m_TakeDamage;
 
-        private List<WeaponVariant> m_WeaponsOnMainCharacter;
-        private IAttaching m_Attaching;
-
-        public WeaponVariant MainWeaponVariant => m_MainWeaponVariant;
-        public List<WeaponVariant> WeaponsOnMainCharacter => m_WeaponsOnMainCharacter;
-
         public void Start()
         {
-            m_WeaponsOnMainCharacter = new List<WeaponVariant>();
+            //m_WeaponsOnMainCharacter = new List<WeaponVariant>();
 
-            for (int i = 0; i < m_WeaponPoints.Count; i++)
-                m_WeaponsOnMainCharacter.Add(WeaponVariant.None);
+            //for (int i = 0; i < m_WeaponPoints.Count; i++)
+            //    m_WeaponsOnMainCharacter.Add(WeaponVariant.None);
+        }
+
+        public override void Init()
+        {
+            base.Init();
+
+            GameObject weapon;
+            for (int i = 0; i < m_WeaponPrefabs.Count; i++)
+            {
+                weapon = Instantiate(m_WeaponPrefabs[i], m_WeaponPoints[i]);
+                weapon.layer = 7;
+
+                m_WeaponObjects.Add(weapon);
+                m_CharacterWeapon.AddWeapon(m_WeaponObjects[i].GetComponent<WeaponBehaviour>());
+            }
         }
 
         public void Move(Vector2 deriction)
@@ -39,34 +44,36 @@ namespace VampireLike.Core.Characters
 
         public List<WeaponVariant> GetWeaponVariants()
         {
-            return new List<WeaponVariant> { m_MainWeaponVariant };
+            //return new List<WeaponVariant> { m_MainWeaponVariant };
+            return null;
         }
 
         public List<Transform> GetWeaponPoints()
         {
-            return new List<Transform> { m_MainWeaponPoint };
+            //return new List<Transform> { m_MainWeaponPoint };
+            return null;
         }
 
         public void SetWeaponVariant(WeaponVariant weaponVariant)
         {
-            for (int i = 0; i < m_WeaponsOnMainCharacter.Count; i++)
-                if (m_WeaponsOnMainCharacter[i] == WeaponVariant.None)
-                {
-                    m_WeaponsOnMainCharacter[i] = weaponVariant;
-                    break;
-                }
+            //for (int i = 0; i < m_WeaponsOnMainCharacter.Count; i++)
+            //    if (m_WeaponsOnMainCharacter[i] == WeaponVariant.None)
+            //    {
+            //        m_WeaponsOnMainCharacter[i] = weaponVariant;
+            //        break;
+            //    }
         }
 
         public Transform Where()
         {
-            if (m_WeaponsOnMainCharacter != null)
-            {
-                for (int i = 0; i < m_WeaponsOnMainCharacter.Count; i++)
-                    if (m_WeaponsOnMainCharacter[i] == WeaponVariant.None)
-                        return m_WeaponPoints[i];
-            }
+            //if (m_WeaponsOnMainCharacter != null)
+            //{
+            //    for (int i = 0; i < m_WeaponsOnMainCharacter.Count; i++)
+            //        if (m_WeaponsOnMainCharacter[i] == WeaponVariant.None)
+            //            return m_WeaponPoints[i];
+            //}
 
-            return m_MainWeaponPoint;
+            return m_WeaponPoints[0];
         }
 
         public void Set(WeaponBehaviour generic)
@@ -88,7 +95,7 @@ namespace VampireLike.Core.Characters
             m_Attaching = generic;
         }
 
-        public void InitWeapon()
+        public void InitWeapons()
         {
             m_CharacterWeapon.Init();
         }

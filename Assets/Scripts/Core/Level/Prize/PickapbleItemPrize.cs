@@ -24,9 +24,9 @@ namespace VampireLike.Core.Levels
             m_ItemObject.UseItem(mainCharacter);
         }
 
-        public void SetItemPrefab(GameObject itemprefab)
+        public void SetItemPrefab(GameObject itemPrefab)
         {
-            m_ItemPrefab = itemprefab;
+            m_ItemPrefab = itemPrefab;
         }
     }
 }

@@ -5,9 +5,24 @@ namespace VampireLike.Core.Weapons
 {
     public abstract class WeaponBehaviour : MonoBehaviour
     {
+        #region SerializeFields
         [SerializeField] protected Transform m_StartPoint;
         [SerializeField] protected ParticleSystem m_ShootParticle;
 
+        [Header("Weapon Data")]
+        [SerializeField] protected WeaponType m_WeaponType;
+        [SerializeField] protected WeaponClass m_WeaponClass;
+        [SerializeField] protected int m_Damage;
+        [SerializeField] protected int m_MagazineSize;
+        [SerializeField] protected float m_FlyTime;
+        [SerializeField] protected float m_FireRate;
+        [SerializeField] protected float m_RechargeTime;
+        [SerializeField] protected float m_RepulsiveForce;
+        [SerializeField] protected float m_ProjectileSpeed;
+        [SerializeField] protected Projectile m_ProjectilePref;
+        #endregion
+
+        #region Fields
         protected WeaponData m_WeaponData;
         protected WeaponTypeDataHolder m_WeaponTypeData;
         protected WeaponClassDataHolder m_WeaponClassData;
@@ -19,10 +34,50 @@ namespace VampireLike.Core.Weapons
 
         protected IMoving m_Moving;
         protected IAttaching m_Attaching;
+        #endregion
 
-        public WeaponType WeaponType => m_WeaponTypeData.WeaponType;
-        public WeaponClass WeaponClass => m_WeaponClassData.WeaponClass;
+        #region Properties
+        public WeaponType WeaponType => m_WeaponType;
+        public WeaponClass WeaponClass => m_WeaponClass;
 
+        public int Damage
+        {
+            get => m_Damage;
+            set => m_Damage = value;
+        }
+        public int MagazineSize
+        {
+            get => m_MagazineSize;
+            set => m_MagazineSize = value;
+        }
+        public float FlyTime
+        {
+            get => m_FlyTime;
+            set => m_FlyTime = value;
+        }
+        public float FireRate
+        {
+            get => m_FireRate;
+            set => m_FireRate = value;
+        }
+        public float RechargeTime
+        {
+            get => m_RechargeTime;
+            set => m_RechargeTime = value;
+        }
+        public float RepulsiveForce
+        {
+            get => m_RepulsiveForce;
+            set => m_RepulsiveForce = value;
+        }
+        public float ProjectileSpeed
+        {
+            get => m_ProjectileSpeed;
+            set => m_ProjectileSpeed = value;
+        }
+        #endregion
+
+        #region Methods
         public virtual void Set(IAttaching generic)
         {
             m_Attaching = generic;
@@ -42,11 +97,11 @@ namespace VampireLike.Core.Weapons
         {
             m_Pool = new PoolBehaviour<Projectile>();
             m_Pool.CreateParent(transform);
-            m_Pool.Pooling(m_WeaponData.ProjectilePref, 20);
+            m_Pool.Pooling(m_ProjectilePref, 20);
 
             m_Moving = new ProjectileMovement();
 
-            m_CurrentNumberBullets = m_WeaponData.MagazineSize;
+            m_CurrentNumberBullets = m_MagazineSize;
         }
 
         public virtual void Shoot(int baseDamage)
@@ -58,7 +113,7 @@ namespace VampireLike.Core.Weapons
                     if (m_IsShoot)
                     {
                         if (m_CurrentNumberBullets == 0) 
-                            m_CurrentNumberBullets = m_WeaponData.MagazineSize;
+                            m_CurrentNumberBullets = m_MagazineSize;
 
                         m_CurrentNumberBullets--;
 
@@ -76,7 +131,7 @@ namespace VampireLike.Core.Weapons
                         if (m_CurrentNumberBullets != 0)
                             m_Delay = GetWeaponFireRate();
                         else
-                            m_Delay = GetWeaponFireRate() + m_WeaponData.RechargeTime;
+                            m_Delay = GetWeaponFireRate() + m_RechargeTime;
                     }
                 }
             }
@@ -117,28 +172,29 @@ namespace VampireLike.Core.Weapons
         #region GetWeaponDataProperty
         public virtual int GetWeaponDamage()
         {
-            return m_WeaponData.Damage * m_WeaponTypeData.Damage * m_WeaponClassData.Damage;
+            return m_Damage * m_WeaponTypeData.Damage * m_WeaponClassData.Damage;
         }
 
         public virtual float GetWeaponRepulsiveForce()
         {
-            return m_WeaponData.RepulsiveForce * m_WeaponTypeData.RepulsiveForce * m_WeaponClassData.RepulsiveForce;
+            return m_RepulsiveForce * m_WeaponTypeData.RepulsiveForce * m_WeaponClassData.RepulsiveForce;
         }
 
         public virtual float GetWeaponProjectileSpeed()
         {
-            return m_WeaponData.ProjectileSpeed * m_WeaponTypeData.ProjectileSpeed * m_WeaponClassData.ProjectileSpeed;
+            return m_ProjectileSpeed * m_WeaponTypeData.ProjectileSpeed * m_WeaponClassData.ProjectileSpeed;
         }
 
         public virtual float GetWeaponFlyTime()
         {
-            return m_WeaponData.FlyTime * m_WeaponTypeData.FlyTime * m_WeaponClassData.FlyTime;
+            return m_FlyTime * m_WeaponTypeData.FlyTime * m_WeaponClassData.FlyTime;
         }
 
         public virtual float GetWeaponFireRate()
         {
-            return m_WeaponData.FireRate * m_WeaponTypeData.FireRate * m_WeaponClassData.FireRate;
+            return m_FireRate * m_WeaponTypeData.FireRate * m_WeaponClassData.FireRate;
         }
+        #endregion
         #endregion
     }
 }

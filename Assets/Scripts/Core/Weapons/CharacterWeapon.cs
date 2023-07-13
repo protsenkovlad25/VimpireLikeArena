@@ -24,13 +24,13 @@ namespace VampireLike.Core.Weapons
             }
         }
 
-        public void Shoot(int baseDamage)
+        /*public void Shoot(int baseDamage)
         {
             foreach (var weapon in m_Weapons)
             {
                 weapon.Shoot(baseDamage);
             }
-        }
+        }*/
 
         public void StartShoot()
         {

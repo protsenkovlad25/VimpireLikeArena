@@ -77,10 +77,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b47aee581c45594c935d91a69403b53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hpBarPrefab: {fileID: 6744790681143353430, guid: 9dfffb2a29c514f4cbef6b17ca5bed2c, type: 3}
   m_WeaponPoints:
   - {fileID: 3703448622044528744}
-  m_WeaponVariants: 01000000
+  m_WeaponPrefabs:
+  - {fileID: 469436177383617850, guid: 5bd930b9bf2eb444a8e749531144fee2, type: 3}
+  m_HpBarPrefab: {fileID: 6744790681143353430, guid: 9dfffb2a29c514f4cbef6b17ca5bed2c, type: 3}
   m_EnemyType: 2
 --- !u!1 &3703448622044528747
 GameObject:

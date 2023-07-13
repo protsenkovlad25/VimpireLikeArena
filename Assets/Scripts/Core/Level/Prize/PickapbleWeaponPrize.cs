@@ -9,27 +9,28 @@ namespace VampireLike.Core.Levels
 {
     public class PickapbleWeaponPrize : PickapblePrize, INeedingWeapon
     {
-        private WeaponVariant m_WeaponVariant;
-        private WeaponBehaviour m_Weapon;
+        private GameObject m_WeaponPrefab;
+        private WeaponBehaviour m_WeaponObject;
         private ItemObject m_ItemObject;
-
-        public WeaponVariant WeaponVariant
-        {
-            get => m_WeaponVariant;
-            set => m_WeaponVariant = value;
-        }
 
         public override void Initialize()
         {
-            EventManager.WeaponReceived(m_WeaponVariant, this);
+            m_WeaponObject = Instantiate(m_WeaponPrefab, m_PrizePoint).GetComponent<WeaponBehaviour>();
+
+            //EventManager.WeaponReceived(m_WeaponVariant, this);
             base.Initialize();
+        }
+
+        public void SetWeaponPrefab(GameObject weaponPrefab)
+        {
+            m_WeaponPrefab = weaponPrefab;
         }
 
         public override void GetPrize(MainCharacter mainCharacter)
         {
             foreach (var weapon in mainCharacter.CharacterWeapon.Weapons)
             {
-                if (weapon.WeaponType == m_Weapon.WeaponType)
+                if (weapon.WeaponType == m_WeaponObject.WeaponType)
                 {
                     // TypeSynergy
                     //m_ItemObject = PoolResourses.GetItemObjects().Equals(item => item.ItemType == ItemType.SynergyType);
@@ -50,14 +51,14 @@ namespace VampireLike.Core.Levels
 
             foreach (var weapon in mainCharacter.CharacterWeapon.Weapons)
             {
-                if (weapon.WeaponClass == m_Weapon.WeaponClass)
+                if (weapon.WeaponClass == m_WeaponObject.WeaponClass)
                 {
                     // ClassSynergy
                     break;
                 }
             }
 
-            EventManager.WeaponReceived(m_WeaponVariant, mainCharacter);
+            //EventManager.WeaponReceived(m_WeaponVariant, mainCharacter);
             Destroy(gameObject);
         }
 
@@ -68,7 +69,7 @@ namespace VampireLike.Core.Levels
 
         public List<WeaponVariant> GetWeaponVariants()
         {
-            return new List<WeaponVariant> { m_WeaponVariant };
+            return new List<WeaponVariant> {  };
         }
 
         public List<Transform> GetWeaponPoints()
@@ -81,7 +82,7 @@ namespace VampireLike.Core.Levels
 
         public void Set(WeaponBehaviour generic)
         {
-            m_Weapon = generic;
+            //m_WeaponObject = generic;
         }
     }
 }

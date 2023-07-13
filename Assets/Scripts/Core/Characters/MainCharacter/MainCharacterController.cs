@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using VampireLike.Core.General;
 using VampireLike.Core.Players;
@@ -44,12 +45,22 @@ namespace VampireLike.Core.Characters
             m_MainCharacter.SetCharacterData(new CharacterData()
             {
                 Speed = 8,
-                HealthPoints = 30,
+                HealthPoints = 30000,
                 BaseDamage = 1
             });
             m_MainCharacter.Init();
-            m_MainCharacter.InitWeapon();
+            //m_MainCharacter.InitWeapons();
             m_MainCharacter.OnDie += OnMainCharacterDie;
+        }
+
+        public void InitMainCharacterWeapons()
+        {
+            m_MainCharacter.InitWeapons();
+        }
+
+        public List<WeaponBehaviour> GetCharacterWeapons()
+        {
+            return m_MainCharacter.CharacterWeapon.Weapons;
         }
 
         public void Move(Vector2 vector2)

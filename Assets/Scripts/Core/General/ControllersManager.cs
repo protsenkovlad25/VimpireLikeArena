@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using VampireLike.Core.Characters;
 using VampireLike.Core.Input;
@@ -22,12 +23,13 @@ namespace VampireLike.Core.General
         public void ControllersInit()
         {
             PoolResourses.LoadItems(m_EnemeisController, m_WeaponsController);
+            PoolResourses.LoadWeapons();
 
             m_EnemeisController.SetAttaching(m_MainCharacterController);
             m_MainCharacterController.SetAttaching(m_EnemeisController);
 
             m_WeaponsController.UploadWeaponTypesAndClasses();
-            m_WeaponsController.GaveWeapon(m_MainCharacterController.NeedingWeapon);
+            //m_WeaponsController.GaveWeapon(m_MainCharacterController.NeedingWeapon);
 
             m_PlayerInput.OnInput += OnDragJoystickPlayer;
             m_EnemeisController.OnAllDeadEnemies += NextWave;
@@ -42,7 +44,12 @@ namespace VampireLike.Core.General
             m_WeaponsController.Init();
             m_EnemeisController.Init();
             m_SolidObjectsController.Init();
+
             m_MainCharacterController.Init();
+            m_WeaponsController.GaveTypeToWeapons(m_MainCharacterController.GetCharacterWeapons());
+            m_WeaponsController.GaveClassToWeapons(m_MainCharacterController.GetCharacterWeapons());
+            m_MainCharacterController.InitMainCharacterWeapons();
+
             m_MISCController.Init();
             m_Level.Init();
 
@@ -100,6 +107,14 @@ namespace VampireLike.Core.General
             // -- Ememies -- //
             m_EnemeisController.SetEnemies(chunk.Enemies);
             m_EnemeisController.InitEnemy(chunk.Enemies);
+
+            List<EnemyCharacter> enemies = m_EnemeisController.GetEnemies();
+            for (int i = 0; i < enemies.Count; i++)
+            {
+                m_WeaponsController.GaveTypeToWeapons(enemies[i].CharacterWeapon.Weapons);
+                m_WeaponsController.GaveClassToWeapons(enemies[i].CharacterWeapon.Weapons);
+            }
+
             m_EnemeisController.SetMark(chunk.Enemies);
 
             // -- Walls -- //
@@ -112,7 +127,7 @@ namespace VampireLike.Core.General
         {
             // -- Enemies -- //
             m_EnemeisController.ActivateEnemies(chunk.Enemies);
-            m_WeaponsController.GaveWeapons(m_EnemeisController.NeedingWeapons);
+            //m_WeaponsController.GaveWeapons(m_EnemeisController.NeedingWeapons);
             m_EnemeisController.InitEnemeisWeapons();
             m_EnemeisController.Landing(chunk.Enemies);
 

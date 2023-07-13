@@ -33,6 +33,30 @@ namespace VampireLike.Core.Weapons
             InitClassesData();
         }
 
+        public void GaveTypeToWeapons(List<WeaponBehaviour> weapons)
+        {
+            foreach (var weapon in weapons)
+            {
+                GaveTypeToWeapon(weapon);
+            }
+        }
+
+        public void GaveClassToWeapons(List<WeaponBehaviour> weapons)
+        {
+            foreach (var weapon in weapons)
+                GaveClassToWeapon(weapon);
+        }
+
+        public void GaveTypeToWeapon(WeaponBehaviour weapon)
+        {
+            weapon.SetType(m_WeaponTypeDataHolders.Find(item => item.WeaponType.Equals(weapon.WeaponType)));
+        }
+
+        public void GaveClassToWeapon(WeaponBehaviour weapon)
+        {
+            weapon.SetClass(m_WeaponClassDataHolders.Find(item => item.WeaponClass.Equals(weapon.WeaponClass)));
+        }
+
         public void InitTypesData()
         {
             m_WeaponTypeDataHolders = m_WeaponConfigurator.GetTypeDataHolders();
@@ -43,37 +67,37 @@ namespace VampireLike.Core.Weapons
             m_WeaponClassDataHolders = m_WeaponConfigurator.GetClassDataHolders();
         }
 
-        public void GaveWeapons(IEnumerable<INeedingWeapon> needingWeapons)
-        {
-            foreach (var item in needingWeapons)
-            {
-                GaveWeapon(item);
-            } 
-        }
+        //public void GaveWeapons(IEnumerable<INeedingWeapon> needingWeapons)
+        //{
+        //    foreach (var item in needingWeapons)
+        //    {
+        //        GaveWeapon(item);
+        //    } 
+        //}
 
-        public void GaveWeapon(INeedingWeapon needingWeapon)
-        {
-            List<WeaponVariant> weaponVariants = needingWeapon.GetWeaponVariants();
-            List<Transform> weaponPoints = needingWeapon.GetWeaponPoints();
+        //public void GaveWeapon(INeedingWeapon needingWeapon)
+        //{
+        //    List<WeaponVariant> weaponVariants = needingWeapon.GetWeaponVariants();
+        //    List<Transform> weaponPoints = needingWeapon.GetWeaponPoints();
 
-            for (int i = 0; i < weaponVariants.Count; i++)
-            {
-                if (weaponVariants[i].Equals(WeaponVariant.None))
-                {
-                    continue;
-                }
+        //    for (int i = 0; i < weaponVariants.Count; i++)
+        //    {
+        //        if (weaponVariants[i].Equals(WeaponVariant.None))
+        //        {
+        //            continue;
+        //        }
 
-                var data = m_WeaponConfigurator.GetData(weaponVariants[i]);
+        //        var data = m_WeaponConfigurator.GetData(weaponVariants[i]);
                 
-                var builder = new WeaponBuilder(weaponPoints[i])
-                                    .SetWeaponData(data.WeaponData)
-                                    .SetWeaponBehaviour(data.WeaponBehaviour)
-                                    .SetWeaponTypeData(m_WeaponTypeDataHolders.Find(item => item.WeaponType.Equals(data.WeaponData.WeaponType)))
-                                    .SetWeaponClassData(m_WeaponClassDataHolders.Find(item => item.WeaponClass.Equals(data.WeaponData.WeaponClass)));
+        //        var builder = new WeaponBuilder(weaponPoints[i])
+        //                            .SetWeaponData(data.WeaponData)
+        //                            .SetWeaponBehaviour(data.WeaponBehaviour)
+        //                            .SetWeaponTypeData(m_WeaponTypeDataHolders.Find(item => item.WeaponType.Equals(data.WeaponData.WeaponType)))
+        //                            .SetWeaponClassData(m_WeaponClassDataHolders.Find(item => item.WeaponClass.Equals(data.WeaponData.WeaponClass)));
                 
-                needingWeapon.Set(builder.Build());
-            }
-        }
+        //        needingWeapon.Set(builder.Build());
+        //    }
+        //}
 
         public void GaveWeapon(WeaponVariant weaponVariant, INeedingWeapon needingWeapon)
         {

@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 744339978039708570}
   - component: {fileID: 744339978039708567}
   - component: {fileID: 744339978039708568}
-  - component: {fileID: 7343093295803128732}
+  - component: {fileID: 744339978039708569}
   m_Layer: 8
-  m_Name: TouchingWeapon
+  m_Name: TangentWeapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -62,7 +62,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 1
---- !u!114 &7343093295803128732
+--- !u!114 &744339978039708569
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -71,6 +71,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 744339978039708571}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9590c8030d315324097623bb72d72687, type: 3}
+  m_Script: {fileID: 11500000, guid: 8688c34a5bb044d468fcc2816cc29c53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_StartPoint: {fileID: 0}
+  m_ShootParticle: {fileID: 0}
+  m_WeaponType: 2
+  m_WeaponClass: 2
+  m_Damage: 0
+  m_MagazineSize: 0
+  m_FlyTime: 0
+  m_FireRate: 0
+  m_RechargeTime: 0
+  m_RepulsiveForce: 0
+  m_ProjectileSpeed: 0
+  m_ProjectilePref: {fileID: 0}
