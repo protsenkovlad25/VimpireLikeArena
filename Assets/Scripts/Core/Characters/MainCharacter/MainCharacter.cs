@@ -14,79 +14,44 @@ namespace VampireLike.Core.Characters
         [SerializeField] private float m_FadeTime;
         [SerializeField] private bool m_TakeDamage;
 
-        public void Start()
-        {
-            //m_WeaponsOnMainCharacter = new List<WeaponVariant>();
-
-            //for (int i = 0; i < m_WeaponPoints.Count; i++)
-            //    m_WeaponsOnMainCharacter.Add(WeaponVariant.None);
-        }
-
-        public override void Init()
-        {
-            base.Init();
-
-            GameObject weapon;
-            for (int i = 0; i < m_WeaponPrefabs.Count; i++)
-            {
-                weapon = Instantiate(m_WeaponPrefabs[i], m_WeaponPoints[i]);
-                weapon.layer = 7;
-
-                m_WeaponObjects.Add(weapon);
-                m_CharacterWeapon.AddWeapon(m_WeaponObjects[i].GetComponent<WeaponBehaviour>());
-            }
-        }
-
         public void Move(Vector2 deriction)
         {
             m_Moving.Move(new Vector3(deriction.x, 0f, deriction.y), m_CharacterData.Speed, transform, gameObject.GetComponent<Rigidbody>());
         }
 
-        public List<WeaponVariant> GetWeaponVariants()
-        {
-            //return new List<WeaponVariant> { m_MainWeaponVariant };
-            return null;
-        }
-
         public List<Transform> GetWeaponPoints()
         {
-            //return new List<Transform> { m_MainWeaponPoint };
-            return null;
+            return m_WeaponPoints;
         }
 
-        public void SetWeaponVariant(WeaponVariant weaponVariant)
+        public List<GameObject> GetWeaponPrefabs()
         {
-            //for (int i = 0; i < m_WeaponsOnMainCharacter.Count; i++)
-            //    if (m_WeaponsOnMainCharacter[i] == WeaponVariant.None)
-            //    {
-            //        m_WeaponsOnMainCharacter[i] = weaponVariant;
-            //        break;
-            //    }
+            return m_WeaponPrefabs;
         }
 
         public Transform Where()
         {
-            //if (m_WeaponsOnMainCharacter != null)
-            //{
-            //    for (int i = 0; i < m_WeaponsOnMainCharacter.Count; i++)
-            //        if (m_WeaponsOnMainCharacter[i] == WeaponVariant.None)
-            //            return m_WeaponPoints[i];
-            //}
+            for (int i = 0; i < m_WeaponPoints.Count; i++)
+                if (m_WeaponObjects[i] == null)
+                    return m_WeaponPoints[i];
 
-            return m_WeaponPoints[0];
+            return null;
         }
 
-        public void Set(WeaponBehaviour generic)
+        public void Set(GameObject weapon)
         {
-            generic.gameObject.layer = 7;
+            weapon.layer = 7;
 
-            if (m_CharacterWeapon == null)
+            for (int i = 0; i < m_WeaponObjects.Count; i++)
             {
-                m_CharacterWeapon = new CharacterWeapon();
-                m_CharacterWeapon.Set(m_Attaching);
+                if (m_WeaponObjects[i] == null)
+                {
+                    m_WeaponObjects[i] = weapon;
+                    break;
+                }
             }
 
-            m_CharacterWeapon.AddWeapon(generic);
+            m_CharacterWeapon.AddWeapon(weapon.GetComponent<WeaponBehaviour>());
             m_CharacterWeapon.Weapons.Last().Init();
         }
 

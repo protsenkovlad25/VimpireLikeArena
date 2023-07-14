@@ -20,6 +20,7 @@ namespace VampireLike.Core.Characters
 
         #region Fields
         private int m_CurrentHealthPoint;
+        private int m_StartedHealthPoint;
 
         private HpBar m_HpBar;
 
@@ -33,6 +34,7 @@ namespace VampireLike.Core.Characters
 
         #region Properties
         public int CurrentHealthPoint => m_CurrentHealthPoint;
+        public int StartedHealthPoint => m_StartedHealthPoint;
         public CharacterData CharacterData => m_CharacterData;
         public CharacterWeapon CharacterWeapon => m_CharacterWeapon;
         #endregion
@@ -56,10 +58,14 @@ namespace VampireLike.Core.Characters
         public virtual void Init()
         {
             m_WeaponObjects = new List<GameObject>();
+            for (int i = 0; i < m_WeaponPoints.Count; i++)
+                m_WeaponObjects.Add(null);
+
             m_CharacterWeapon = new CharacterWeapon();
             m_CharacterWeapon.Set(m_Attaching);
 
             m_CurrentHealthPoint = m_CharacterData.HealthPoints;
+            m_StartedHealthPoint = m_CharacterData.HealthPoints;
 
             m_HpBar = Instantiate(m_HpBarPrefab, transform).GetComponent<HpBar>();
             m_HpBar.Init(m_CharacterData.HealthPoints);

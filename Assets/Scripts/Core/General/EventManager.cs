@@ -1,3 +1,4 @@
+using UnityEngine;
 using UnityEngine.Events;
 using VampireLike.Core.Characters;
 using VampireLike.Core.Weapons;
@@ -13,8 +14,8 @@ namespace VampireLike.Core.General
         public static UnityEvent MainCharacterTakeDamage = new UnityEvent();
         public static UnityEvent<EnemyCharacter, IMoving> OnSwitchMovement = new UnityEvent<EnemyCharacter, IMoving>();
         public static UnityEvent<EnemyCharacter, ILooking> OnSwitchLook = new UnityEvent<EnemyCharacter, ILooking>();
-        public static UnityEvent<WeaponVariant, INeedingWeapon> OnSwitchWeapon = new UnityEvent<WeaponVariant, INeedingWeapon>();
-        public static UnityEvent<WeaponVariant, INeedingWeapon> OnWeaponReceived = new UnityEvent<WeaponVariant, INeedingWeapon>();
+        public static UnityEvent<INeedingWeapon, GameObject> OnSwitchWeapon = new UnityEvent<INeedingWeapon, GameObject>();
+        public static UnityEvent<INeedingWeapon, GameObject> OnWeaponReceived = new UnityEvent<INeedingWeapon, GameObject>();
 
         public static void Lose()
         {
@@ -51,14 +52,14 @@ namespace VampireLike.Core.General
             OnSwitchLook?.Invoke(enemyCharacter, looking);
         }
 
-        public static void SwitchWeapon(WeaponVariant weaponVariant, INeedingWeapon needingWeapon)
+        public static void SwitchWeapon(INeedingWeapon needingWeapon, GameObject weaponPrefab)
         {
-            OnSwitchWeapon?.Invoke(weaponVariant, needingWeapon);
+            OnSwitchWeapon?.Invoke(needingWeapon, weaponPrefab);
         }
 
-        public static void WeaponReceived(WeaponVariant weaponVariant, INeedingWeapon needingWeapon)
+        public static void WeaponReceived(INeedingWeapon needingWeapon, GameObject weaponPrefab)
         {
-            OnWeaponReceived?.Invoke(weaponVariant, needingWeapon);
+            OnWeaponReceived?.Invoke(needingWeapon, weaponPrefab);
         }
     }
 }

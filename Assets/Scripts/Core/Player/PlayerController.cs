@@ -49,7 +49,7 @@ namespace VampireLike.Core.Players
 
         public bool IsCompleteLevel()
         {
-            return Player.QtyCompleteArean > Player.QtyArenas;
+            return Player.QtyCompleteArean == Player.QtyArenas;
         }
 
         public void LoseLevel()

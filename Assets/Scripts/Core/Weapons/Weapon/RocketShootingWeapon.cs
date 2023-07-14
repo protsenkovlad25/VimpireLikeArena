@@ -9,6 +9,7 @@ namespace VampireLike.Core.Weapons
     public class RocketShootingWeapon : WeaponBehaviour, INeeding<IAttaching>
     {
         [SerializeField] private List<RocketProjectile> m_RocketProjectiles;
+        [SerializeField] private GameObject m_SwitchWeapon;
  
         private EnemyCharacter m_EnemyCharacter;
 
@@ -79,7 +80,7 @@ namespace VampireLike.Core.Weapons
         {
             EventManager.SwitchMovement(m_EnemyCharacter, new DashMovement());
             EventManager.SwitchLook(m_EnemyCharacter, new SimpleLook());
-            EventManager.SwitchWeapon(WeaponVariant.Pushing, m_EnemyCharacter);
+            EventManager.SwitchWeapon(m_EnemyCharacter, m_SwitchWeapon);
             Destroy(this);
         }
     }

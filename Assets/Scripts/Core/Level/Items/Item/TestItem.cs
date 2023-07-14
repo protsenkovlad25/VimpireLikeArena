@@ -15,9 +15,6 @@ namespace VampireLike.Core.Levels
 
         public override void UseItem(GameCharacterBehaviour gameCharacterBehaviour)
         {
-            base.UseItem(gameCharacterBehaviour);
-
-
             // -- Weapon Data Changes -- //
 
             /*foreach (var weapon in gameCharacterBehaviour.CharacterWeapons)
@@ -50,7 +47,8 @@ namespace VampireLike.Core.Levels
 
 
             // -- Changes Data based on Type or Class -- //
-            foreach (var weaponTypeDataHolder in m_WeaponsController.WeaponTypeDataHolders)
+
+            /*foreach (var weaponTypeDataHolder in m_WeaponsController.WeaponTypeDataHolders)
             {
                 if (weaponTypeDataHolder.WeaponType == m_ItemWeaponType)
                 {
@@ -58,13 +56,13 @@ namespace VampireLike.Core.Levels
                 }
             }
 
-            //foreach (var weaponClassDataHolder in m_WeaponsController.WeaponClassDataHolders)
-            //{
-            //    if (weaponClassDataHolder.WeaponClass == m_ItemWeaponClass)
-            //    {
-            //        weaponClassDataHolder.FireRate = m_ItemFireRate;
-            //    }
-            //}
+            foreach (var weaponClassDataHolder in m_WeaponsController.WeaponClassDataHolders)
+            {
+                if (weaponClassDataHolder.WeaponClass == m_ItemWeaponClass)
+                {
+                    weaponClassDataHolder.FireRate = m_ItemFireRate;
+                }
+            }*/
         }
     }
 }

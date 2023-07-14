@@ -58,11 +58,6 @@ namespace VampireLike.Core.Characters
             m_MainCharacter.InitWeapons();
         }
 
-        public List<WeaponBehaviour> GetCharacterWeapons()
-        {
-            return m_MainCharacter.CharacterWeapon.Weapons;
-        }
-
         public void Move(Vector2 vector2)
         {
             m_MainCharacter.Move(vector2);

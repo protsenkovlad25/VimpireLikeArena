@@ -15,25 +15,9 @@ namespace VampireLike.Core.Characters
 
         private bool m_IsMove;
 
-        public override void Init()
+        public List<GameObject> GetWeaponPrefabs()
         {
-            base.Init();
-
-            GameObject weapon;
-            for (int i = 0; i < m_WeaponPrefabs.Count; i++)
-            {
-                weapon = Instantiate(m_WeaponPrefabs[i], m_WeaponPoints[i]);
-                weapon.layer = 9;
-
-                m_WeaponObjects.Add(weapon);
-                m_CharacterWeapon.AddWeapon(m_WeaponObjects[i].GetComponent<WeaponBehaviour>());
-            }
-        }
-
-        public List<WeaponVariant> GetWeaponVariants()
-        {
-            //return m_WeaponVariants;
-            return null;
+            return m_WeaponPrefabs;
         }
 
         public List<Transform> GetWeaponPoints()
@@ -44,10 +28,6 @@ namespace VampireLike.Core.Characters
         public EnemyType GetEnemyType()
         {
             return m_EnemyType;
-        }
-
-        public void SetWeaponVariant(WeaponVariant weaponVariant)
-        {
         }
 
         public void Move(IAttaching targetPosition)
@@ -70,17 +50,20 @@ namespace VampireLike.Core.Characters
             transform.eulerAngles = angle;
         }
 
-        public void Set(WeaponBehaviour generic)
+        public void Set(GameObject weapon)
         {
-            generic.gameObject.layer = 9;
+            weapon.layer = 9;
 
-            if (m_CharacterWeapon == null)
+            for (int i = 0; i < m_WeaponObjects.Count; i++)
             {
-                m_CharacterWeapon = new CharacterWeapon();
-                m_CharacterWeapon.Set(m_Attaching);
+                if (m_WeaponObjects[i] == null)
+                {
+                    m_WeaponObjects[i] = weapon;
+                    break;
+                }
             }
 
-            m_CharacterWeapon.AddWeapon(generic, this);
+            m_CharacterWeapon.AddWeapon(weapon.GetComponent<WeaponBehaviour>(), this);
             m_CharacterWeapon.Weapons.Last().Init();
         }
 
@@ -91,7 +74,11 @@ namespace VampireLike.Core.Characters
 
         public Transform Where()
         {
-            return m_WeaponPoints[0];
+            for (int i = 0; i < m_WeaponPoints.Count; i++)
+                if (m_WeaponObjects[i] == null)
+                    return m_WeaponPoints[i];
+
+            return null;
         }
 
         public void StartShoot()

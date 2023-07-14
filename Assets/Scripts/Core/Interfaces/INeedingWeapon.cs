@@ -3,13 +3,11 @@ using UnityEngine;
 
 namespace VampireLike.Core.Weapons
 {
-    public interface INeedingWeapon : INeeding<WeaponBehaviour>
+    public interface INeedingWeapon : INeeding<GameObject>
     {
-        List<WeaponVariant> GetWeaponVariants();
-
         List<Transform> GetWeaponPoints();
 
-        public void SetWeaponVariant(WeaponVariant weaponVariant);
+        List<GameObject> GetWeaponPrefabs();
 
         Transform Where();
     }

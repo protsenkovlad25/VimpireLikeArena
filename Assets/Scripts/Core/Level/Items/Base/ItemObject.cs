@@ -12,17 +12,11 @@ namespace VampireLike.Core.Levels
         protected EnemeisController m_EnemeisController;
         protected WeaponsController m_WeaponsController;
 
-        protected ItemType m_ItemType = ItemType.None;
-
-        public ItemType ItemType => m_ItemType;
-
         public virtual void Init()
         { }
 
         public virtual void UseItem(GameCharacterBehaviour gameCharacterBehaviour)
-        {
-
-        }
+        { }
 
         public virtual void SetEnemeisController(EnemeisController enemeisController)
         {
@@ -43,12 +37,5 @@ namespace VampireLike.Core.Levels
         {
             return m_WeaponsController;
         }
-    }
-
-    public enum ItemType
-    {
-        None,
-        SynergyType,
-        SynergyClass
     }
 }

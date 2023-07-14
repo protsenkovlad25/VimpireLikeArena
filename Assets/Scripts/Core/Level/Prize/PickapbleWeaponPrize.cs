@@ -15,9 +15,8 @@ namespace VampireLike.Core.Levels
 
         public override void Initialize()
         {
-            m_WeaponObject = Instantiate(m_WeaponPrefab, m_PrizePoint).GetComponent<WeaponBehaviour>();
+            EventManager.WeaponReceived(this, m_WeaponPrefab);
 
-            //EventManager.WeaponReceived(m_WeaponVariant, this);
             base.Initialize();
         }
 
@@ -28,11 +27,14 @@ namespace VampireLike.Core.Levels
 
         public override void GetPrize(MainCharacter mainCharacter)
         {
-            foreach (var weapon in mainCharacter.CharacterWeapon.Weapons)
+            // --- Синергия - пока нету (доделать) --- //
+
+            /*foreach (var weapon in mainCharacter.CharacterWeapon.Weapons)
             {
                 if (weapon.WeaponType == m_WeaponObject.WeaponType)
                 {
                     // TypeSynergy
+
                     //m_ItemObject = PoolResourses.GetItemObjects().Equals(item => item.ItemType == ItemType.SynergyType);
                     foreach (var item in PoolResourses.GetItemObjects())
                     {
@@ -56,9 +58,9 @@ namespace VampireLike.Core.Levels
                     // ClassSynergy
                     break;
                 }
-            }
+            }*/
 
-            //EventManager.WeaponReceived(m_WeaponVariant, mainCharacter);
+            EventManager.WeaponReceived(mainCharacter, m_WeaponPrefab);
             Destroy(gameObject);
         }
 
@@ -67,9 +69,9 @@ namespace VampireLike.Core.Levels
             return m_PrizePoint;
         }
 
-        public List<WeaponVariant> GetWeaponVariants()
+        public List<GameObject> GetWeaponPrefabs()
         {
-            return new List<WeaponVariant> {  };
+            return null;
         }
 
         public List<Transform> GetWeaponPoints()
@@ -77,12 +79,8 @@ namespace VampireLike.Core.Levels
             return new List<Transform> { m_PrizePoint };
         }
 
-        public void SetWeaponVariant(WeaponVariant weaponVariant)
-        { }
-
-        public void Set(WeaponBehaviour generic)
+        public void Set(GameObject generic)
         {
-            //m_WeaponObject = generic;
         }
     }
 }

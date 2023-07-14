@@ -76,11 +76,13 @@ namespace VampireLike.Core.Levels
 
         public void RemoveWavesCluster()
         {
-            m_TreeHolder.Remove(m_TreeHolder.CurrentArenaNode.WavesCluster, m_TreeHolder.CurrentArenaNode.Prize);
+            m_TreeHolder.CurrentArenaNode = m_TreeHolder.CurrentArenaNode.Next;
+            //m_TreeHolder.Remove(m_TreeHolder.CurrentArenaNode.WavesCluster, m_TreeHolder.CurrentArenaNode.Prize);
         }
 
         public WavesCluster GetWavesCluster()
         {
+            //m_TreeHolder.CurrentArenaNode = m_TreeHolder.CurrentArenaNode.Next;
             return m_TreeHolder.CurrentArenaNode.WavesCluster;
         }
 

@@ -9,8 +9,6 @@ namespace VampireLike.Core.Levels
         public override void Init()
         {
             base.Init();
-
-            m_ItemType = ItemType.SynergyType;
         }
     }
 }

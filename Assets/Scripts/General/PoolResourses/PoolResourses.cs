@@ -27,7 +27,7 @@ namespace VampireLike.General
         public static void LoadWeapons()
         {
             m_Weapons = new List<GameObject>();
-            Object[] objects = Resources.LoadAll("Weapons", typeof(GameObject));
+            Object[] objects = Resources.LoadAll("WeaponsForPrize", typeof(GameObject));
 
             foreach (Object obj in objects)
             {

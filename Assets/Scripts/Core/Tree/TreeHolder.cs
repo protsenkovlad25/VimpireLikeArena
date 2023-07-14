@@ -10,12 +10,18 @@ namespace VampireLike.Core.Trees
 
         public int Count 
         { 
-            get { return count; } 
-            set { count = value; } 
+            get => count;
+            set => count = value; 
         }
         public ArenaNode CurrentArenaNode
         {
-            get { return currentArena; }
+            get => currentArena;
+            set => currentArena = value;
+        }
+
+        public TreeHolder(int count)
+        {
+            this.count = count;
         }
 
         public ArenaNode GetCurrentArena()
